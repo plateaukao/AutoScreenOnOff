@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
 			return;
 		}
 		
-		setContentView(R.layout.activity_main);
+		//setContentView(R.layout.activity_main);
 	}
 
 
@@ -78,13 +78,7 @@ public class MainActivity extends Activity {
     }
     
     private void shutdown(){
-    	Handler handlerUI = new Handler();
-    	handlerUI.postDelayed(new Runnable() {
-    		@Override
-    		public void run() {
-    			deviceManager.lockNow();
-    		}
-    	}, 500);
+    	deviceManager.lockNow();
     }
         
 }
