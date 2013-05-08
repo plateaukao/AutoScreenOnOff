@@ -5,10 +5,14 @@ import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
+import android.os.IBinder;
 import android.util.Log;
 import android.view.Menu;
+
+import com.danielkao.poweroff.SensorMonitorService.LocalBinder;
 
 public class MainActivity extends Activity {
 
@@ -17,6 +21,13 @@ public class MainActivity extends Activity {
     
     DevicePolicyManager deviceManager;
     ComponentName mDeviceAdmin;
+    
+    //service
+    SensorMonitorService sensorService;
+    boolean mBoundLocalBindService;
+    // pref: turn on auto on/off
+    boolean mIsAutoOn;
+    
     
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -39,22 +50,56 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		//get pref
+		SharedPreferences sp = getSharedPreferences(ConstantValues.PREF, Activity.MODE_PRIVATE);
+		mIsAutoOn = sp.getBoolean(ConstantValues.IS_AUTO_ON, false);
+		ConstantValues.logv("%b",mIsAutoOn);
 
 		deviceManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 		mDeviceAdmin = new ComponentName(this, TurnOffReceiver.class);
 
-		// check if activated. if not, send the intent
-		if(!isActiveAdmin())
-			sendDeviceAdminIntent();
-		else{
-			shutdown();
-			finish();
+		// check whether is from another activity
+		Intent intentGot = this.getIntent();
+		if(intentGot.getExtras() != null)
+		{
+			Intent i = new Intent(this, SensorMonitorService.class);
+			bindService(i , mConnection, Context.BIND_AUTO_CREATE);
+			// make it long live
+			if(mIsAutoOn){
+				this.startService(i);
+				finish();
+			}
 			return;
 		}
-		
-		//setContentView(R.layout.activity_main);
+
+		// no intent passed from another activity
+		if(mIsAutoOn){
+			Intent intent = new Intent(this, SensorMonitorService.class);
+			bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
+			this.startService(intent);
+			finish();
+		} // use manually
+		else{
+			// check if activated. if not, send the intent
+			if(!isActiveAdmin())
+				sendDeviceAdminIntent();
+			else{
+				shutdown();
+				finish();
+				return;
+			}
+
+		}
+
 	}
 
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		if(sensorService != null)
+			unbindService(mConnection);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,5 +125,27 @@ public class MainActivity extends Activity {
     private void shutdown(){
     	deviceManager.lockNow();
     }
-        
+    
+    // service connection
+    private ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            LocalBinder binder = (LocalBinder) service;
+            sensorService = binder.getService();
+            mBoundLocalBindService = true;
+            if(mIsAutoOn){
+            	sensorService.registerSensor();
+            }
+            else {
+            	sensorService.unregisterSensor();
+            	finish();
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName arg0) {
+            mBoundLocalBindService = false;
+        }
+    };
 }
