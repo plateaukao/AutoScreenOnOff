@@ -1,11 +1,14 @@
 package com.danielkao.poweroff;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Service;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -37,9 +40,15 @@ public class SensorMonitorService extends Service  implements SensorEventListene
     
     @Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+    	if(intent==null)
+    		return super.onStartCommand(intent, flags, startId);
+    	
     	int action = intent.getIntExtra(ConstantValues.SERVICEACTION, -1);
     	if(action == ConstantValues.SERVICEACTION_TOGGLE)
     	{
+    		// do the toggle first
+    		togglePreference();
+    		
     		if(mIsRegistered)
     		{
     			unregisterSensor();
@@ -108,7 +117,6 @@ public class SensorMonitorService extends Service  implements SensorEventListene
     	
     	if(partialLock!=null)
     		partialLock.acquire();
-
 
     	Toast.makeText(SensorMonitorService.this, "Turn on Auto Screen On/off", Toast.LENGTH_LONG ).show();
     }
@@ -179,4 +187,11 @@ public class SensorMonitorService extends Service  implements SensorEventListene
       }
     }
     
+    private void togglePreference(){
+    	SharedPreferences sp = getSharedPreferences(ConstantValues.PREF, Activity.MODE_PRIVATE);
+    	boolean IsAutoOn = sp.getBoolean(ConstantValues.IS_AUTO_ON, false);
+    	Editor editor = sp.edit();
+    	editor.putBoolean(ConstantValues.IS_AUTO_ON, !IsAutoOn);
+    	editor.commit();
+    }
 }
