@@ -52,6 +52,16 @@
                 <action android:name="com.danielkao.poweroff.action.toggle" />
             </intent-filter>
         </activity>
+
+        <receiver android:name="ToggleAutoScreenOnOffAppWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/toggleonoff_appwidget_info" />
+        </receiver>
+        
     </application>
 
 </manifest>

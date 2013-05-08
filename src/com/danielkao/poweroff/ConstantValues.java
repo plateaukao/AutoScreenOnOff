@@ -11,6 +11,8 @@ public final class ConstantValues {
 	public static final String PREF = "SensorMonitorPref";
 	public static final String IS_AUTO_ON = "is_audo_on";
 	public static final String TOGGLE_AUTO = "toggle_auto";
+	public static final int SERVICEACTION_TOGGLE = 0;
+	public static final String SERVICEACTION = "serviceaction";
 	
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	public static void logv(Object...argv){

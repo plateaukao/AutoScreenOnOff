@@ -35,7 +35,24 @@ public class SensorMonitorService extends Service  implements SensorEventListene
         return deviceManager.isAdminActive(mDeviceAdmin);
     }
     
-    //
+    @Override
+	public int onStartCommand(Intent intent, int flags, int startId) {
+    	int action = intent.getIntExtra(ConstantValues.SERVICEACTION, -1);
+    	if(action == ConstantValues.SERVICEACTION_TOGGLE)
+    	{
+    		if(mIsRegistered)
+    		{
+    			unregisterSensor();
+    		}
+    		else
+    		{
+    			registerSensor();
+    		}
+    	}
+		return super.onStartCommand(intent, flags, startId);
+	}
+
+	//
     // life cycle
     //
 	public SensorMonitorService() {
