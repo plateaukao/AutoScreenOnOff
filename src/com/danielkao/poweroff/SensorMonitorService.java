@@ -43,22 +43,34 @@ public class SensorMonitorService extends Service implements
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+		// being restarted
 		if (intent == null)
-			return super.onStartCommand(intent, flags, startId);
+		{
+			ConstantValues.logv("onStartCommand: no intent");
+			if (getPrefAutoOnoff() == false) {
+				unregisterSensor();
+			} else {
+				registerSensor();
+			}
+			
+			return START_STICKY;
+		}
 
+		// from widget
 		int action = intent.getIntExtra(ConstantValues.SERVICEACTION, -1);
 		if (action == ConstantValues.SERVICEACTION_TOGGLE) {
 			// do the toggle first
 			togglePreference();
 			updateWidgetUI(intent);
 
-			if (mIsRegistered) {
+			if (getPrefAutoOnoff() == false) {
 				unregisterSensor();
 			} else {
 				registerSensor();
 			}
 		}
-		return super.onStartCommand(intent, flags, startId);
+		
+		return START_STICKY;
 	}
 
 	//
@@ -93,6 +105,7 @@ public class SensorMonitorService extends Service implements
 
 	@Override
 	public void onDestroy() {
+		ConstantValues.logv("onDestroy");
 		unregisterSensor();
 		super.onDestroy();
 	}
@@ -135,10 +148,11 @@ public class SensorMonitorService extends Service implements
 					"Turn off Auto Screen On/off", Toast.LENGTH_SHORT).show();
 		}
 
-		if (partialLock != null)
+		if (partialLock != null && partialLock.isHeld())
 			partialLock.release();
 		mIsRegistered = false;
 
+		stopSelf();
 	}
 
 	public boolean isRegistered() {
@@ -160,6 +174,7 @@ public class SensorMonitorService extends Service implements
 		// The light sensor returns a single value.
 		// Many sensors return 3 values, one for each axis.
 		float lux = event.values[0];
+		
 		// Do something with this sensor value.
 		ConstantValues.logv("onSensorChanged:%f", lux);
 		if (isActiveAdmin()) {
@@ -208,13 +223,11 @@ public class SensorMonitorService extends Service implements
         if(widgetId == -1)
         	return;
         
-		// update UI if necessary
-		SharedPreferences sp = getSharedPreferences(ConstantValues.PREF, Activity.MODE_PRIVATE);
-		boolean autoOn = sp.getBoolean(ConstantValues.IS_AUTO_ON, false);
-
         AppWidgetManager appWidgetMan = AppWidgetManager.getInstance(this);
         RemoteViews views = new RemoteViews(this.getPackageName(),R.layout.toggleonoff_appwidget);
         
+		// update UI if necessary
+		boolean autoOn = getPrefAutoOnoff();
 		if (autoOn) {
 			// set icon to on
 			views.setImageViewResource(R.id.imageview, R.drawable.widget_on);
@@ -225,4 +238,10 @@ public class SensorMonitorService extends Service implements
 		
         appWidgetMan.updateAppWidget(widgetId, views);  
 	}
+	
+	private boolean getPrefAutoOnoff(){
+		SharedPreferences sp = getSharedPreferences(ConstantValues.PREF, Activity.MODE_PRIVATE);
+		return sp.getBoolean(ConstantValues.IS_AUTO_ON, false);
+	}
+	
 }
