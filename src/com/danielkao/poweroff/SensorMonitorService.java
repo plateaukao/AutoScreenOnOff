@@ -192,6 +192,7 @@ public class SensorMonitorService extends Service implements
 					if (!screenLock.isHeld()) {
 						screenLock.acquire();
 
+						//screenLock.release();
 						new Thread(new Runnable() {
 							public void run() {
 								try {

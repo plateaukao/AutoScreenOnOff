@@ -21,7 +21,7 @@ public class ToggleAutoScreenOnOffAppWidgetProvider extends AppWidgetProvider {
 			int appWidgetId = appWidgetIds[i];
 
 			// Create an Intent to launch ExampleActivity
-			Intent intent = new Intent(context, SensorMonitorService.class);
+			Intent intent = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
 			intent.putExtra(ConstantValues.SERVICEACTION, ConstantValues.SERVICEACTION_TOGGLE);
 		    intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
 

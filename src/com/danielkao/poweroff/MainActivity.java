@@ -95,10 +95,15 @@ public class MainActivity extends Activity {
 
 
 	@Override
-	protected void onDestroy() {
-		super.onDestroy();
+	protected void onStop() {
+		super.onStop();
 		if(sensorService != null)
 			unbindService(mConnection);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
 	}
 
 	@Override

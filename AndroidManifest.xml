@@ -42,7 +42,10 @@
         <service
             android:name="com.danielkao.poweroff.SensorMonitorService"
             android:enabled="true"
-            android:exported="false" >
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.danielkao.poweroff.serviceaction" />
+            </intent-filter>
         </service>
 
         <activity
