@@ -2,6 +2,7 @@ package com.danielkao.poweroff;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.app.admin.DevicePolicyManager;
 import android.appwidget.AppWidgetManager;
@@ -44,15 +45,14 @@ public class SensorMonitorService extends Service implements
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		// being restarted
-		if (intent == null)
-		{
+		if (intent == null) {
 			ConstantValues.logv("onStartCommand: no intent");
 			if (getPrefAutoOnoff() == false) {
 				unregisterSensor();
 			} else {
 				registerSensor();
 			}
-			
+
 			return START_STICKY;
 		}
 
@@ -69,7 +69,7 @@ public class SensorMonitorService extends Service implements
 				registerSensor();
 			}
 		}
-		
+
 		return START_STICKY;
 	}
 
@@ -174,7 +174,7 @@ public class SensorMonitorService extends Service implements
 		// The light sensor returns a single value.
 		// Many sensors return 3 values, one for each axis.
 		float lux = event.values[0];
-		
+
 		// Do something with this sensor value.
 		ConstantValues.logv("onSensorChanged:%f", lux);
 		if (isActiveAdmin()) {
@@ -192,7 +192,7 @@ public class SensorMonitorService extends Service implements
 					if (!screenLock.isHeld()) {
 						screenLock.acquire();
 
-						//screenLock.release();
+						// screenLock.release();
 						new Thread(new Runnable() {
 							public void run() {
 								try {
@@ -220,13 +220,25 @@ public class SensorMonitorService extends Service implements
 	}
 
 	private void updateWidgetUI(Intent intent) {
-        int widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, -1);
-        if(widgetId == -1)
-        	return;
-        
-        AppWidgetManager appWidgetMan = AppWidgetManager.getInstance(this);
-        RemoteViews views = new RemoteViews(this.getPackageName(),R.layout.toggleonoff_appwidget);
-        
+		int widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+				-1);
+		if (widgetId == -1)
+			return;
+
+		// Create an Intent to interact with service 
+		Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
+		i.putExtra(ConstantValues.SERVICEACTION,
+				ConstantValues.SERVICEACTION_TOGGLE);
+		i.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
+
+		PendingIntent pendingIntent = PendingIntent.getService(this, 0, i,
+				PendingIntent.FLAG_UPDATE_CURRENT);
+
+		AppWidgetManager appWidgetMan = AppWidgetManager.getInstance(this);
+		RemoteViews views = new RemoteViews(this.getPackageName(),
+				R.layout.toggleonoff_appwidget);
+		views.setOnClickPendingIntent(R.id.imageview, pendingIntent);
+
 		// update UI if necessary
 		boolean autoOn = getPrefAutoOnoff();
 		if (autoOn) {
@@ -236,13 +248,14 @@ public class SensorMonitorService extends Service implements
 			// set icon to off
 			views.setImageViewResource(R.id.imageview, R.drawable.widget_off);
 		}
-		
-        appWidgetMan.updateAppWidget(widgetId, views);  
+
+		appWidgetMan.updateAppWidget(widgetId, views);
 	}
-	
-	private boolean getPrefAutoOnoff(){
-		SharedPreferences sp = getSharedPreferences(ConstantValues.PREF, Activity.MODE_PRIVATE);
+
+	private boolean getPrefAutoOnoff() {
+		SharedPreferences sp = getSharedPreferences(ConstantValues.PREF,
+				Activity.MODE_PRIVATE);
 		return sp.getBoolean(ConstantValues.IS_AUTO_ON, false);
 	}
-	
+
 }
