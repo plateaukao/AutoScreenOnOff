@@ -128,6 +128,13 @@ public class SensorMonitorService extends Service implements
 					Toast.LENGTH_SHORT).show();
 			return;
 		}
+		
+		// grant device management
+		if(!isActiveAdmin()){
+			Intent i = new Intent(this, MainActivity.class);
+			i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			this.startActivity(i);
+		}
 
 		mSensorManager.registerListener(this, mProximity,
 				SensorManager.SENSOR_DELAY_NORMAL);

@@ -36,13 +36,15 @@ public class MainActivity extends Activity {
 		{
 			if (resultCode == Activity.RESULT_OK) {
 				// Has become the device administrator.
-				shutdown();
+				if(false == mIsAutoOn){
+					shutdown();
+				}
 				Log.v(TAG, "add device admin okay!!");
-				finish();
 			} else {
 				//Canceled or failed.
 				Log.v(TAG, "add device admin not okay");
 			}
+			finish();
 		}
 	}
     
@@ -52,27 +54,21 @@ public class MainActivity extends Activity {
 
 		//get pref
 		SharedPreferences sp = getSharedPreferences(ConstantValues.PREF, Activity.MODE_PRIVATE);
-		mIsAutoOn = sp.getBoolean(ConstantValues.IS_AUTO_ON, false);
+		mIsAutoOn = sp.getBoolean(ConstantValues.IS_AUTO_ON, true);
 		ConstantValues.logv("%b",mIsAutoOn);
 
 		deviceManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 		mDeviceAdmin = new ComponentName(this, TurnOffReceiver.class);
 
-		// check whether is from another activity
-		Intent intentGot = this.getIntent();
-		if(intentGot.getExtras() != null)
+		// handle activeAdmin previlige
+		if(!isActiveAdmin())
 		{
-			Intent i = new Intent(this, SensorMonitorService.class);
-			bindService(i , mConnection, Context.BIND_AUTO_CREATE);
-			// make it long live
-			if(mIsAutoOn){
-				this.startService(i);
-				finish();
-			}
+			sendDeviceAdminIntent();
 			return;
 		}
-
+		
 		// no intent passed from another activity
+		/*
 		if(mIsAutoOn){
 			Intent intent = new Intent(this, SensorMonitorService.class);
 			bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
@@ -80,16 +76,12 @@ public class MainActivity extends Activity {
 			finish();
 		} // use manually
 		else{
-			// check if activated. if not, send the intent
-			if(!isActiveAdmin())
-				sendDeviceAdminIntent();
-			else{
-				shutdown();
-				finish();
-				return;
-			}
-
+			shutdown();
+			finish();
+			return;
 		}
+		}
+		*/
 
 	}
 
