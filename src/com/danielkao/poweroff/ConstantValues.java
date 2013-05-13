@@ -3,11 +3,12 @@ package com.danielkao.poweroff;
 import java.util.Arrays;
 
 import android.annotation.TargetApi;
-import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 
 public final class ConstantValues {
+	static final boolean debug = true;
+	
 	public static final String TAG = "SensorMonitor";
 	public static final String PREF = "SensorMonitorPref";
 	public static final String IS_AUTO_ON = "is_audo_on";
@@ -18,6 +19,9 @@ public final class ConstantValues {
 	
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	public static void logv(Object...argv){
+		if(!debug)
+			return;
+		
 		if(argv.length == 1)
 			Log.v(TAG, (String) argv[0]);
 		else
