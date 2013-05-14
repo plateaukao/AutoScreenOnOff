@@ -4,5 +4,7 @@
     <string name="app_name">AutoScreenOnOff</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
+    <string name="turn_autoscreen_on">Turn AutoScreen ON</string>
+    <string name="turn_autoscreen_off">Turn AutoScreen OFF</string>
     
 </resources>

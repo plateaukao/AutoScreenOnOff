@@ -143,16 +143,16 @@ public class SensorMonitorService extends Service implements
 		if (partialLock != null)
 			partialLock.acquire();
 
-		Toast.makeText(SensorMonitorService.this, "Turn on Auto Screen On/off",
-				Toast.LENGTH_SHORT).show();
+		String s = getResources().getString(R.string.turn_autoscreen_on);
+		Toast.makeText(SensorMonitorService.this, s, Toast.LENGTH_SHORT).show();
 	}
 
 	public void unregisterSensor() {
 		ConstantValues.logv("unregisterSensor");
 		if (mIsRegistered) {
 			mSensorManager.unregisterListener(this);
-			Toast.makeText(SensorMonitorService.this,
-					"Turn off Auto Screen On/off", Toast.LENGTH_SHORT).show();
+			String s = getResources().getString(R.string.turn_autoscreen_off);
+			Toast.makeText(SensorMonitorService.this, s, Toast.LENGTH_SHORT).show();
 		}
 
 		if (partialLock != null && partialLock.isHeld())
