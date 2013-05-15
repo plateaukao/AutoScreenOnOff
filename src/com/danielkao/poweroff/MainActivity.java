@@ -2,17 +2,10 @@ package com.danielkao.poweroff;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
+import android.content.*;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import android.view.Menu;
-
 import com.danielkao.poweroff.SensorMonitorService.LocalBinder;
 
 public class MainActivity extends Activity {
@@ -20,14 +13,13 @@ public class MainActivity extends Activity {
     private static final int REQUEST_CODE_ENABLE_ADMIN = 1;
     private static final String TAG = "TurnOff";
     
-    DevicePolicyManager deviceManager;
-    ComponentName mDeviceAdmin;
+    private DevicePolicyManager deviceManager;
+    private ComponentName mDeviceAdmin;
     
     //service
-    SensorMonitorService sensorService;
-    boolean mBoundLocalBindService;
+    private SensorMonitorService sensorService;
     // pref: turn on auto on/off
-    boolean mIsAutoOn;
+    private boolean mIsAutoOn;
     
     
 	@Override
@@ -100,14 +92,6 @@ public class MainActivity extends Activity {
 		super.onDestroy();
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
-	}
-
-	
     private boolean isActiveAdmin() {
         return deviceManager.isAdminActive(mDeviceAdmin);
     }
@@ -115,8 +99,9 @@ public class MainActivity extends Activity {
     private void sendDeviceAdminIntent(){
 		Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
 		intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mDeviceAdmin);
-		intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
-				"Need this privilege to turn off the screen");
+        intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
+                getResources().getString(R.string.device_management_explanation));
+        //"Need this privilege to turn off the screen");
 		startActivityForResult(intent, REQUEST_CODE_ENABLE_ADMIN);
 		
     }
@@ -132,7 +117,6 @@ public class MainActivity extends Activity {
             // We've bound to LocalService, cast the IBinder and get LocalService instance
             LocalBinder binder = (LocalBinder) service;
             sensorService = binder.getService();
-            mBoundLocalBindService = true;
             if(mIsAutoOn){
             	sensorService.registerSensor();
             }
@@ -144,7 +128,6 @@ public class MainActivity extends Activity {
 
         @Override
         public void onServiceDisconnected(ComponentName arg0) {
-            mBoundLocalBindService = false;
         }
     };
 }
