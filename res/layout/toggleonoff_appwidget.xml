@@ -18,5 +18,5 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center"
         android:gravity="center"
-        android:text="Screen\nOnoff" />
+        android:text="@string/widget_title" />
 </LinearLayout>

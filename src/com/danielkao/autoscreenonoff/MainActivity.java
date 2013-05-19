@@ -1,4 +1,4 @@
-package com.danielkao.poweroff;
+package com.danielkao.autoscreenonoff;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -6,7 +6,7 @@ import android.content.*;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import com.danielkao.poweroff.SensorMonitorService.LocalBinder;
+import com.danielkao.autoscreenonoff.SensorMonitorService.LocalBinder;
 
 public class MainActivity extends Activity {
 
@@ -93,7 +93,7 @@ public class MainActivity extends Activity {
 	}
 
     private boolean isActiveAdmin() {
-        return deviceManager.isAdminActive(mDeviceAdin);
+        return deviceManager.isAdminActive(mDeviceAdmin);
     }
     
     private void sendDeviceAdminIntent(){

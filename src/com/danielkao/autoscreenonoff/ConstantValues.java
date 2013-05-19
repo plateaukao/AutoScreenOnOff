@@ -1,4 +1,4 @@
-package com.danielkao.poweroff;
+package com.danielkao.autoscreenonoff;
 
 import android.annotation.TargetApi;
 import android.os.Build;
@@ -14,7 +14,7 @@ public final class ConstantValues {
 	public static final String IS_AUTO_ON = "is_audo_on";
 	public static final int SERVICEACTION_TOGGLE = 0;
 	public static final String SERVICEACTION = "serviceaction";
-	public static final String SERVICE_INTENT_ACTION = "com.danielkao.poweroff.serviceaction";
+	public static final String SERVICE_INTENT_ACTION = "com.danielkao.autoscreenonoff.serviceaction";
 	
 	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	public static void logv(Object...argv){

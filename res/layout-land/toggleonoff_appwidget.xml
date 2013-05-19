@@ -17,5 +17,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|center"
         android:gravity="center"
-        android:text="Smart\nOnoff" />
+        android:textColor="@color/light_font"
+        android:shadowColor="@color/text_shadow"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="2"
+        android:text="@string/widget_title" />
 </LinearLayout>

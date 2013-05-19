@@ -1,14 +1,11 @@
-package com.danielkao.poweroff;
+package com.danielkao.autoscreenonoff;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.widget.RemoteViews;
-import android.widget.Toast;
 
 public class ToggleAutoScreenOnOffAppWidgetProvider extends AppWidgetProvider {
 
@@ -22,7 +19,6 @@ public class ToggleAutoScreenOnOffAppWidgetProvider extends AppWidgetProvider {
 			ConstantValues.logv("onUpdate in AppWidget");
 			int appWidgetId = appWidgetIds[i];
 
-			// Create an Intent to launch ExampleActivity
 			Intent intent = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
 			intent.putExtra(ConstantValues.SERVICEACTION,
 					ConstantValues.SERVICEACTION_TOGGLE);

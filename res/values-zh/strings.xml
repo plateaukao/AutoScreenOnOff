@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">螢幕自動開關 Widget</string>
+    <string name="app_name">自動螢幕開關</string>
     <string name="action_settings">設定</string>
     <string name="hello_world">Hello world!</string>
     <string name="turn_autoscreen_on">啟動螢幕自動控制</string>
     <string name="turn_autoscreen_off">關閉螢幕自動控制</string>
     <string name="device_management_explanation">需要此權限，才可以關閉螢幕</string>
+    <string name="widget_title">自動螢幕開關</string>
 
 </resources>

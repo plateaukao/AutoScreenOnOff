@@ -7,5 +7,6 @@
     <string name="turn_autoscreen_on">Turn AutoScreen ON</string>
     <string name="turn_autoscreen_off">Turn AutoScreen OFF</string>
     <string name="device_management_explanation">Need this privilege to turn off the screen</string>
+    <string name="widget_title">Screen OnOff</string>
 
 </resources>

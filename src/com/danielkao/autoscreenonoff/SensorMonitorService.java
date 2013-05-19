@@ -1,4 +1,4 @@
-package com.danielkao.poweroff;
+package com.danielkao.autoscreenonoff;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -20,7 +20,6 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.widget.RemoteViews;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class SensorMonitorService extends Service implements
