@@ -93,7 +93,7 @@ public class MainActivity extends Activity {
 	}
 
     private boolean isActiveAdmin() {
-        return deviceManager.isAdminActive(mDeviceAdmin);
+        return deviceManager.isAdminActive(mDeviceAdin);
     }
     
     private void sendDeviceAdminIntent(){

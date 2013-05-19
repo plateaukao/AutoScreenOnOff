@@ -7,7 +7,7 @@ import android.util.Log;
 import java.util.Arrays;
 
 public final class ConstantValues {
-	static final boolean debug = true;
+	static final boolean debug = false;
 	
 	public static final String TAG = "SensorMonitor";
 	public static final String PREF = "SensorMonitorPref";

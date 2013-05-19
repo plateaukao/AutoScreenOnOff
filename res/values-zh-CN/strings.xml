@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">AutoScreenOnOff</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">屏幕自动开关小部件</string>
+    <string name="action_settings">设置</string>
     <string name="hello_world">Hello world!</string>
-    <string name="turn_autoscreen_on">Turn AutoScreen ON</string>
-    <string name="turn_autoscreen_off">Turn AutoScreen OFF</string>
-    <string name="device_management_explanation">Need this privilege to turn off the screen</string>
+    <string name="turn_autoscreen_on">开启屏幕自动控制</string>
+    <string name="turn_autoscreen_off">关闭屏幕自动控制</string>
+    <string name="device_management_explanation">需要此权限以关闭屏幕</string>
 
 </resources>
