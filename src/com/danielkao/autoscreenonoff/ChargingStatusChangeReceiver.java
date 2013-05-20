@@ -3,8 +3,6 @@ package com.danielkao.autoscreenonoff;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import static android.content.Intent.ACTION_POWER_CONNECTED;
 import static android.content.Intent.ACTION_POWER_DISCONNECTED;
@@ -16,7 +14,7 @@ public class ChargingStatusChangeReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         // not enabled
-        if(!getPrefChargingOn(context))
+        if(!ConstantValues.getPrefChargingOn(context))
             return;
 
         String action = intent.getAction();
@@ -44,10 +42,4 @@ public class ChargingStatusChangeReceiver extends BroadcastReceiver {
     }
 
 
-        private boolean getPrefChargingOn(Context context) {
-            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-            boolean isPrefChargingOn = sp.getBoolean(ConstantValues.PREF_CHARGING_ON, false);
-            ConstantValues.logv("prefchargingon: %b",isPrefChargingOn);
-            return isPrefChargingOn;
-        }
 }

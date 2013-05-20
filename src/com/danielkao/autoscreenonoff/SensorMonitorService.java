@@ -47,7 +47,7 @@ public class SensorMonitorService extends Service implements
 		// being restarted
 		if (intent == null) {
 			ConstantValues.logv("onStartCommand: no intent");
-			if (getPrefAutoOnoff() == false) {
+			if (ConstantValues.getPrefAutoOnoff(this) == false) {
 				unregisterSensor();
 			} else {
 				registerSensor();
@@ -64,7 +64,7 @@ public class SensorMonitorService extends Service implements
 			togglePreference();
 			updateWidgetUI(intent);
 
-			if (getPrefAutoOnoff() == false) {
+			if (ConstantValues.getPrefAutoOnoff(this) == false) {
 				unregisterSensor();
 			} else {
 				registerSensor();
@@ -73,12 +73,14 @@ public class SensorMonitorService extends Service implements
             // from charging receiver
             if(!isRegistered()){
                 registerSensor();
+                updateWidgetCharging(true);
             }
 
         } else if(action == ConstantValues.SERVICEACTION_TURNOFF){
             // from charging receiver
-            if(isRegistered() && !getPrefAutoOnoff()){
+            if(isRegistered() && !ConstantValues.getPrefAutoOnoff(this)){
                 unregisterSensor();
+                updateWidgetCharging(false);
             }
 
         }
@@ -86,7 +88,14 @@ public class SensorMonitorService extends Service implements
 		return START_STICKY;
 	}
 
-	//
+    private void updateWidgetCharging(boolean b) {
+        Intent i = new Intent(this, ToggleAutoScreenOnOffAppWidgetProvider.class);
+        i.setAction(ConstantValues.UPDATE_WIDGET_ACTION);
+        i.putExtra(ConstantValues.PREF_CHARGING_ON, b);
+        this.sendBroadcast(i);
+    }
+
+    //
 	// life cycle
 	//
 	public SensorMonitorService() {
@@ -260,7 +269,7 @@ public class SensorMonitorService extends Service implements
 		views.setOnClickPendingIntent(R.id.imageview, pendingIntent);
 
 		// update UI if necessary
-		boolean autoOn = getPrefAutoOnoff();
+		boolean autoOn = ConstantValues.getPrefAutoOnoff(this);
 		if (autoOn) {
 			// set icon to on
 			views.setImageViewResource(R.id.imageview, R.drawable.widget_on);
@@ -270,12 +279,6 @@ public class SensorMonitorService extends Service implements
 		}
 
 		appWidgetMan.updateAppWidget(widgetId, views);
-	}
-
-	private boolean getPrefAutoOnoff() {
-		SharedPreferences sp = getSharedPreferences(ConstantValues.PREF,
-				Activity.MODE_PRIVATE);
-		return sp.getBoolean(ConstantValues.IS_AUTO_ON, false);
 	}
 
 }
