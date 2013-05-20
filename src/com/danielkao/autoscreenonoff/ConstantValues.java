@@ -11,7 +11,9 @@ public final class ConstantValues {
 	
 	public static final String TAG = "SensorMonitor";
 	public static final String PREF = "SensorMonitorPref";
+    public static final String PREF_CHARGING_ON = "prefChargingOn";
 	public static final String IS_AUTO_ON = "is_audo_on";
+
 	public static final int SERVICEACTION_TOGGLE = 0;
     public static final int SERVICEACTION_TURNON = 1;
     public static final int SERVICEACTION_TURNOFF = 2;

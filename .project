@@ -30,4 +30,11 @@
 		<nature>com.android.ide.eclipse.adt.AndroidNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>src/com/danielkao/poweroff/ChargingStatusChangeReceiver.java</name>
+			<type>1</type>
+			<location>/Users/plateau/Documents/workspace/PowerOff/src/com/danielkao/autoscreenonoff/ChargingStatusChangeReceiver.java</location>
+		</link>
+	</linkedResources>
 </projectDescription>

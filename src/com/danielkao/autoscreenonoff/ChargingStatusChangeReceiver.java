@@ -1,11 +1,10 @@
 package com.danielkao.autoscreenonoff;
 
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.BatteryManager;
-import android.widget.Toast;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import static android.content.Intent.ACTION_POWER_CONNECTED;
 import static android.content.Intent.ACTION_POWER_DISCONNECTED;
@@ -15,9 +14,10 @@ import static android.content.Intent.ACTION_POWER_DISCONNECTED;
  */
 public class ChargingStatusChangeReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
-        int status = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1);
-        boolean isCharging = status == BatteryManager.BATTERY_STATUS_CHARGING ||
-                status == BatteryManager.BATTERY_STATUS_FULL;
+
+        // not enabled
+        if(!getPrefChargingOn(context))
+            return;
 
         String action = intent.getAction();
         if(action.equals(ACTION_POWER_CONNECTED)) {
@@ -32,6 +32,7 @@ public class ChargingStatusChangeReceiver extends BroadcastReceiver {
         }
         else if(action.equals(ACTION_POWER_DISCONNECTED)) {
         //else{
+
             ConstantValues.logv("is not charging anymore");
 
             Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
@@ -40,7 +41,13 @@ public class ChargingStatusChangeReceiver extends BroadcastReceiver {
             context.startService(i);
 
         }
-
-
     }
+
+
+        private boolean getPrefChargingOn(Context context) {
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+            boolean isPrefChargingOn = sp.getBoolean(ConstantValues.PREF_CHARGING_ON, false);
+            ConstantValues.logv("prefchargingon: %b",isPrefChargingOn);
+            return isPrefChargingOn;
+        }
 }

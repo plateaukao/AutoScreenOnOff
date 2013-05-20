@@ -27,6 +27,14 @@
             </intent-filter>
             -->
         </activity>
+        <activity
+                android:name=".ScreenOffWidgetConfigure"
+                android:label="@string/setting_name">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
 
         <receiver
             android:name="com.danielkao.autoscreenonoff.TurnOffReceiver"
@@ -57,7 +65,10 @@
             </intent-filter>
         </service>
 
-        <receiver android:name="ToggleAutoScreenOnOffAppWidgetProvider" >
+        <receiver android:name="ToggleAutoScreenOnOffAppWidgetProvider"
+                  android:configure="com.danielkao.autoscreenonoff.ScreenOffWidgetConfigure"
+                >
+
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>

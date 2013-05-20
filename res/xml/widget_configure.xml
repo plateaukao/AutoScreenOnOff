@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/pref_setting" >
+        <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="prefChargingOn"
+                android:summary="@string/pref_summary_charging_on"
+                android:title="@string/pref_title_charging_on" >
+        </CheckBoxPreference>
+
+        <!--
+        <ListPreference
+                android:key="prefSyncFrequency"
+                android:entries="@array/syncFrequency"
+                android:summary="@string/pref_sync_frequency_summary"
+                android:entryValues="@array/syncFrequencyValues"
+                android:title="@string/pref_sync_frequency" />
+                -->
+    </PreferenceCategory>
+
+</PreferenceScreen>
