@@ -56,8 +56,9 @@ public class SensorMonitorService extends Service implements
 			return START_STICKY;
 		}
 
-		// from widget
 		int action = intent.getIntExtra(ConstantValues.SERVICEACTION, -1);
+
+        // from widget
 		if (action == ConstantValues.SERVICEACTION_TOGGLE) {
 			// do the toggle first
 			togglePreference();
@@ -68,7 +69,19 @@ public class SensorMonitorService extends Service implements
 			} else {
 				registerSensor();
 			}
-		}
+		} else if(action == ConstantValues.SERVICEACTION_TURNON){
+            // from charging receiver
+            if(!isRegistered()){
+                registerSensor();
+            }
+
+        } else if(action == ConstantValues.SERVICEACTION_TURNOFF){
+            // from charging receiver
+            if(isRegistered() && !getPrefAutoOnoff()){
+                unregisterSensor();
+            }
+
+        }
 
 		return START_STICKY;
 	}

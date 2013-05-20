@@ -7,12 +7,14 @@ import android.util.Log;
 import java.util.Arrays;
 
 public final class ConstantValues {
-	static final boolean debug = false;
+	static final boolean debug = true;
 	
 	public static final String TAG = "SensorMonitor";
 	public static final String PREF = "SensorMonitorPref";
 	public static final String IS_AUTO_ON = "is_audo_on";
 	public static final int SERVICEACTION_TOGGLE = 0;
+    public static final int SERVICEACTION_TURNON = 1;
+    public static final int SERVICEACTION_TURNOFF = 2;
 	public static final String SERVICEACTION = "serviceaction";
 	public static final String SERVICE_INTENT_ACTION = "com.danielkao.autoscreenonoff.serviceaction";
 	
