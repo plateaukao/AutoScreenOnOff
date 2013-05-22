@@ -9,10 +9,11 @@
               android:layout_height="fill_parent"
               android:layout_weight="10"
             />
-    <Button android:id="@+id/auto_toggle_button" android:text="Uninstall App"
+    <Button android:id="@+id/auto_toggle_button" android:text="@string/uninstall_app"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:onClick="uninstallApp"
+            android:drawableLeft="@android:drawable/ic_menu_delete"
             android:layout_margin="5dp"
             android:layout_weight="1"/>
 

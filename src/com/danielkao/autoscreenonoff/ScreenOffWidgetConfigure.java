@@ -11,14 +11,14 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.Toast;
 
 /**
  * Created by plateau on 2013/05/20.
  */
-public class ScreenOffWidgetConfigure extends PreferenceActivity {
+public class ScreenOffWidgetConfigure extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
     private static String CONFIGURE_ACTION="android.appwidget.action.APPWIDGET_CONFIGURE";
 
     private static final int REQUEST_CODE_DISABLE_ADMIN = 1;
@@ -48,6 +48,16 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity {
 
         addPreferencesFromResource(R.xml.widget_configure);
         setContentView(R.layout.activity_settings);
+
+        // for receiving pref change callbacks
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
 
     }
 
@@ -102,17 +112,21 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity {
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,String key)
     {
-        Toast.makeText(this, "changed", Toast.LENGTH_SHORT).show();
-        // do stuff
+        if(key.equals(ConstantValues.PREF_AUTO_ON)){
+            Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
+            i.putExtra(ConstantValues.SERVICEACTION,
+                    ConstantValues.SERVICEACTION_TOGGLE);
+            i.putExtra(ConstantValues.SERVICETYPE,
+                    ConstantValues.SERVICETYPE_SETTING);
+            startService(i);
+        }
+        else if(key.equals(ConstantValues.PREF_CHARGING_ON)){
+            Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
+            i.putExtra(ConstantValues.SERVICEACTION,
+                    (sharedPreferences.getBoolean(key,false))
+                            ?ConstantValues.SERVICEACTION_TURNON
+                            :ConstantValues.SERVICEACTION_TURNOFF);
+                startService(i);
+        }
     }
-
-    private void sendDeviceAdminIntent(){
-        Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-        intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mDeviceAdmin);
-        intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
-                getResources().getString(R.string.device_management_explanation));
-        //"Need this privilege to turn off the screen");
-        startActivityForResult(intent, REQUEST_CODE_DISABLE_ADMIN);
-    }
-
 }

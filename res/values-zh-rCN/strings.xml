@@ -9,4 +9,16 @@
     <string name="device_management_explanation">需要此权限以关闭屏幕</string>
     <string name="widget_title">自动屏幕开关</string>
 
+    <string name="setting_name">自动屏幕开关</string>
+    <string name="action_settings">设W置</string>
+
+    <string name="pref_setting">设置</string>
+
+    <string name="pref_summary_charging_on">当接上USB线时，启动本功能；拔出时，则中断。</string>
+    <string name="pref_title_charging_on">接上电源时开启</string>
+
+    <string name="pref_summary_auto_on">启动后，如果物体(如保护盖)遮盖于感测器上方，则屏幕自动关闭；反之，则自动开启。</string>
+    <string name="pref_title_auto_on">启动自动屏幕开关</string>
+    <string name="uninstall_app">移除本软件</string>
+
 </resources>

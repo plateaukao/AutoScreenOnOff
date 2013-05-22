@@ -9,4 +9,15 @@
     <string name="device_management_explanation">需要此權限，才可以關閉螢幕</string>
     <string name="widget_title">自動螢幕開關</string>
 
+    <string name="setting_name">自動螢幕設定</string>
+    <string name="action_settings">設定</string>
+
+    <string name="pref_setting">設定</string>
+
+    <string name="pref_summary_charging_on">當接上USB線時，開啟本功能；當拔出USB時,自動關閉本功能。</string>
+    <string name="pref_title_charging_on">接上電源時開啟</string>
+
+    <string name="pref_summary_auto_on">啟動後，當"測近感側器"被遮蓋時，畫面自動關閉；當無遮蓋時，則自動點亮畫面。</string>
+    <string name="pref_title_auto_on">啟動自動螢幕開關</string>
+    <string name="uninstall_app">移除本軟體</string>
 </resources>

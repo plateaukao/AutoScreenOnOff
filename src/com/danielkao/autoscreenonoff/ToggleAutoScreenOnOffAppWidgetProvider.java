@@ -39,6 +39,11 @@ public class ToggleAutoScreenOnOffAppWidgetProvider extends AppWidgetProvider {
             //Toast.makeText(context,"onReceive", Toast.LENGTH_SHORT);
 
             int ids[] = awm.getAppWidgetIds(thisAppWidget);
+
+            // no widgets yet, return
+            if (ids.length == 0)return;
+
+            // widget exists, update all
             for(int appWidgetID : ids)
                 updateRemoteViews(context, awm, appWidgetID,b);
 
@@ -49,8 +54,8 @@ public class ToggleAutoScreenOnOffAppWidgetProvider extends AppWidgetProvider {
         ConstantValues.logv("onUpdate in AppWidget");
 
         Intent intent = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
-        intent.putExtra(ConstantValues.SERVICEACTION,
-                ConstantValues.SERVICEACTION_TOGGLE);
+        intent.putExtra(ConstantValues.SERVICEACTION, ConstantValues.SERVICEACTION_TOGGLE);
+        intent.putExtra(ConstantValues.SERVICETYPE, ConstantValues.SERVICETYPE_WIDGET);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
 
         PendingIntent pendingIntent = PendingIntent.getService(context, 0,

@@ -18,5 +18,6 @@
 
     <string name="pref_summary_auto_on">Turn off Screen when proximity sensor is covered; turn on screen when it\'s uncovered</string>
     <string name="pref_title_auto_on">Enable AutoScreen</string>
+    <string name="uninstall_app">Uninstall App</string>
 
 </resources>

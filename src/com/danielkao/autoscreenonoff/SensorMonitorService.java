@@ -1,25 +1,20 @@
 package com.danielkao.autoscreenonoff;
 
 import android.annotation.SuppressLint;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.app.admin.DevicePolicyManager;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.content.SharedPreferences.Editor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.BatteryManager;
 import android.os.Binder;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
-import android.widget.RemoteViews;
 import android.widget.Toast;
 
 public class SensorMonitorService extends Service implements
@@ -58,11 +53,15 @@ public class SensorMonitorService extends Service implements
 
 		int action = intent.getIntExtra(ConstantValues.SERVICEACTION, -1);
 
-        // from widget
+        // from widget or setting
 		if (action == ConstantValues.SERVICEACTION_TOGGLE) {
-			// do the toggle first
-			togglePreference();
-			updateWidgetUI(intent);
+
+            // it's from widget, need to do the toggle first
+            if(!intent.getStringExtra(ConstantValues.SERVICETYPE).equals(ConstantValues.SERVICETYPE_SETTING)){
+			    togglePreference();
+            }
+
+            updateWidgetCharging(false);
 
 			if (ConstantValues.getPrefAutoOnoff(this) == false) {
 				unregisterSensor();
@@ -73,7 +72,11 @@ public class SensorMonitorService extends Service implements
             // from charging receiver
             if(!isRegistered()){
                 registerSensor();
-                updateWidgetCharging(true);
+                //get current power state
+                Intent intentBat = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+                boolean isPlugged = (intentBat.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) > 0);
+
+                updateWidgetCharging(isPlugged);
             }
 
         } else if(action == ConstantValues.SERVICEACTION_TURNOFF){
@@ -165,7 +168,7 @@ public class SensorMonitorService extends Service implements
 		if (partialLock != null)
 			partialLock.acquire();
 
-		String s = getResources().getString(R.string.turn_autoscreen_on);
+		String s = getString(R.string.turn_autoscreen_on);
 		Toast.makeText(SensorMonitorService.this, s, Toast.LENGTH_SHORT).show();
 	}
 
@@ -173,7 +176,7 @@ public class SensorMonitorService extends Service implements
 		ConstantValues.logv("unregisterSensor");
 		if (mIsRegistered) {
 			mSensorManager.unregisterListener(this);
-			String s = getResources().getString(R.string.turn_autoscreen_off);
+			String s = getString(R.string.turn_autoscreen_off);
 			Toast.makeText(SensorMonitorService.this, s, Toast.LENGTH_SHORT).show();
 		}
 
@@ -247,6 +250,8 @@ public class SensorMonitorService extends Service implements
 
 	}
 
+    /* code for udpate specific widget ID
+     * not used anymore
 	private void updateWidgetUI(Intent intent) {
 		int widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
 				-1);
@@ -257,6 +262,7 @@ public class SensorMonitorService extends Service implements
 		Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
 		i.putExtra(ConstantValues.SERVICEACTION,
 				ConstantValues.SERVICEACTION_TOGGLE);
+        i.putExtra(ConstantValues.SERVICETYPE, ConstantValues.SERVICETYPE_WIDGET);
 		i.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
 
 		PendingIntent pendingIntent = PendingIntent.getService(this, 0, i,
@@ -279,5 +285,6 @@ public class SensorMonitorService extends Service implements
 
 		appWidgetMan.updateAppWidget(widgetId, views);
 	}
+	*/
 
 }

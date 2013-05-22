@@ -48,7 +48,6 @@ public class MainActivity extends Activity {
 
 		//get pref
 		mIsAutoOn = ConstantValues.getPrefAutoOnoff(this.getApplicationContext());
-		//ConstantValues.logv("%b",mIsAutoOn);
 
 		deviceManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 		mDeviceAdmin = new ComponentName(this, TurnOffReceiver.class);
@@ -60,22 +59,6 @@ public class MainActivity extends Activity {
 			return;
 		}
 		
-		// no intent passed from another activity
-		/*
-		if(mIsAutoOn){
-			Intent intent = new Intent(this, SensorMonitorService.class);
-			bindService(intent, mConnection, Context.BIND_AUTO_CREATE);
-			this.startService(intent);
-			finish();
-		} // use manually
-		else{
-			shutdown();
-			finish();
-			return;
-		}
-		}
-		*/
-
 	}
 
 

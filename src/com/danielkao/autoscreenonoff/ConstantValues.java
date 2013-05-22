@@ -17,14 +17,21 @@ public final class ConstantValues {
     public static final String PREF_CHARGING_ON = "prefChargingOn";
 	public static final String PREF_AUTO_ON = "prefAutoOn";
 
+    //
+    public static final String SERVICEACTION = "serviceaction";
 	public static final int SERVICEACTION_TOGGLE = 0;
     public static final int SERVICEACTION_TURNON = 1;
     public static final int SERVICEACTION_TURNOFF = 2;
-	public static final String SERVICEACTION = "serviceaction";
+    //
 	public static final String SERVICE_INTENT_ACTION = "com.danielkao.autoscreenonoff.serviceaction";
     public static final String UPDATE_WIDGET_ACTION = "com.danielkao.autoscreenonoff.updatewidget";
-	
-	@TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    //
+    public static final String SERVICETYPE = "servicetype";
+    public static final String SERVICETYPE_CHARGING = "charging";
+    public static final String SERVICETYPE_SETTING = "setting";
+    public static final String SERVICETYPE_WIDGET = "widget";
+
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	public static void logv(Object...argv){
 		if(!debug)
 			return;

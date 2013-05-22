@@ -26,6 +26,8 @@ public class ChargingStatusChangeReceiver extends BroadcastReceiver {
             Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
             i.putExtra(ConstantValues.SERVICEACTION,
                     ConstantValues.SERVICEACTION_TURNON);
+            i.putExtra(ConstantValues.SERVICETYPE,
+                    ConstantValues.SERVICETYPE_CHARGING);
             context.startService(i);
         }
         else if(action.equals(ACTION_POWER_DISCONNECTED)) {
@@ -36,6 +38,8 @@ public class ChargingStatusChangeReceiver extends BroadcastReceiver {
             Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
             i.putExtra(ConstantValues.SERVICEACTION,
                     ConstantValues.SERVICEACTION_TURNOFF);
+            i.putExtra(ConstantValues.SERVICETYPE,
+                    ConstantValues.SERVICETYPE_CHARGING);
             context.startService(i);
 
         }
