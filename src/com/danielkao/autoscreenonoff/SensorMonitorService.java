@@ -1,7 +1,6 @@
 package com.danielkao.autoscreenonoff;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.app.admin.DevicePolicyManager;
@@ -19,6 +18,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.preference.PreferenceManager;
 import android.widget.RemoteViews;
 import android.widget.Toast;
 
@@ -239,11 +239,10 @@ public class SensorMonitorService extends Service implements
 	}
 
 	private void togglePreference() {
-		SharedPreferences sp = getSharedPreferences(ConstantValues.PREF,
-				Activity.MODE_PRIVATE);
-		boolean IsAutoOn = sp.getBoolean(ConstantValues.IS_AUTO_ON, false);
+		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+		boolean IsAutoOn = sp.getBoolean(ConstantValues.PREF_AUTO_ON, false);
 		Editor editor = sp.edit();
-		editor.putBoolean(ConstantValues.IS_AUTO_ON, !IsAutoOn);
+		editor.putBoolean(ConstantValues.PREF_AUTO_ON, !IsAutoOn);
 		editor.commit();
 
 	}

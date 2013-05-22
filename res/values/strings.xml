@@ -12,7 +12,11 @@
     <string name="widget_title">Screen OnOff</string>
 
     <string name="pref_setting">Settings</string>
+
     <string name="pref_summary_charging_on">Enable AutoScreen function during charging; and disable it once unplugged.</string>
     <string name="pref_title_charging_on">Enable while charging</string>
+
+    <string name="pref_summary_auto_on">Turn off Screen when proximity sensor is covered; turn on screen when it\'s uncovered</string>
+    <string name="pref_title_auto_on">Enable AutoScreen</string>
 
 </resources>

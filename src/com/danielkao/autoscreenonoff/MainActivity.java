@@ -47,9 +47,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		//get pref
-		SharedPreferences sp = getSharedPreferences(ConstantValues.PREF, Activity.MODE_PRIVATE);
-		mIsAutoOn = sp.getBoolean(ConstantValues.IS_AUTO_ON, true);
-		ConstantValues.logv("%b",mIsAutoOn);
+		mIsAutoOn = ConstantValues.getPrefAutoOnoff(this.getApplicationContext());
+		//ConstantValues.logv("%b",mIsAutoOn);
 
 		deviceManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 		mDeviceAdmin = new ComponentName(this, TurnOffReceiver.class);

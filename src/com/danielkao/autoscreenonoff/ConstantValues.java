@@ -1,7 +1,6 @@
 package com.danielkao.autoscreenonoff;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -16,7 +15,7 @@ public final class ConstantValues {
 	public static final String TAG = "SensorMonitor";
 	public static final String PREF = "SensorMonitorPref";
     public static final String PREF_CHARGING_ON = "prefChargingOn";
-	public static final String IS_AUTO_ON = "is_audo_on";
+	public static final String PREF_AUTO_ON = "prefAutoOn";
 
 	public static final int SERVICEACTION_TOGGLE = 0;
     public static final int SERVICEACTION_TURNON = 1;
@@ -40,9 +39,8 @@ public final class ConstantValues {
 	}
 
     public static boolean getPrefAutoOnoff(Context context) {
-        SharedPreferences sp = context.getSharedPreferences(ConstantValues.PREF,
-                Activity.MODE_PRIVATE);
-        return sp.getBoolean(ConstantValues.IS_AUTO_ON, false);
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        return sp.getBoolean(ConstantValues.PREF_AUTO_ON, false);
     }
 
     /*

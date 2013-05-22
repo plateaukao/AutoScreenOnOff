@@ -4,6 +4,12 @@
     <PreferenceCategory android:title="@string/pref_setting" >
         <CheckBoxPreference
                 android:defaultValue="false"
+                android:key="prefAutoOn"
+                android:summary="@string/pref_summary_auto_on"
+                android:title="@string/pref_title_auto_on" >
+        </CheckBoxPreference>
+        <CheckBoxPreference
+                android:defaultValue="false"
                 android:key="prefChargingOn"
                 android:summary="@string/pref_summary_charging_on"
                 android:title="@string/pref_title_charging_on" >

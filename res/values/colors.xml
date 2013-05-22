@@ -2,4 +2,5 @@
 <resources>
     <color name="light_font">#FBFBFB</color>
     <color name="text_shadow">#7F000000</color>
+    <color name="red">#FFFF0000</color>
 </resources>
