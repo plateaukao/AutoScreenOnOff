@@ -10,15 +10,22 @@
     <string name="widget_title">自动屏幕开关</string>
 
     <string name="setting_name">自动屏幕开关</string>
-    <string name="action_settings">设W置</string>
+    <string name="action_power_settings">插入电源时设置</string>
+    <string name="action_auto_settings">自动屏幕开关设置</string>
 
-    <string name="pref_setting">设置</string>
+    <string name="pref_auto_setting">屏幕自动控制设置</string>
+    <string name="pref_power_setting">插入电源时的设置</string>
 
     <string name="pref_summary_charging_on">当接上USB线时，启动本功能；拔出时，则中断。</string>
-    <string name="pref_title_charging_on">接上电源时开启</string>
+    <string name="pref_title_charging_on">仅在接上电源时启动</string>
 
     <string name="pref_summary_auto_on">启动后，如果物体(如保护盖)遮盖于感测器上方，则屏幕自动关闭；反之，则自动开启。</string>
-    <string name="pref_title_auto_on">启动自动屏幕开关</string>
+    <string name="pref_title_auto_on">启动</string>
     <string name="uninstall_app">移除本软件</string>
 
+    <string name="title_playstore">前往谷哥商店</string>
+    <string name="title_codesite">前往GitHub</string>
+
+    <string name="pref_summary_disable_in_landscape">画面横置时，暂时不关闭画面，因为此时可能在拍照或看影片。</string>
+    <string name="pref_title_disable_in_landscape">横屏时暂时停止作用</string>
 </resources>

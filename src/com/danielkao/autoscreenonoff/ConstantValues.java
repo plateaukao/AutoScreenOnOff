@@ -16,6 +16,7 @@ public final class ConstantValues {
 	public static final String PREF = "SensorMonitorPref";
     public static final String PREF_CHARGING_ON = "prefChargingOn";
 	public static final String PREF_AUTO_ON = "prefAutoOn";
+    public static final String PREF_DISABLE_IN_LANDSCAPE= "prefDisableInLandscape";
 
     //
     public static final String SERVICEACTION = "serviceaction";
@@ -47,7 +48,7 @@ public final class ConstantValues {
 
     public static boolean getPrefAutoOnoff(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        return sp.getBoolean(ConstantValues.PREF_AUTO_ON, false);
+        return sp.getBoolean(PREF_AUTO_ON, false);
     }
 
     /*
@@ -60,8 +61,15 @@ public final class ConstantValues {
 
     public static boolean getPrefChargingOn(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        boolean isPrefChargingOn = sp.getBoolean(ConstantValues.PREF_CHARGING_ON, false);
+        boolean isPrefChargingOn = sp.getBoolean(PREF_CHARGING_ON, false);
         ConstantValues.logv("prefchargingon: %b",isPrefChargingOn);
         return isPrefChargingOn;
+    }
+
+    public static boolean getPrefDisableInLandscape(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean isPrefDisableInLandscape = sp.getBoolean(PREF_DISABLE_IN_LANDSCAPE, false);
+        ConstantValues.logv("prefdisableinlandscape: %b",isPrefDisableInLandscape);
+        return isPrefDisableInLandscape;
     }
 }

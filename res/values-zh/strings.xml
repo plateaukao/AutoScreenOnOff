@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string name="app_name">自動螢幕開關</string>
     <string name="action_settings">設定</string>
     <string name="hello_world">Hello world!</string>
@@ -12,12 +11,16 @@
     <string name="setting_name">自動螢幕設定</string>
     <string name="action_settings">設定</string>
 
-    <string name="pref_setting">設定</string>
+    <string name="pref_auto_setting">自動螢幕控制設定</string>
+    <string name="pref_setting">插入電源時的設定</string>
 
     <string name="pref_summary_charging_on">當接上USB線時，開啟本功能；當拔出USB時,自動關閉本功能。</string>
-    <string name="pref_title_charging_on">接上電源時開啟</string>
+    <string name="pref_title_charging_on">僅在接上電源時啟動</string>
 
     <string name="pref_summary_auto_on">啟動後，當"測近感側器"被遮蓋時，畫面自動關閉；當無遮蓋時，則自動點亮畫面。</string>
-    <string name="pref_title_auto_on">啟動自動螢幕開關</string>
+    <string name="pref_title_auto_on">啟動自動螢幕控制</string>
     <string name="uninstall_app">移除本軟體</string>
+
+    <string name="pref_summary_disable_in_landscape">手機在橫放時，暫時不關閉螢幕。因為此時可能在看影片，或是要拍照，很容易誤遮到感測器。</string>
+    <string name="pref_title_disable_in_landscape">橫屏時暫時無作用</string>
 </resources>

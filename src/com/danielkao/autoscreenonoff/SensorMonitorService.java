@@ -15,6 +15,9 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
+import android.view.Display;
+import android.view.Surface;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 public class SensorMonitorService extends Service implements
@@ -213,8 +216,15 @@ public class SensorMonitorService extends Service implements
 			// should turn off
 			if (lux == 0f) {
 				if (mPowerManager.isScreenOn()) {
-					deviceManager.lockNow();
-					ConstantValues.logv("turn off");
+                    // check if it is disabled during landscape mode, and now it's really in landscape
+                    // --> return
+                    if(ConstantValues.getPrefDisableInLandscape(this) && isOrientationLandscape()){
+                        return;
+                    }
+                    else{
+                        deviceManager.lockNow();
+                        ConstantValues.logv("turn off");
+                    }
 				}
 			}
 			// should turn on
@@ -287,4 +297,12 @@ public class SensorMonitorService extends Service implements
 	}
 	*/
 
+    private boolean isOrientationLandscape(){
+        Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
+        int rotation = display.getRotation();
+        if(rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270)
+            return true;
+        else
+            return false;
+    }
 }
