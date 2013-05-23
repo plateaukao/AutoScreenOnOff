@@ -7,14 +7,16 @@
     <ListView android:id="@android:id/list"
               style="@style/MagicPoint"
               android:layout_height="fill_parent"
-              android:layout_weight="10"
+              android:layout_weight="20"
             />
     <Button android:id="@+id/auto_toggle_button" android:text="@string/uninstall_app"
             style="@style/MagicPoint"
             android:layout_height="wrap_content"
             android:onClick="uninstallApp"
             android:drawableLeft="@android:drawable/ic_menu_delete"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
             android:layout_weight="1"/>
 
 </LinearLayout>
