@@ -13,7 +13,12 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+
+// TODO: add menu to link back to play store
+// TODO: add admob module at top of the screen
 
 /**
  * Created by plateau on 2013/05/20.
@@ -60,6 +65,38 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
         PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(this);
 
     }
+
+    //<editor-fold desc="menu handlings">
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.menu_playstore_url:
+            {
+                String url = getString(R.string.playstore_url);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+                return true;
+            }
+            case R.id.menu_code_url:
+            {
+                String url = getString(R.string.author_url);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                i.setData(Uri.parse(url));
+                startActivity(i);
+                return true;
+            }
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    //</editor-fold>
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

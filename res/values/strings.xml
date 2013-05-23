@@ -20,4 +20,10 @@
     <string name="pref_title_auto_on">Enable AutoScreen</string>
     <string name="uninstall_app">Uninstall App</string>
 
+    <string name="title_playstore">Goto PlayStore</string>
+    <string name="title_codesite">Goto GitHub</string>
+
+    <!-- no translation -->
+    <string name="author_url">https://github.com/plateaukao/PowerOff</string>
+    <string name="playstore_url">https://play.google.com/store/apps/details?id=com.danielkao.autoscreenonoff</string>
 </resources>
