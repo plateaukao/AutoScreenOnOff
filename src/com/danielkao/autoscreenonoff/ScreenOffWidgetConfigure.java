@@ -1,12 +1,15 @@
 package com.danielkao.autoscreenonoff;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -98,6 +101,26 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
                 i.setData(Uri.parse(url));
                 startActivity(i);
                 return true;
+            }
+            case R.id.menu_about:
+            {
+                String appName = getString(R.string.app_name);
+                String version="";
+                try {
+                    version = getPackageManager().getPackageInfo(getPackageName(),0).versionName;
+                } catch (PackageManager.NameNotFoundException e) {
+                    e.printStackTrace();
+                }
+                String about = String.format(getString(R.string.dialog_about_message), appName, version);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                Dialog d = builder.setMessage(about)
+                        .setTitle(R.string.dialog_about_title)
+                        .create();
+                d.show();
+
+                return true;
+
             }
             default:
                 return super.onOptionsItemSelected(item);

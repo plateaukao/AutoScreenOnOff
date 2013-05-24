@@ -21,12 +21,18 @@
     <string name="pref_title_auto_on">Enable AutoScreen</string>
     <string name="uninstall_app">Uninstall App</string>
 
-    <string name="title_playstore">Goto PlayStore</string>
-    <string name="title_codesite">Goto GitHub</string>
+    <string name="title_playstore">goto PlayStore</string>
+    <string name="title_codesite">goto GitHub</string>
+    <string name="title_about">About</string>
 
     <string name="pref_summary_disable_in_landscape">Temporarily Disable turning off screen when sensor is covered. Users may take photos or watch movies now.</string>
     <string name="pref_title_disable_in_landscape">Temporarily Disable in Landscape Mode</string>
+
+    <string name="dialog_about_title">About</string>
+    <string name="dialog_about_message" formatted="false">%s\nv%s</string>
+
     <!-- no translation -->
     <string name="author_url">https://github.com/plateaukao/PowerOff</string>
     <string name="playstore_url">https://play.google.com/store/apps/details?id=com.danielkao.autoscreenonoff</string>
+
 </resources>

@@ -7,4 +7,7 @@
     <item android:id="@+id/menu_playstore_url"
           android:icon="@android:drawable/ic_menu_help"
           android:title="@string/title_playstore" />
+    <item android:id="@+id/menu_about"
+          android:icon="@android:drawable/ic_menu_help"
+          android:title="@string/title_about" />
 </menu>
