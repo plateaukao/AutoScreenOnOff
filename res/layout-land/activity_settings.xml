@@ -18,16 +18,7 @@
             android:drawableLeft="@android:drawable/ic_menu_delete"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="2dp"
             android:layout_weight="1"/>
-
-    <com.google.ads.AdView android:id="@+id/adView"
-                           android:layout_width="wrap_content"
-                           android:layout_height="wrap_content"
-                           ads:adUnitId="a1519f30be4a645"
-                           ads:adSize="BANNER"
-                           ads:testDevices="TEST_EMULATOR, TEST_DEVICE_ID"
-                           ads:loadAdOnCreate="true"/>
-
 
 </LinearLayout>
