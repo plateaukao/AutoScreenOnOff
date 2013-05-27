@@ -11,9 +11,10 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-feature android:name="android.hardware.sensor.proximity" android:required="true" />
 
-    <!-- for ads -->
+    <!-- for admob
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    -->
 
     <application
         android:allowBackup="true"
@@ -41,9 +42,10 @@
         </intent-filter>
         </activity>
 
-        <!-- mobad -->
+        <!-- admob
         <activity android:name="com.google.ads.AdActivity"
                   android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"/>
+         -->
 
         <receiver
             android:name="com.danielkao.autoscreenonoff.TurnOffReceiver"

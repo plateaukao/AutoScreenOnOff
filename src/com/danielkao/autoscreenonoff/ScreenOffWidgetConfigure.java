@@ -20,11 +20,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import com.google.ads.AdRequest;
 import com.google.ads.AdView;
-
-// TODO: add admob module at top of the screen
-// TODO: disable turningOff while device is in landscape mode
 
 /**
  * Created by plateau on 2013/05/20.
@@ -70,22 +66,6 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
 
         addPreferencesFromResource(R.xml.widget_configure);
         setContentView(R.layout.activity_settings);
-
-        /*
-        // mobad
-        adView = new AdView(this, AdSize.BANNER, MY_AD_UNIT_ID);
-        LinearLayout layout = (LinearLayout)findViewById(R.id.pref_layout);
-        layout.addView(adView);
-
-        AdRequest request = new AdRequest();
-        request.addTestDevice(AdRequest.TEST_EMULATOR);
-        request.addTestDevice("E83D20734F72FB3108F104ABC0FFC738");
-
-        adView.loadAd(request);
-        // ---
-        */
-
-
 
         // for receiving pref change callbacks
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
@@ -233,6 +213,8 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
                             :ConstantValues.SERVICEACTION_TURNOFF);
                 startService(i);
         }
+
+        //TODO: notify service when Pref of temp disable in land is changed.
     }
 
     // when auto on is turned on; user can't set charging mode
