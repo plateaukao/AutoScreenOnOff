@@ -15,9 +15,7 @@ import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
-import android.view.Display;
-import android.view.Surface;
-import android.view.WindowManager;
+import android.view.OrientationEventListener;
 import android.widget.Toast;
 
 public class SensorMonitorService extends Service implements
@@ -36,12 +34,15 @@ public class SensorMonitorService extends Service implements
 	DevicePolicyManager deviceManager;
 	ComponentName mDeviceAdmin;
 
+    private int mRotationAngle = 360;
+
 	private boolean isActiveAdmin() {
 		return deviceManager.isAdminActive(mDeviceAdmin);
 	}
 
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
+        ConstantValues.logv("onStartCommand");
 		// being restarted
 		if (intent == null) {
 			ConstantValues.logv("onStartCommand: no intent");
@@ -58,6 +59,7 @@ public class SensorMonitorService extends Service implements
 
         // from widget or setting
 		if (action == ConstantValues.SERVICEACTION_TOGGLE) {
+            ConstantValues.logv("onStartCommand: toggle");
 
             // it's from widget, need to do the toggle first
             if(!intent.getStringExtra(ConstantValues.SERVICETYPE).equals(ConstantValues.SERVICETYPE_SETTING)){
@@ -72,6 +74,7 @@ public class SensorMonitorService extends Service implements
 				registerSensor();
 			}
 		} else if(action == ConstantValues.SERVICEACTION_TURNON){
+            ConstantValues.logv("onStartCommand: turnon");
             // from charging receiver
             if(!isRegistered()){
                 registerSensor();
@@ -83,13 +86,15 @@ public class SensorMonitorService extends Service implements
             }
 
         } else if(action == ConstantValues.SERVICEACTION_TURNOFF){
+            ConstantValues.logv("onStartCommand: turnoff");
             // from charging receiver
-            if(isRegistered() && !ConstantValues.getPrefAutoOnoff(this)){
+            if(isRegistered())
                 unregisterSensor();
+            if(!ConstantValues.getPrefAutoOnoff(this))
                 updateWidgetCharging(false);
-            }
-
         }
+
+        ConstantValues.logv("onStartCommand: others");
 
 		return START_STICKY;
 	}
@@ -164,8 +169,20 @@ public class SensorMonitorService extends Service implements
 			this.startActivity(i);
 		}
 
-		mSensorManager.registerListener(this, mProximity,
-				SensorManager.SENSOR_DELAY_NORMAL);
+		mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_NORMAL);
+        // listen to orientation change
+        // TODO: should move to a function and being triggered when the pref is clicked
+        if(ConstantValues.getPrefDisableInLandscape(getBaseContext())){
+            OrientationEventListener mListener = new OrientationEventListener(this,
+                    SensorManager.SENSOR_DELAY_UI) {
+                public void onOrientationChanged (int orientation) {
+                    mRotationAngle = orientation;
+                    ConstantValues.logv("onOrientationChanged:%d",orientation);
+                }
+            };
+            mListener.enable ();
+        }
+
 		mIsRegistered = true;
 
 		if (partialLock != null)
@@ -208,47 +225,50 @@ public class SensorMonitorService extends Service implements
 	public final void onSensorChanged(SensorEvent event) {
 		// The light sensor returns a single value.
 		// Many sensors return 3 values, one for each axis.
-		float lux = event.values[0];
+        int type = event.sensor.getType();
+        if(type == Sensor.TYPE_PROXIMITY){
+            float lux = event.values[0];
 
-		// Do something with this sensor value.
-		ConstantValues.logv("onSensorChanged:%f", lux);
-		if (isActiveAdmin()) {
-			// should turn off
-			if (lux == 0f) {
-				if (mPowerManager.isScreenOn()) {
-                    // check if it is disabled during landscape mode, and now it's really in landscape
-                    // --> return
-                    if(ConstantValues.getPrefDisableInLandscape(this) && isOrientationLandscape()){
-                        return;
+            // Do something with this sensor value.
+            ConstantValues.logv("onSensorChanged:%f", lux);
+            if (isActiveAdmin()) {
+                // should turn off
+                if (lux == 0f) {
+                    if (mPowerManager.isScreenOn()) {
+                        // check if it is disabled during landscape mode, and now it's really in landscape
+                        // --> return
+                        if(ConstantValues.getPrefDisableInLandscape(this) && isOrientationLandscape()){
+                            return;
+                        }
+                        else{
+                            deviceManager.lockNow();
+                            ConstantValues.logv("sensor: turn off");
+                        }
                     }
-                    else{
-                        deviceManager.lockNow();
-                        ConstantValues.logv("turn off");
-                    }
-				}
-			}
-			// should turn on
-			else {
-				if (!mPowerManager.isScreenOn()) {
-					ConstantValues.logv("turn on");
-					if (!screenLock.isHeld()) {
-						screenLock.acquire();
+                }
+                // should turn on
+                else {
+                    if (!mPowerManager.isScreenOn()) {
+                        ConstantValues.logv("sensor: turn on");
+                        if (!screenLock.isHeld()) {
+                            screenLock.acquire();
 
-						// screenLock.release();
-						new Thread(new Runnable() {
-							public void run() {
-								try {
-									Thread.sleep(1000);
-								} catch (InterruptedException e) {
-									e.printStackTrace();
-								}
-								screenLock.release();
-							}
-						}).start();
-					}
-				}
-			}
-		}
+                            // screenLock.release();
+                            new Thread(new Runnable() {
+                                public void run() {
+                                    try {
+                                        Thread.sleep(1000);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    screenLock.release();
+                                }
+                            }).start();
+                        }
+                    }
+                }
+            }
+        }
 	}
 
 	private void togglePreference() {
@@ -298,11 +318,19 @@ public class SensorMonitorService extends Service implements
 	*/
 
     private boolean isOrientationLandscape(){
+        if(((mRotationAngle > 90 - ConstantValues.ROTATION_THRESHOLD) && (mRotationAngle < 90 + ConstantValues.ROTATION_THRESHOLD))
+        || ((mRotationAngle > 270 - ConstantValues.ROTATION_THRESHOLD) && (mRotationAngle < 270 + ConstantValues.ROTATION_THRESHOLD))){
+            return true;
+        }
+        else return false;
+        /*
         Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
         int rotation = display.getRotation();
         if(rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270)
             return true;
         else
             return false;
+            */
     }
+
 }

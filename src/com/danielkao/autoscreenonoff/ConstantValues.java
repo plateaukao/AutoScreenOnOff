@@ -10,7 +10,7 @@ import android.util.Log;
 import java.util.Arrays;
 
 public final class ConstantValues {
-	static final boolean debug = false;
+	static final boolean debug = true;
 	
 	public static final String TAG = "SensorMonitor";
 	public static final String PREF = "SensorMonitorPref";
@@ -31,6 +31,8 @@ public final class ConstantValues {
     public static final String SERVICETYPE_CHARGING = "charging";
     public static final String SERVICETYPE_SETTING = "setting";
     public static final String SERVICETYPE_WIDGET = "widget";
+    // rotation threshold
+    public static final int ROTATION_THRESHOLD = 15;
 
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	public static void logv(Object...argv){

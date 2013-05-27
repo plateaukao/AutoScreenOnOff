@@ -30,7 +30,7 @@ public class ToggleAutoScreenOnOffAppWidgetProvider extends AppWidgetProvider {
         String strAction = intent.getAction();
         if (ConstantValues.UPDATE_WIDGET_ACTION.equals(strAction)){
             boolean b = intent.getBooleanExtra(ConstantValues.PREF_CHARGING_ON, false);
-            ConstantValues.logv("update widget action is received:%b");
+            ConstantValues.logv("update widget action is received:%b",b);
 
             ComponentName thisAppWidget = new ComponentName(context.getPackageName(),
                                                             getClass().getName());
