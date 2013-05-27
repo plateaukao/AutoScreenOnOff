@@ -26,6 +26,7 @@ public class SensorMonitorService extends Service implements
 	private SensorManager mSensorManager;
 	private PowerManager mPowerManager;
 	private Sensor mProximity;
+    OrientationEventListener mOrientationListener;
 
 	private boolean mIsRegistered;
 
@@ -40,61 +41,79 @@ public class SensorMonitorService extends Service implements
 		return deviceManager.isAdminActive(mDeviceAdmin);
 	}
 
-	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
         ConstantValues.logv("onStartCommand");
-		// being restarted
-		if (intent == null) {
-			ConstantValues.logv("onStartCommand: no intent");
-			if (ConstantValues.getPrefAutoOnoff(this) == false) {
-				unregisterSensor();
-			} else {
-				registerSensor();
-			}
-
-			return START_STICKY;
-		}
-
-		int action = intent.getIntExtra(ConstantValues.SERVICEACTION, -1);
-
-        // from widget or setting
-		if (action == ConstantValues.SERVICEACTION_TOGGLE) {
-            ConstantValues.logv("onStartCommand: toggle");
-
-            // it's from widget, need to do the toggle first
-            if(!intent.getStringExtra(ConstantValues.SERVICETYPE).equals(ConstantValues.SERVICETYPE_SETTING)){
-			    togglePreference();
-            }
-
-            updateWidgetCharging(false);
-
-			if (ConstantValues.getPrefAutoOnoff(this) == false) {
-				unregisterSensor();
-			} else {
-				registerSensor();
-			}
-		} else if(action == ConstantValues.SERVICEACTION_TURNON){
-            ConstantValues.logv("onStartCommand: turnon");
-            // from charging receiver
-            if(!isRegistered()){
-                registerSensor();
-                //get current power state
-                Intent intentBat = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-                boolean isPlugged = (intentBat.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) > 0);
-
-                updateWidgetCharging(isPlugged);
-            }
-
-        } else if(action == ConstantValues.SERVICEACTION_TURNOFF){
-            ConstantValues.logv("onStartCommand: turnoff");
-            // from charging receiver
-            if(isRegistered())
+        // being restarted
+        if (intent == null) {
+            ConstantValues.logv("onStartCommand: no intent");
+            if (ConstantValues.getPrefAutoOnoff(this) == false) {
                 unregisterSensor();
-            if(!ConstantValues.getPrefAutoOnoff(this))
-                updateWidgetCharging(false);
+            } else {
+                registerSensor();
+            }
+
+            return START_STICKY;
         }
 
-        ConstantValues.logv("onStartCommand: others");
+        int action = intent.getIntExtra(ConstantValues.SERVICEACTION, -1);
+
+        switch(action){
+            // from widget or setting
+            case ConstantValues.SERVICEACTION_TOGGLE:
+            {
+                ConstantValues.logv("onStartCommand: toggle");
+
+                // it's from widget, need to do the toggle first
+                if(!intent.getStringExtra(ConstantValues.SERVICETYPE).equals(ConstantValues.SERVICETYPE_SETTING)){
+                    togglePreference();
+                }
+
+                updateWidgetCharging(false);
+
+                if (ConstantValues.getPrefAutoOnoff(this) == false) {
+                    unregisterSensor();
+                } else {
+                    registerSensor();
+                }
+                break;
+            }
+            case ConstantValues.SERVICEACTION_TURNON:
+            {
+                ConstantValues.logv("onStartCommand: turnon");
+                // from charging receiver
+                if(!isRegistered()){
+                    registerSensor();
+
+                    updateWidgetCharging(isPlugged());
+                }
+                break;
+            }
+            case ConstantValues.SERVICEACTION_TURNOFF:
+            {
+                ConstantValues.logv("onStartCommand: turnoff");
+                // from charging receiver
+                if(isRegistered())
+                    unregisterSensor();
+                if(!ConstantValues.getPrefAutoOnoff(this))
+                    updateWidgetCharging(false);
+                break;
+            }
+            case ConstantValues.SERVICEACTION_UPDATE_DISABLE_IN_LANDSCAPE:
+            {
+                //if(ConstantValues.getPrefAutoOnoff(this) ||
+                //        (ConstantValues.getPrefChargingOn(this)&& isPlugged())){
+                if(mIsRegistered){
+                    if(ConstantValues.getPrefDisableInLandscape(this) == true)
+                        registerOrientationChange();
+                    else
+                        unregisterOrientationChange();
+                }
+                break;
+            }
+            default:
+                ConstantValues.logv("onStartCommand: others");
+        }
 
 		return START_STICKY;
 	}
@@ -171,16 +190,8 @@ public class SensorMonitorService extends Service implements
 
 		mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_NORMAL);
         // listen to orientation change
-        // TODO: should move to a function and being triggered when the pref is clicked
         if(ConstantValues.getPrefDisableInLandscape(getBaseContext())){
-            OrientationEventListener mListener = new OrientationEventListener(this,
-                    SensorManager.SENSOR_DELAY_UI) {
-                public void onOrientationChanged (int orientation) {
-                    mRotationAngle = orientation;
-                    ConstantValues.logv("onOrientationChanged:%d",orientation);
-                }
-            };
-            mListener.enable ();
+            registerOrientationChange();
         }
 
 		mIsRegistered = true;
@@ -333,4 +344,28 @@ public class SensorMonitorService extends Service implements
             */
     }
 
+    private void registerOrientationChange(){
+        if(null != mOrientationListener && mOrientationListener.canDetectOrientation())
+            return;
+
+        mOrientationListener = new OrientationEventListener(this, SensorManager.SENSOR_DELAY_UI) {
+            public void onOrientationChanged (int orientation) {
+                mRotationAngle = orientation;
+                //ConstantValues.logv("onOrientationChanged:%d",orientation);
+            }
+        };
+        mOrientationListener.enable ();
+    }
+
+    private void unregisterOrientationChange(){
+        if(null != mOrientationListener){
+            mOrientationListener.disable();
+            mOrientationListener = null;
+        }
+    }
+
+    private boolean isPlugged(){
+        Intent intentBat = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return (intentBat.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) > 0);
+    }
 }

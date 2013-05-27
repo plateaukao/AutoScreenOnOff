@@ -13,12 +13,13 @@
 
     <string name="pref_auto_setting">Auto Screen Settings</string>
     <string name="pref_power_setting">Power Settings</string>
+    <string name="pref_advanced_setting">Advanced</string>
 
     <string name="pref_summary_charging_on">Enable AutoScreen function during charging; and disable it once unplugged.</string>
-    <string name="pref_title_charging_on">Enable only while charging</string>
+    <string name="pref_title_charging_on">Only when plugged</string>
 
-    <string name="pref_summary_auto_on">Turn off Screen when proximity sensor is covered; turn on screen when it\'s uncovered</string>
-    <string name="pref_title_auto_on">Enable AutoScreen</string>
+    <string name="pref_summary_auto_on">Turn off Screen when proximity sensor is covered; turn on screen when it\'s uncovered.</string>
+    <string name="pref_title_auto_on">Enable</string>
     <string name="uninstall_app">Uninstall App</string>
 
     <string name="title_playstore">goto PlayStore</string>

@@ -23,6 +23,7 @@ public final class ConstantValues {
 	public static final int SERVICEACTION_TOGGLE = 0;
     public static final int SERVICEACTION_TURNON = 1;
     public static final int SERVICEACTION_TURNOFF = 2;
+    public static final int SERVICEACTION_UPDATE_DISABLE_IN_LANDSCAPE = 4;
     //
 	public static final String SERVICE_INTENT_ACTION = "com.danielkao.autoscreenonoff.serviceaction";
     public static final String UPDATE_WIDGET_ACTION = "com.danielkao.autoscreenonoff.updatewidget";

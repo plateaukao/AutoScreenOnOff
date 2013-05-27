@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -193,10 +194,10 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,String key)
     {
-        if(key.equals(ConstantValues.PREF_AUTO_ON)){
-            // update state of pref disable in landscape
-            updatePrefState();
+        // update state of pref disable in landscape
+        updatePrefState();
 
+        if(key.equals(ConstantValues.PREF_AUTO_ON)){
             // send intent to service
             Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
             i.putExtra(ConstantValues.SERVICEACTION,
@@ -213,8 +214,15 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
                             :ConstantValues.SERVICEACTION_TURNOFF);
                 startService(i);
         }
+        //notify service when Pref of temp disable in land is changed.
+        else if(key.equals(ConstantValues.PREF_DISABLE_IN_LANDSCAPE)){
+            // if it's on mode, then should notify service to enable onOrientationListener
+            Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
+            i.putExtra(ConstantValues.SERVICEACTION,ConstantValues.SERVICEACTION_UPDATE_DISABLE_IN_LANDSCAPE);
+            startService(i);
 
-        //TODO: notify service when Pref of temp disable in land is changed.
+        }
+
     }
 
     // when auto on is turned on; user can't set charging mode
@@ -222,13 +230,25 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
     private void updatePrefState(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         CheckBoxPreference cbpLandscape = (CheckBoxPreference) findPreference(ConstantValues.PREF_DISABLE_IN_LANDSCAPE);
-        CheckBoxPreference cbpCharging = (CheckBoxPreference) findPreference(ConstantValues.PREF_CHARGING_ON);
+        SwitchPreference spCharging = (SwitchPreference) findPreference(ConstantValues.PREF_CHARGING_ON);
+        SwitchPreference spAuto = (SwitchPreference) findPreference(ConstantValues.PREF_AUTO_ON);
 
         if(sp.getBoolean(ConstantValues.PREF_AUTO_ON, false)){
-            cbpCharging.setEnabled(false);
+            spCharging.setEnabled(false);
             cbpLandscape.setEnabled(true);
         }else{
-            cbpCharging.setEnabled(true);
+            spCharging.setEnabled(true);
+        }
+
+        if(sp.getBoolean(ConstantValues.PREF_CHARGING_ON, false)){
+            spAuto.setEnabled(false);
+            cbpLandscape.setEnabled(true);
+        }else{
+            spAuto.setEnabled(true);
+        }
+
+        if(sp.getBoolean(ConstantValues.PREF_AUTO_ON, false) == false &&
+                sp.getBoolean(ConstantValues.PREF_CHARGING_ON, false) == false){
             cbpLandscape.setEnabled(false);
         }
 
