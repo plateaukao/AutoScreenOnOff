@@ -22,6 +22,14 @@
                 android:summary="@string/pref_summary_disable_in_landscape"
                 android:title="@string/pref_title_disable_in_landscape" >
         </CheckBoxPreference>
+        <ListPreference
+                android:defaultValue="500"
+                android:key="prefTimeout"
+                android:entries="@array/timeout_entries"
+                android:entryValues="@array/timeout_values"
+                android:summary="@string/pref_summary_timeout"
+                android:title="@string/pref_title_timeout" >
+        </ListPreference>
     </PreferenceCategory>
 
 

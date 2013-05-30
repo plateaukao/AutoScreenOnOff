@@ -18,6 +18,9 @@ import android.preference.PreferenceManager;
 import android.view.OrientationEventListener;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class SensorMonitorService extends Service implements
 		SensorEventListener {
 	// Binder given to clients
@@ -36,6 +39,8 @@ public class SensorMonitorService extends Service implements
 	ComponentName mDeviceAdmin;
 
     private int mRotationAngle = 360;
+
+    private Timer timer;
 
 	private boolean isActiveAdmin() {
 		return deviceManager.isAdminActive(mDeviceAdmin);
@@ -245,6 +250,13 @@ public class SensorMonitorService extends Service implements
             if (isActiveAdmin()) {
                 // should turn off
                 if (lux == 0f) {
+                    if(timer!=null){
+                        timer.cancel();
+                        timer.purge();
+                        timer = null;
+                        ConstantValues.logv("timer is on; exit");
+                        return;
+                    }
                     if (mPowerManager.isScreenOn()) {
                         // check if it is disabled during landscape mode, and now it's really in landscape
                         // --> return
@@ -252,30 +264,25 @@ public class SensorMonitorService extends Service implements
                             return;
                         }
                         else{
-                            deviceManager.lockNow();
-                            ConstantValues.logv("sensor: turn off");
+                            long timeout = (long)ConstantValues.getPrefTimeout(this);
+                            timer = new Timer();
+                            timer.schedule(new TurnOffTask(), timeout);
                         }
                     }
                 }
                 // should turn on
                 else {
+                    if(timer!=null){
+                        ConstantValues.logv("timer is on; exit");
+                        timer.cancel();
+                        timer.purge();
+                        timer = null;
+                        return;
+                    }
                     if (!mPowerManager.isScreenOn()) {
-                        ConstantValues.logv("sensor: turn on");
-                        if (!screenLock.isHeld()) {
-                            screenLock.acquire();
-
-                            // screenLock.release();
-                            new Thread(new Runnable() {
-                                public void run() {
-                                    try {
-                                        Thread.sleep(1000);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                    screenLock.release();
-                                }
-                            }).start();
-                        }
+                        long timeout = (long)ConstantValues.getPrefTimeout(this);
+                        timer = new Timer();
+                        timer.schedule(new TurnOnTask(), timeout);
                     }
                 }
             }
@@ -334,14 +341,6 @@ public class SensorMonitorService extends Service implements
             return true;
         }
         else return false;
-        /*
-        Display display = ((WindowManager) getSystemService(WINDOW_SERVICE)).getDefaultDisplay();
-        int rotation = display.getRotation();
-        if(rotation == Surface.ROTATION_90 || rotation == Surface.ROTATION_270)
-            return true;
-        else
-            return false;
-            */
     }
 
     private void registerOrientationChange(){
@@ -367,5 +366,35 @@ public class SensorMonitorService extends Service implements
     private boolean isPlugged(){
         Intent intentBat = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         return (intentBat.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) > 0);
+    }
+
+    class TurnOffTask extends TimerTask {
+        public void run() {
+            ConstantValues.logv("sensor: turn off thread");
+            deviceManager.lockNow();
+            timer = null;
+        }
+    }
+
+    class TurnOnTask extends TimerTask {
+        public void run() {
+            ConstantValues.logv("sensor: turn on thread");
+            if (!screenLock.isHeld()) {
+                screenLock.acquire();
+                timer = null;
+
+                // screenLock.release();
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        screenLock.release();
+                    }
+                }).start();
+            }
+        }
     }
 }

@@ -13,10 +13,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
-import android.preference.SwitchPreference;
+import android.preference.*;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -221,6 +218,12 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
             i.putExtra(ConstantValues.SERVICEACTION,ConstantValues.SERVICEACTION_UPDATE_DISABLE_IN_LANDSCAPE);
             startService(i);
 
+        }else if(key.equals(ConstantValues.PREF_TIMEOUT)){
+            // for updating list preference summary
+            ListPreference lp = (ListPreference) findPreference(ConstantValues.PREF_TIMEOUT);
+            String str = getString(R.string.pref_summary_timeout);
+            lp.setSummary(String.format(str,lp.getEntry()));
+            //lp.setSummary(str);
         }
 
     }

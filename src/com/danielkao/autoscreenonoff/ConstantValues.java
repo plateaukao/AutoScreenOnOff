@@ -10,13 +10,14 @@ import android.util.Log;
 import java.util.Arrays;
 
 public final class ConstantValues {
-	static final boolean debug = true;
+	static final boolean debug = false;
 	
 	public static final String TAG = "SensorMonitor";
 	public static final String PREF = "SensorMonitorPref";
     public static final String PREF_CHARGING_ON = "prefChargingOn";
 	public static final String PREF_AUTO_ON = "prefAutoOn";
     public static final String PREF_DISABLE_IN_LANDSCAPE= "prefDisableInLandscape";
+    public static final String PREF_TIMEOUT = "prefTimeout";
 
     //
     public static final String SERVICEACTION = "serviceaction";
@@ -74,5 +75,13 @@ public final class ConstantValues {
         boolean isPrefDisableInLandscape = sp.getBoolean(PREF_DISABLE_IN_LANDSCAPE, false);
         ConstantValues.logv("prefdisableinlandscape: %b",isPrefDisableInLandscape);
         return isPrefDisableInLandscape;
+    }
+
+    //return milliseconds
+    public static int getPrefTimeout(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        int i  = Integer.parseInt(sp.getString(PREF_TIMEOUT, "0"));
+        ConstantValues.logv("prefTimeout: %d",i);
+        return i;
     }
 }

@@ -27,13 +27,39 @@
     <string name="title_about">About</string>
 
     <string name="pref_summary_disable_in_landscape">Temporarily Disable turning off screen when sensor is covered. Users may take photos or watch movies now.</string>
-    <string name="pref_title_disable_in_landscape">Temporarily Disable in Landscape Mode</string>
+    <string name="pref_title_disable_in_landscape">Temporarily Disable in Landscape</string>
 
     <string name="dialog_about_title">About</string>
     <string name="dialog_about_message" formatted="false">%s\nv%s</string>
 
+    <string name="pref_summary_timeout">Delay how long before Auto On/Off take effects. (prevent from mis-triggering)\n\nCurrent setting:%s</string>
+    <string name="pref_title_timeout">Timeout Value</string>
+    <string name="timeout_0">right away</string>
+    <string name="timeout_05">0.5 sec</string>
+    <string name="timeout_1">1 sec</string>
+    <string name="timeout_2">2 sec</string>
+    <string name="timeout_3">3 sec</string>
+
+    <string-array name="timeout_entries">
+        <item>@string/timeout_0</item>
+        <item>@string/timeout_05</item>
+        <item>@string/timeout_1</item>
+        <item>@string/timeout_2</item>
+        <item>@string/timeout_3</item>
+    </string-array>
+
+    <!-- no translation -->
+    <string-array name="timeout_values">
+        <item>0</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+    </string-array>
+
     <!-- no translation -->
     <string name="author_url">https://github.com/plateaukao/PowerOff</string>
     <string name="playstore_url">https://play.google.com/store/apps/details?id=com.danielkao.autoscreenonoff</string>
+
 
 </resources>
