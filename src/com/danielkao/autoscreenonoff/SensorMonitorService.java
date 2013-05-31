@@ -9,17 +9,11 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.BatteryManager;
-import android.os.Binder;
-import android.os.IBinder;
-import android.os.PowerManager;
+import android.os.*;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
 import android.view.OrientationEventListener;
 import android.widget.Toast;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class SensorMonitorService extends Service implements
 		SensorEventListener {
@@ -40,7 +34,10 @@ public class SensorMonitorService extends Service implements
 
     private int mRotationAngle = 360;
 
-    private Timer timer;
+    //handle timeout function
+    private int CALLBACK_EXISTS=0;
+    //private Timer timer;
+    private Handler handler = new Handler();
 
 	private boolean isActiveAdmin() {
 		return deviceManager.isAdminActive(mDeviceAdmin);
@@ -48,10 +45,10 @@ public class SensorMonitorService extends Service implements
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        ConstantValues.logv("onStartCommand");
+        ConstantValues.logi("onStartCommand");
         // being restarted
         if (intent == null) {
-            ConstantValues.logv("onStartCommand: no intent");
+            ConstantValues.logi("onStartCommand: no intent");
             if (ConstantValues.getPrefAutoOnoff(this) == false) {
                 unregisterSensor();
             } else {
@@ -67,7 +64,7 @@ public class SensorMonitorService extends Service implements
             // from widget or setting
             case ConstantValues.SERVICEACTION_TOGGLE:
             {
-                ConstantValues.logv("onStartCommand: toggle");
+                ConstantValues.logi("onStartCommand: toggle");
 
                 // it's from widget, need to do the toggle first
                 if(!intent.getStringExtra(ConstantValues.SERVICETYPE).equals(ConstantValues.SERVICETYPE_SETTING)){
@@ -85,7 +82,7 @@ public class SensorMonitorService extends Service implements
             }
             case ConstantValues.SERVICEACTION_TURNON:
             {
-                ConstantValues.logv("onStartCommand: turnon");
+                ConstantValues.logi("onStartCommand: turnon");
                 // from charging receiver
                 if(!isRegistered()){
                     registerSensor();
@@ -96,7 +93,7 @@ public class SensorMonitorService extends Service implements
             }
             case ConstantValues.SERVICEACTION_TURNOFF:
             {
-                ConstantValues.logv("onStartCommand: turnoff");
+                ConstantValues.logi("onStartCommand: turnoff");
                 // from charging receiver
                 if(isRegistered())
                     unregisterSensor();
@@ -117,7 +114,7 @@ public class SensorMonitorService extends Service implements
                 break;
             }
             default:
-                ConstantValues.logv("onStartCommand: others");
+                ConstantValues.logi("onStartCommand: others");
         }
 
 		return START_STICKY;
@@ -162,7 +159,7 @@ public class SensorMonitorService extends Service implements
 
 	@Override
 	public void onDestroy() {
-		ConstantValues.logv("onDestroy");
+		ConstantValues.logi("onDestroy");
 		unregisterSensor();
 		super.onDestroy();
 	}
@@ -178,7 +175,7 @@ public class SensorMonitorService extends Service implements
 	// pubilc API for client
 	//
 	public void registerSensor() {
-		ConstantValues.logv("registerSensor");
+		ConstantValues.logi("registerSensor");
 		if (mIsRegistered) {
 			Toast.makeText(SensorMonitorService.this,
 					"Auto Screen On/off is already turned on",
@@ -209,7 +206,7 @@ public class SensorMonitorService extends Service implements
 	}
 
 	public void unregisterSensor() {
-		ConstantValues.logv("unregisterSensor");
+		ConstantValues.logi("unregisterSensor");
 		if (mIsRegistered) {
 			mSensorManager.unregisterListener(this);
 			String s = getString(R.string.turn_autoscreen_off);
@@ -248,15 +245,15 @@ public class SensorMonitorService extends Service implements
             // Do something with this sensor value.
             ConstantValues.logv("onSensorChanged:%f", lux);
             if (isActiveAdmin()) {
-                // should turn off
+                // reset handler if there's already one
+                if(handler.hasMessages(CALLBACK_EXISTS)){
+                    ConstantValues.logv("timer is on; exit");
+                    resetHandler();
+                    return;
+                }
+
+                // value == 0; should turn screen off
                 if (lux == 0f) {
-                    if(timer!=null){
-                        timer.cancel();
-                        timer.purge();
-                        timer = null;
-                        ConstantValues.logv("timer is on; exit");
-                        return;
-                    }
                     if (mPowerManager.isScreenOn()) {
                         // check if it is disabled during landscape mode, and now it's really in landscape
                         // --> return
@@ -265,24 +262,15 @@ public class SensorMonitorService extends Service implements
                         }
                         else{
                             long timeout = (long)ConstantValues.getPrefTimeout(this);
-                            timer = new Timer();
-                            timer.schedule(new TurnOffTask(), timeout);
+                            handler.postDelayed(runnableTurnOff,timeout);
                         }
                     }
                 }
                 // should turn on
                 else {
-                    if(timer!=null){
-                        ConstantValues.logv("timer is on; exit");
-                        timer.cancel();
-                        timer.purge();
-                        timer = null;
-                        return;
-                    }
                     if (!mPowerManager.isScreenOn()) {
                         long timeout = (long)ConstantValues.getPrefTimeout(this);
-                        timer = new Timer();
-                        timer.schedule(new TurnOnTask(), timeout);
+                        handler.postDelayed(runnableTurnOn,timeout);
                     }
                 }
             }
@@ -297,43 +285,6 @@ public class SensorMonitorService extends Service implements
 		editor.commit();
 
 	}
-
-    /* code for udpate specific widget ID
-     * not used anymore
-	private void updateWidgetUI(Intent intent) {
-		int widgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-				-1);
-		if (widgetId == -1)
-			return;
-
-		// Create an Intent to interact with service 
-		Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
-		i.putExtra(ConstantValues.SERVICEACTION,
-				ConstantValues.SERVICEACTION_TOGGLE);
-        i.putExtra(ConstantValues.SERVICETYPE, ConstantValues.SERVICETYPE_WIDGET);
-		i.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, widgetId);
-
-		PendingIntent pendingIntent = PendingIntent.getService(this, 0, i,
-				PendingIntent.FLAG_UPDATE_CURRENT);
-
-		AppWidgetManager appWidgetMan = AppWidgetManager.getInstance(this);
-		RemoteViews views = new RemoteViews(this.getPackageName(),
-				R.layout.toggleonoff_appwidget);
-		views.setOnClickPendingIntent(R.id.imageview, pendingIntent);
-
-		// update UI if necessary
-		boolean autoOn = ConstantValues.getPrefAutoOnoff(this);
-		if (autoOn) {
-			// set icon to on
-			views.setImageViewResource(R.id.imageview, R.drawable.widget_on);
-		} else {
-			// set icon to off
-			views.setImageViewResource(R.id.imageview, R.drawable.widget_off);
-		}
-
-		appWidgetMan.updateAppWidget(widgetId, views);
-	}
-	*/
 
     private boolean isOrientationLandscape(){
         if(((mRotationAngle > 90 - ConstantValues.ROTATION_THRESHOLD) && (mRotationAngle < 90 + ConstantValues.ROTATION_THRESHOLD))
@@ -368,20 +319,30 @@ public class SensorMonitorService extends Service implements
         return (intentBat.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) > 0);
     }
 
-    class TurnOffTask extends TimerTask {
+    private void resetHandler(){
+        ConstantValues.logv("reset Handler");
+        handler.removeMessages(CALLBACK_EXISTS);
+        handler.removeCallbacks(runnableTurnOn);
+        handler.removeCallbacks(runnableTurnOff);
+    }
+
+    private Runnable runnableTurnOff = new Runnable() {
+        @Override
         public void run() {
             ConstantValues.logv("sensor: turn off thread");
             deviceManager.lockNow();
-            timer = null;
+            resetHandler();
         }
-    }
+    };
 
-    class TurnOnTask extends TimerTask {
+    //timeout
+    private Runnable runnableTurnOn = new Runnable() {
+        @Override
         public void run() {
-            ConstantValues.logv("sensor: turn on thread");
+            ConstantValues.logi("sensor: turn on thread");
             if (!screenLock.isHeld()) {
                 screenLock.acquire();
-                timer = null;
+                resetHandler();
 
                 // screenLock.release();
                 new Thread(new Runnable() {
@@ -396,5 +357,5 @@ public class SensorMonitorService extends Service implements
                 }).start();
             }
         }
-    }
+    };
 }

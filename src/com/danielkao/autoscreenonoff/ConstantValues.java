@@ -10,7 +10,7 @@ import android.util.Log;
 import java.util.Arrays;
 
 public final class ConstantValues {
-	static final boolean debug = false;
+	static final boolean debug = true;
 	
 	public static final String TAG = "SensorMonitor";
 	public static final String PREF = "SensorMonitorPref";
@@ -49,6 +49,19 @@ public final class ConstantValues {
 			Log.v(TAG,String.format((String) argv[0], (Object[])slicedObj));
 		}
 	}
+
+    public static void logi(Object...argv){
+        if(!debug)
+            return;
+
+        if(argv.length == 1)
+            Log.i(TAG, (String) argv[0]);
+        else
+        {
+            Object [] slicedObj = Arrays.copyOfRange(argv, 1, argv.length);
+            Log.i(TAG,String.format((String) argv[0], (Object[])slicedObj));
+        }
+    }
 
     public static boolean getPrefAutoOnoff(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
