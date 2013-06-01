@@ -8,6 +8,13 @@
     <string name="device_management_explanation">需要此權限，才可以關閉螢幕</string>
     <string name="widget_title">自動螢幕開關</string>
 
+    <string name="title_playstore">給我評價</string>
+    <string name="title_codesite">前往 GitHub</string>
+    <string name="title_about">關於</string>
+
+    <string name="dialog_about_title">關於</string>
+    <string name="dialog_about_message" formatted="false">%s\n版本：%s</string>
+
     <string name="setting_name">自動螢幕控制設定</string>
     <string name="pref_advanced_setting">進階</string>
 
