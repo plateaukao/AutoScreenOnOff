@@ -28,4 +28,16 @@
 
     <string name="pref_summary_disable_in_landscape">画面横置时，暂时不关闭画面，因为此时可能在拍照或看影片。</string>
     <string name="pref_title_disable_in_landscape">横屏时暂时停止作用</string>
+
+    <string name="pref_summary_timeout_lock">遮盖时，延迟多久才关闭画面。(可避免误触)\n\n目前设定: %s</string>
+    <string name="pref_title_timeout_lock">关闭画面延迟</string>
+    <string name="pref_summary_timeout_unlock">开盖时，延迟多久才开启画面\n\n目前设定: %s</string>
+    <string name="pref_title_timeout_unlock">开启画面延迟</string>
+
+    <string name="timeout_same">与关闭画面延迟相同</string>
+    <string name="timeout_0">立马生效</string>
+    <string name="timeout_05">0.5 秒</string>
+    <string name="timeout_1">1 秒</string>
+    <string name="timeout_2">2 秒</string>
+    <string name="timeout_3">3 秒</string>
 </resources>

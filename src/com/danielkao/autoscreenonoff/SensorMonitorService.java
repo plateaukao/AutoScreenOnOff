@@ -201,8 +201,11 @@ public class SensorMonitorService extends Service implements
 		if (partialLock != null)
 			partialLock.acquire();
 
-		String s = getString(R.string.turn_autoscreen_on);
-		Toast.makeText(SensorMonitorService.this, s, Toast.LENGTH_SHORT).show();
+        // show hint text if the screen is on
+        if (mPowerManager.isScreenOn()) {
+            String s = getString(R.string.turn_autoscreen_on);
+            Toast.makeText(SensorMonitorService.this, s, Toast.LENGTH_SHORT).show();
+        }
 	}
 
 	public void unregisterSensor() {
@@ -261,7 +264,7 @@ public class SensorMonitorService extends Service implements
                             return;
                         }
                         else{
-                            long timeout = (long)ConstantValues.getPrefTimeout(this);
+                            long timeout = (long)ConstantValues.getPrefTimeoutLock(this);
                             handler.postDelayed(runnableTurnOff,timeout);
                         }
                     }
@@ -269,7 +272,7 @@ public class SensorMonitorService extends Service implements
                 // should turn on
                 else {
                     if (!mPowerManager.isScreenOn()) {
-                        long timeout = (long)ConstantValues.getPrefTimeout(this);
+                        long timeout = (long)ConstantValues.getPrefTimeoutUnlock(this);
                         handler.postDelayed(runnableTurnOn,timeout);
                     }
                 }

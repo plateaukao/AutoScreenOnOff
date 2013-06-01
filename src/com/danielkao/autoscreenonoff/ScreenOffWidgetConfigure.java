@@ -218,12 +218,17 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
             i.putExtra(ConstantValues.SERVICEACTION,ConstantValues.SERVICEACTION_UPDATE_DISABLE_IN_LANDSCAPE);
             startService(i);
 
-        }else if(key.equals(ConstantValues.PREF_TIMEOUT)){
+        }else if(key.equals(ConstantValues.PREF_TIMEOUT_LOCK)){
             // for updating list preference summary
-            ListPreference lp = (ListPreference) findPreference(ConstantValues.PREF_TIMEOUT);
-            String str = getString(R.string.pref_summary_timeout);
+            ListPreference lp = (ListPreference) findPreference(ConstantValues.PREF_TIMEOUT_LOCK);
+            String str = getString(R.string.pref_summary_timeout_lock);
             lp.setSummary(String.format(str,lp.getEntry()));
             //lp.setSummary(str);
+        }else if(key.equals(ConstantValues.PREF_TIMEOUT_UNLOCK)){
+            // for updating list preference summary
+            ListPreference lp = (ListPreference) findPreference(ConstantValues.PREF_TIMEOUT_UNLOCK);
+            String str = getString(R.string.pref_summary_timeout_unlock);
+            lp.setSummary(String.format(str,lp.getEntry()));
         }
 
     }

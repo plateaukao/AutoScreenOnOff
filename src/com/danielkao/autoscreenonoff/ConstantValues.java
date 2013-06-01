@@ -17,7 +17,8 @@ public final class ConstantValues {
     public static final String PREF_CHARGING_ON = "prefChargingOn";
 	public static final String PREF_AUTO_ON = "prefAutoOn";
     public static final String PREF_DISABLE_IN_LANDSCAPE= "prefDisableInLandscape";
-    public static final String PREF_TIMEOUT = "prefTimeout";
+    public static final String PREF_TIMEOUT_LOCK = "prefTimeout";
+    public static final String PREF_TIMEOUT_UNLOCK = "prefTimeoutUnlock";
 
     //
     public static final String SERVICEACTION = "serviceaction";
@@ -91,10 +92,23 @@ public final class ConstantValues {
     }
 
     //return milliseconds
-    public static int getPrefTimeout(Context context) {
+    public static int getPrefTimeoutLock(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        int i  = Integer.parseInt(sp.getString(PREF_TIMEOUT, "0"));
-        ConstantValues.logv("prefTimeout: %d",i);
+        int i  = Integer.parseInt(sp.getString(PREF_TIMEOUT_LOCK, "0"));
+        ConstantValues.logv("prefTimeout lock: %d",i);
+        return i;
+    }
+
+    public static int getPrefTimeoutUnlock(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        int i  = Integer.parseInt(sp.getString(PREF_TIMEOUT_UNLOCK, "-1"));
+        ConstantValues.logv("prefTimeout unlock: %d",i);
+
+        // if the value is -1, means user want it to be the same as lock timeout value
+        if(i==-1)
+        {
+            i = getPrefTimeoutLock(context);
+        }
         return i;
     }
 }

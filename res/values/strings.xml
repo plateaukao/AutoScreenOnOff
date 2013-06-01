@@ -32,15 +32,20 @@
     <string name="dialog_about_title">About</string>
     <string name="dialog_about_message" formatted="false">%s\nv%s</string>
 
-    <string name="pref_summary_timeout">Delay how long before Auto On/Off take effects. (prevent from mis-triggering)\n\nCurrent setting:%s</string>
-    <string name="pref_title_timeout">Timeout Value</string>
-    <string name="timeout_0">right away</string>
+    <string name="pref_summary_timeout_lock">Delay how long before Screen Off take effects. (prevent from mis-triggering)\n\nCurrent setting:%s</string>
+    <string name="pref_title_timeout_lock">Screen Off Timeout Value</string>
+
+    <string name="pref_summary_timeout_unlock">Delay how long before Screen On take effects. (prevent from mis-triggering)\n\nCurrent setting:%s</string>
+    <string name="pref_title_timeout_unlock">Screen On Timeout Value</string>
+
+    <string name="timeout_same">Same as Lock Timeout Value</string>
+    <string name="timeout_0">Right Away</string>
     <string name="timeout_05">0.5 sec</string>
     <string name="timeout_1">1 sec</string>
     <string name="timeout_2">2 sec</string>
     <string name="timeout_3">3 sec</string>
 
-    <string-array name="timeout_entries">
+    <string-array name="timeout_lock_entries">
         <item>@string/timeout_0</item>
         <item>@string/timeout_05</item>
         <item>@string/timeout_1</item>
@@ -49,7 +54,26 @@
     </string-array>
 
     <!-- no translation -->
-    <string-array name="timeout_values">
+    <string-array name="timeout_lock_values">
+        <item>0</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+    </string-array>
+
+    <string-array name="timeout_unlock_entries">
+        <item>@string/timeout_same</item>
+        <item>@string/timeout_0</item>
+        <item>@string/timeout_05</item>
+        <item>@string/timeout_1</item>
+        <item>@string/timeout_2</item>
+        <item>@string/timeout_3</item>
+    </string-array>
+
+    <!-- no translation -->
+    <string-array name="timeout_unlock_values">
+        <item>-1</item>
         <item>0</item>
         <item>500</item>
         <item>1000</item>

@@ -24,8 +24,12 @@
     <string name="pref_summary_disable_in_landscape">手機在橫放時，暫時不關閉螢幕。因為此時可能在看影片，或是要拍照，很容易誤遮到感測器。</string>
     <string name="pref_title_disable_in_landscape">橫屏時暫時無作用</string>
 
-    <string name="pref_summary_timeout">遮蓋時(或開蓋時)，延遲多久才生效。可避免誤觸(測試中的功能)\n\n目前設定: %s</string>
-    <string name="pref_title_timeout">延遲發生作用</string>
+    <string name="pref_summary_timeout_lock">遮蓋時，延遲多久才關閉畫面。可避免誤觸\n\n目前設定: %s</string>
+    <string name="pref_title_timeout_lock">關閉畫面延遲</string>
+    <string name="pref_summary_timeout_unlock">開蓋時，延遲多久才開啟畫面。\n\n目前設定: %s</string>
+    <string name="pref_title_timeout_unlock">開啟畫面延遲</string>
+
+    <string name="timeout_same">與關閉畫面延遲相同</string>
     <string name="timeout_0">立即作用</string>
     <string name="timeout_05">0.5 秒</string>
     <string name="timeout_1">1 秒</string>

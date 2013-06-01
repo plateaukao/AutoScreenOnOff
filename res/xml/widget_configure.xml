@@ -25,10 +25,18 @@
         <ListPreference
                 android:defaultValue="500"
                 android:key="prefTimeout"
-                android:entries="@array/timeout_entries"
-                android:entryValues="@array/timeout_values"
-                android:summary="@string/pref_summary_timeout"
-                android:title="@string/pref_title_timeout" >
+                android:entries="@array/timeout_lock_entries"
+                android:entryValues="@array/timeout_lock_values"
+                android:summary="@string/pref_summary_timeout_lock"
+                android:title="@string/pref_title_timeout_lock" >
+        </ListPreference>
+        <ListPreference
+                android:defaultValue="-1"
+                android:key="prefTimeoutUnlock"
+                android:entries="@array/timeout_unlock_entries"
+                android:entryValues="@array/timeout_unlock_values"
+                android:summary="@string/pref_summary_timeout_unlock"
+                android:title="@string/pref_title_timeout_unlock" >
         </ListPreference>
     </PreferenceCategory>
 
