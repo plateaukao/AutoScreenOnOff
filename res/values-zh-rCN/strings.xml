@@ -40,4 +40,7 @@
     <string name="timeout_1">1 秒</string>
     <string name="timeout_2">2 秒</string>
     <string name="timeout_3">3 秒</string>
+
+    <string name="dlg_uninstall_title">缷载软件</string>
+    <string name="dlg_uninstall_message">确定要缷载本软件吗？</string>
 </resources>

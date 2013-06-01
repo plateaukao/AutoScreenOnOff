@@ -5,10 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -176,17 +173,27 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
 
     // uninstall button clicked
     public void uninstallApp(View view){
-        deviceManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-        mDeviceAdmin = new ComponentName(this, TurnOffReceiver.class);
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.dlg_uninstall_title))
+                .setMessage(getString(R.string.dlg_uninstall_message))
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
-        // handle activeAdmin previlige
-        if(isActiveAdmin()) {
-            deviceManager.removeActiveAdmin(mDeviceAdmin);
-        }
-        Uri packageUri = Uri.parse("package:com.danielkao.autoscreenonoff");
-        Intent uninstallIntent =
-                new Intent(Intent.ACTION_DELETE, packageUri);
-        startActivity(uninstallIntent);
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        deviceManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
+                        mDeviceAdmin = new ComponentName(ScreenOffWidgetConfigure.this, TurnOffReceiver.class);
+
+                        // handle activeAdmin previlige
+                        if(isActiveAdmin()) {
+                            deviceManager.removeActiveAdmin(mDeviceAdmin);
+                        }
+                        Uri packageUri = Uri.parse("package:com.danielkao.autoscreenonoff");
+                        Intent uninstallIntent =
+                                new Intent(Intent.ACTION_DELETE, packageUri);
+                        startActivity(uninstallIntent);
+                    }})
+                .setNegativeButton(android.R.string.no, null).show();
+
     }
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,String key)
