@@ -50,8 +50,10 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
     }
 
     @Override
-    protected void onResume() {
+    protected void onStart() {
         super.onResume();
+        // for receiving pref change callbacks
+        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
         updatePrefState();
     }
 
@@ -62,8 +64,6 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
         addPreferencesFromResource(R.xml.widget_configure);
         setContentView(R.layout.activity_settings);
 
-        // for receiving pref change callbacks
-        PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
