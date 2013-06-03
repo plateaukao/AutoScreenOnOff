@@ -3,13 +3,19 @@ package com.danielkao.autoscreenonoff;
 import android.annotation.SuppressLint;
 import android.app.Service;
 import android.app.admin.DevicePolicyManager;
-import android.content.*;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.*;
+import android.os.Binder;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
 import android.view.OrientationEventListener;
@@ -68,7 +74,15 @@ public class SensorMonitorService extends Service implements
 
                 // it's from widget, need to do the toggle first
                 if(!intent.getStringExtra(CV.SERVICETYPE).equals(CV.SERVICETYPE_SETTING)){
-                    togglePreference();
+                    // in charging state and pref charging on is turned on
+                    if(CV.isPlugged(this)&&CV.getPrefChargingOn(this)){
+                        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+                        Editor editor = sp.edit();
+                        editor.putBoolean(CV.PREF_CHARGING_ON, false);
+                        editor.commit();
+                    }else{
+                        togglePreference();
+                    }
                 }
 
                 updateWidgetCharging(false);
@@ -285,6 +299,9 @@ public class SensorMonitorService extends Service implements
 		boolean IsAutoOn = sp.getBoolean(CV.PREF_AUTO_ON, false);
 		Editor editor = sp.edit();
 		editor.putBoolean(CV.PREF_AUTO_ON, !IsAutoOn);
+        // if it's meant to turn on pref, then we should make sure which-charging is off
+        if(!IsAutoOn)
+            editor.putBoolean(CV.PREF_CHARGING_ON, false);
 		editor.commit();
 
 	}

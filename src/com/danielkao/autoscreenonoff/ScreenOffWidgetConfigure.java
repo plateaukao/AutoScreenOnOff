@@ -250,29 +250,22 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
     // only when auto on is turned on, use can set landscape mode
     private void updatePrefState(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        CheckBoxPreference cbpLandscape = (CheckBoxPreference) findPreference(CV.PREF_DISABLE_IN_LANDSCAPE);
         SwitchPreference spCharging = (SwitchPreference) findPreference(CV.PREF_CHARGING_ON);
         SwitchPreference spAuto = (SwitchPreference) findPreference(CV.PREF_AUTO_ON);
 
         if(sp.getBoolean(CV.PREF_AUTO_ON, false)){
+            spAuto.setEnabled(false);
             spCharging.setEnabled(false);
-            cbpLandscape.setEnabled(true);
         }else{
             spCharging.setEnabled(true);
         }
 
         if(sp.getBoolean(CV.PREF_CHARGING_ON, false)){
+            spCharging.setEnabled(true);
             spAuto.setEnabled(false);
-            cbpLandscape.setEnabled(true);
         }else{
             spAuto.setEnabled(true);
         }
-
-        if(sp.getBoolean(CV.PREF_AUTO_ON, false) == false &&
-                sp.getBoolean(CV.PREF_CHARGING_ON, false) == false){
-            cbpLandscape.setEnabled(false);
-        }
-
     }
 
     private void showChangelogDialogCheck(){
