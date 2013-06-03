@@ -74,7 +74,8 @@ public class ToggleAutoScreenOnOffAppWidgetProvider extends AppWidgetProvider {
             views.setImageViewResource(R.id.imageview, R.drawable.widget_on);
         } else {
             // check whether charging_on is on and it's under charging state
-            if(isCharging && CV.getPrefChargingOn(context)) {
+            if((isCharging || CV.isPlugged(context))
+                    && CV.getPrefChargingOn(context)) {
                 views.setImageViewResource(R.id.imageview, R.drawable.widget_charging_on);
             } else{
                 // set icon to off
