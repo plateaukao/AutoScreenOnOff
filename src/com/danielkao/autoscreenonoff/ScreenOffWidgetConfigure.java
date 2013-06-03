@@ -201,39 +201,39 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
         // update state of pref disable in landscape
         updatePrefState();
 
-        if(key.equals(ConstantValues.PREF_AUTO_ON)){
+        if(key.equals(CV.PREF_AUTO_ON)){
             // send intent to service
-            Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
-            i.putExtra(ConstantValues.SERVICEACTION,
-                    ConstantValues.SERVICEACTION_TOGGLE);
-            i.putExtra(ConstantValues.SERVICETYPE,
-                    ConstantValues.SERVICETYPE_SETTING);
+            Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
+            i.putExtra(CV.SERVICEACTION,
+                    CV.SERVICEACTION_TOGGLE);
+            i.putExtra(CV.SERVICETYPE,
+                    CV.SERVICETYPE_SETTING);
             startService(i);
         }
-        else if(key.equals(ConstantValues.PREF_CHARGING_ON)){
-            Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
-            i.putExtra(ConstantValues.SERVICEACTION,
+        else if(key.equals(CV.PREF_CHARGING_ON)){
+            Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
+            i.putExtra(CV.SERVICEACTION,
                     (sharedPreferences.getBoolean(key,false))
-                            ?ConstantValues.SERVICEACTION_TURNON
-                            :ConstantValues.SERVICEACTION_TURNOFF);
+                            ? CV.SERVICEACTION_TURNON
+                            : CV.SERVICEACTION_TURNOFF);
                 startService(i);
         }
         //notify service when Pref of temp disable in land is changed.
-        else if(key.equals(ConstantValues.PREF_DISABLE_IN_LANDSCAPE)){
+        else if(key.equals(CV.PREF_DISABLE_IN_LANDSCAPE)){
             // if it's on mode, then should notify service to enable onOrientationListener
-            Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
-            i.putExtra(ConstantValues.SERVICEACTION,ConstantValues.SERVICEACTION_UPDATE_DISABLE_IN_LANDSCAPE);
+            Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
+            i.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_UPDATE_DISABLE_IN_LANDSCAPE);
             startService(i);
 
-        }else if(key.equals(ConstantValues.PREF_TIMEOUT_LOCK)){
+        }else if(key.equals(CV.PREF_TIMEOUT_LOCK)){
             // for updating list preference summary
-            ListPreference lp = (ListPreference) findPreference(ConstantValues.PREF_TIMEOUT_LOCK);
+            ListPreference lp = (ListPreference) findPreference(CV.PREF_TIMEOUT_LOCK);
             String str = getString(R.string.pref_summary_timeout_lock);
             lp.setSummary(String.format(str,lp.getEntry()));
             //lp.setSummary(str);
-        }else if(key.equals(ConstantValues.PREF_TIMEOUT_UNLOCK)){
+        }else if(key.equals(CV.PREF_TIMEOUT_UNLOCK)){
             // for updating list preference summary
-            ListPreference lp = (ListPreference) findPreference(ConstantValues.PREF_TIMEOUT_UNLOCK);
+            ListPreference lp = (ListPreference) findPreference(CV.PREF_TIMEOUT_UNLOCK);
             String str = getString(R.string.pref_summary_timeout_unlock);
             lp.setSummary(String.format(str,lp.getEntry()));
         }
@@ -244,26 +244,26 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
     // only when auto on is turned on, use can set landscape mode
     private void updatePrefState(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        CheckBoxPreference cbpLandscape = (CheckBoxPreference) findPreference(ConstantValues.PREF_DISABLE_IN_LANDSCAPE);
-        SwitchPreference spCharging = (SwitchPreference) findPreference(ConstantValues.PREF_CHARGING_ON);
-        SwitchPreference spAuto = (SwitchPreference) findPreference(ConstantValues.PREF_AUTO_ON);
+        CheckBoxPreference cbpLandscape = (CheckBoxPreference) findPreference(CV.PREF_DISABLE_IN_LANDSCAPE);
+        SwitchPreference spCharging = (SwitchPreference) findPreference(CV.PREF_CHARGING_ON);
+        SwitchPreference spAuto = (SwitchPreference) findPreference(CV.PREF_AUTO_ON);
 
-        if(sp.getBoolean(ConstantValues.PREF_AUTO_ON, false)){
+        if(sp.getBoolean(CV.PREF_AUTO_ON, false)){
             spCharging.setEnabled(false);
             cbpLandscape.setEnabled(true);
         }else{
             spCharging.setEnabled(true);
         }
 
-        if(sp.getBoolean(ConstantValues.PREF_CHARGING_ON, false)){
+        if(sp.getBoolean(CV.PREF_CHARGING_ON, false)){
             spAuto.setEnabled(false);
             cbpLandscape.setEnabled(true);
         }else{
             spAuto.setEnabled(true);
         }
 
-        if(sp.getBoolean(ConstantValues.PREF_AUTO_ON, false) == false &&
-                sp.getBoolean(ConstantValues.PREF_CHARGING_ON, false) == false){
+        if(sp.getBoolean(CV.PREF_AUTO_ON, false) == false &&
+                sp.getBoolean(CV.PREF_CHARGING_ON, false) == false){
             cbpLandscape.setEnabled(false);
         }
 

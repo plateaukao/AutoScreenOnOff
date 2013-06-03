@@ -17,7 +17,7 @@ public class ToggleAutoScreenOnOffAppWidgetProvider extends AppWidgetProvider {
 		// Perform this loop procedure for each App Widget that belongs to this
 		// provider
 		for (int i = 0; i < N; i++) {
-			ConstantValues.logv("onUpdate in AppWidget");
+			CV.logv("onUpdate in AppWidget");
 			int appWidgetId = appWidgetIds[i];
             updateRemoteViews(context, appWidgetManager, appWidgetId,false);
 		}
@@ -28,9 +28,9 @@ public class ToggleAutoScreenOnOffAppWidgetProvider extends AppWidgetProvider {
         super.onReceive(context, intent);
 
         String strAction = intent.getAction();
-        if (ConstantValues.UPDATE_WIDGET_ACTION.equals(strAction)){
-            boolean b = intent.getBooleanExtra(ConstantValues.PREF_CHARGING_ON, false);
-            ConstantValues.logv("update widget action is received:%b",b);
+        if (CV.UPDATE_WIDGET_ACTION.equals(strAction)){
+            boolean b = intent.getBooleanExtra(CV.PREF_CHARGING_ON, false);
+            CV.logv("update widget action is received:%b", b);
 
             ComponentName thisAppWidget = new ComponentName(context.getPackageName(),
                                                             getClass().getName());
@@ -51,11 +51,11 @@ public class ToggleAutoScreenOnOffAppWidgetProvider extends AppWidgetProvider {
     }
 
     private void updateRemoteViews(Context context, AppWidgetManager awm, int appWidgetId, boolean isCharging){
-        ConstantValues.logv("onUpdate in AppWidget");
+        CV.logv("onUpdate in AppWidget");
 
-        Intent intent = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
-        intent.putExtra(ConstantValues.SERVICEACTION, ConstantValues.SERVICEACTION_TOGGLE);
-        intent.putExtra(ConstantValues.SERVICETYPE, ConstantValues.SERVICETYPE_WIDGET);
+        Intent intent = new Intent(CV.SERVICE_INTENT_ACTION);
+        intent.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_TOGGLE);
+        intent.putExtra(CV.SERVICETYPE, CV.SERVICETYPE_WIDGET);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
 
         PendingIntent pendingIntent = PendingIntent.getService(context, 0,
@@ -68,13 +68,13 @@ public class ToggleAutoScreenOnOffAppWidgetProvider extends AppWidgetProvider {
         views.setOnClickPendingIntent(R.id.imageview, pendingIntent);
 
         // ------ change images!!
-        boolean autoOn = ConstantValues.getPrefAutoOnoff(context);
+        boolean autoOn = CV.getPrefAutoOnoff(context);
         if (autoOn) {
             // set icon to on
             views.setImageViewResource(R.id.imageview, R.drawable.widget_on);
         } else {
             // check whether charging_on is on and it's under charging state
-            if(isCharging && ConstantValues.getPrefChargingOn(context)) {
+            if(isCharging && CV.getPrefChargingOn(context)) {
                 views.setImageViewResource(R.id.imageview, R.drawable.widget_charging_on);
             } else{
                 // set icon to off

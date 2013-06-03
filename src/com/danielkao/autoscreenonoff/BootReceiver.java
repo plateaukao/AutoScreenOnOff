@@ -10,25 +10,25 @@ import android.content.Intent;
 public class BootReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
-        ConstantValues.logv("boot receiver");
+        CV.logv("boot receiver");
 
         // auto pref is on
-        if(ConstantValues.getPrefAutoOnoff(context)){
-            ConstantValues.logv("start service by boot receiver");
+        if(CV.getPrefAutoOnoff(context)){
+            CV.logv("start service by boot receiver");
             // send intent to service
-            Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
-            i.putExtra(ConstantValues.SERVICEACTION,
-                    ConstantValues.SERVICEACTION_TOGGLE);
-            i.putExtra(ConstantValues.SERVICETYPE,
-                    ConstantValues.SERVICETYPE_SETTING);
+            Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
+            i.putExtra(CV.SERVICEACTION,
+                    CV.SERVICEACTION_TOGGLE);
+            i.putExtra(CV.SERVICETYPE,
+                    CV.SERVICETYPE_SETTING);
             context.startService(i);
         }// check whether pre charging is on, and is under charging
-        else if(ConstantValues.getPrefChargingOn(context) && ConstantValues.isPlugged(context)){
-            Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
-            i.putExtra(ConstantValues.SERVICEACTION,
-                    ConstantValues.SERVICEACTION_TURNON);
-            i.putExtra(ConstantValues.SERVICETYPE,
-                    ConstantValues.SERVICETYPE_CHARGING);
+        else if(CV.getPrefChargingOn(context) && CV.isPlugged(context)){
+            Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
+            i.putExtra(CV.SERVICEACTION,
+                    CV.SERVICEACTION_TURNON);
+            i.putExtra(CV.SERVICETYPE,
+                    CV.SERVICETYPE_CHARGING);
             context.startService(i);
         }
     }

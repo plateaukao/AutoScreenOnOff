@@ -47,7 +47,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		//get pref
-		mIsAutoOn = ConstantValues.getPrefAutoOnoff(this.getApplicationContext());
+		mIsAutoOn = CV.getPrefAutoOnoff(this.getApplicationContext());
 
 		deviceManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 		mDeviceAdmin = new ComponentName(this, TurnOffReceiver.class);

@@ -17,28 +17,28 @@ public class ChargingStatusChangeReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
 
         // not enabled
-        if(!ConstantValues.getPrefChargingOn(context))
+        if(!CV.getPrefChargingOn(context))
             return;
 
         String action = intent.getAction();
         if(action.equals(ACTION_POWER_CONNECTED)) {
-            ConstantValues.logv("is charging");
+            CV.logv("is charging");
 
-            Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
-            i.putExtra(ConstantValues.SERVICEACTION,
-                    ConstantValues.SERVICEACTION_TURNON);
-            i.putExtra(ConstantValues.SERVICETYPE,
-                    ConstantValues.SERVICETYPE_CHARGING);
+            Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
+            i.putExtra(CV.SERVICEACTION,
+                    CV.SERVICEACTION_TURNON);
+            i.putExtra(CV.SERVICETYPE,
+                    CV.SERVICETYPE_CHARGING);
             context.startService(i);
         }
         else if(action.equals(ACTION_POWER_DISCONNECTED)) {
-            ConstantValues.logv("is not charging anymore");
+            CV.logv("is not charging anymore");
 
-            Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
-            i.putExtra(ConstantValues.SERVICEACTION,
-                    ConstantValues.SERVICEACTION_TURNOFF);
-            i.putExtra(ConstantValues.SERVICETYPE,
-                    ConstantValues.SERVICETYPE_CHARGING);
+            Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
+            i.putExtra(CV.SERVICEACTION,
+                    CV.SERVICEACTION_TURNOFF);
+            i.putExtra(CV.SERVICETYPE,
+                    CV.SERVICETYPE_CHARGING);
             context.startService(i);
 
         }

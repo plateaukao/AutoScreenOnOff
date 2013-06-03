@@ -12,11 +12,10 @@ import android.util.Log;
 
 import java.util.Arrays;
 
-public final class ConstantValues {
+public final class CV {
 	static final boolean debug = false;
 
 	public static final String TAG = "SensorMonitor";
-	public static final String PREF = "SensorMonitorPref";
     public static final String PREF_CHARGING_ON = "prefChargingOn";
 	public static final String PREF_AUTO_ON = "prefAutoOn";
     public static final String PREF_DISABLE_IN_LANDSCAPE= "prefDisableInLandscape";
@@ -83,14 +82,14 @@ public final class ConstantValues {
     public static boolean getPrefChargingOn(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         boolean isPrefChargingOn = sp.getBoolean(PREF_CHARGING_ON, false);
-        ConstantValues.logv("prefchargingon: %b",isPrefChargingOn);
+        CV.logv("prefchargingon: %b", isPrefChargingOn);
         return isPrefChargingOn;
     }
 
     public static boolean getPrefDisableInLandscape(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         boolean isPrefDisableInLandscape = sp.getBoolean(PREF_DISABLE_IN_LANDSCAPE, false);
-        ConstantValues.logv("prefdisableinlandscape: %b",isPrefDisableInLandscape);
+        CV.logv("prefdisableinlandscape: %b", isPrefDisableInLandscape);
         return isPrefDisableInLandscape;
     }
 
@@ -98,14 +97,14 @@ public final class ConstantValues {
     public static int getPrefTimeoutLock(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         int i  = Integer.parseInt(sp.getString(PREF_TIMEOUT_LOCK, "0"));
-        ConstantValues.logv("prefTimeout lock: %d",i);
+        CV.logv("prefTimeout lock: %d", i);
         return i;
     }
 
     public static int getPrefTimeoutUnlock(Context context) {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         int i  = Integer.parseInt(sp.getString(PREF_TIMEOUT_UNLOCK, "-1"));
-        ConstantValues.logv("prefTimeout unlock: %d",i);
+        CV.logv("prefTimeout unlock: %d", i);
 
         // if the value is -1, means user want it to be the same as lock timeout value
         if(i==-1)
