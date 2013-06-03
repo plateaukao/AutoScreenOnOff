@@ -2,7 +2,10 @@ package com.danielkao.autoscreenonoff;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.os.BatteryManager;
 import android.os.Build;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -110,5 +113,10 @@ public final class ConstantValues {
             i = getPrefTimeoutLock(context);
         }
         return i;
+    }
+
+    public static boolean isPlugged(Context context){
+        Intent intentBat = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        return (intentBat.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) > 0);
     }
 }

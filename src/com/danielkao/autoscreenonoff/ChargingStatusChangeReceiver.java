@@ -7,6 +7,9 @@ import android.content.Intent;
 import static android.content.Intent.ACTION_POWER_CONNECTED;
 import static android.content.Intent.ACTION_POWER_DISCONNECTED;
 
+// TODO: boot receiver
+// dialog for new versions: add ad here?
+
 /**
  * Created by plateau on 2013/05/20.
  */
@@ -19,8 +22,6 @@ public class ChargingStatusChangeReceiver extends BroadcastReceiver {
 
         String action = intent.getAction();
         if(action.equals(ACTION_POWER_CONNECTED)) {
-        //if(isCharging){
-
             ConstantValues.logv("is charging");
 
             Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);
@@ -31,8 +32,6 @@ public class ChargingStatusChangeReceiver extends BroadcastReceiver {
             context.startService(i);
         }
         else if(action.equals(ACTION_POWER_DISCONNECTED)) {
-        //else{
-
             ConstantValues.logv("is not charging anymore");
 
             Intent i = new Intent(ConstantValues.SERVICE_INTENT_ACTION);

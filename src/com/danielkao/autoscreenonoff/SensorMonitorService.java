@@ -87,7 +87,7 @@ public class SensorMonitorService extends Service implements
                 if(!isRegistered()){
                     registerSensor();
 
-                    updateWidgetCharging(isPlugged());
+                    updateWidgetCharging(ConstantValues.isPlugged(this));
                 }
                 break;
             }
@@ -315,11 +315,6 @@ public class SensorMonitorService extends Service implements
             mOrientationListener.disable();
             mOrientationListener = null;
         }
-    }
-
-    private boolean isPlugged(){
-        Intent intentBat = registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        return (intentBat.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) > 0);
     }
 
     private void resetHandler(){

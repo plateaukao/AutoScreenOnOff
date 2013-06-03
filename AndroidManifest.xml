@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.danielkao.autoscreenonoff"
-    android:versionCode="8"
-    android:versionName="1.7" >
+    android:versionCode="9"
+    android:versionName="1.8" >
 
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
     <uses-feature android:name="android.hardware.sensor.proximity" android:required="true" />
 
     <!-- for admob
@@ -48,7 +50,7 @@
          -->
 
         <receiver
-            android:name="com.danielkao.autoscreenonoff.TurnOffReceiver"
+            android:name=".TurnOffReceiver"
 	        android:label="@string/app_name"
             android:permission="android.permission.BIND_DEVICE_ADMIN" >
             <meta-data
@@ -61,10 +63,17 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name="com.danielkao.autoscreenonoff.ChargingStatusChangeReceiver" android:label="@string/app_name">
+        <receiver android:name=".ChargingStatusChangeReceiver" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.QUICKBOOT_POWERON" />
             </intent-filter>
         </receiver>
 
@@ -89,7 +98,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/toggleonoff_appwidget_info" />
         </receiver>
-        <receiver android:name=".ChargingStatusChangeReceiver"/>
 
     </application>
 
