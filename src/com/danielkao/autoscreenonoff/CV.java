@@ -21,6 +21,7 @@ public final class CV {
     public static final String PREF_DISABLE_IN_LANDSCAPE= "prefDisableInLandscape";
     public static final String PREF_TIMEOUT_LOCK = "prefTimeout";
     public static final String PREF_TIMEOUT_UNLOCK = "prefTimeoutUnlock";
+    public static final String PREF_VIEWED_VERSION_CODE = "prefViewedVersionCode";
 
     //
     public static final String SERVICEACTION = "serviceaction";

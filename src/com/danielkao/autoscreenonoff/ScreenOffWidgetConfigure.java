@@ -6,16 +6,14 @@ import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.appwidget.AppWidgetManager;
 import android.content.*;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.*;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import com.google.ads.AdView;
+import android.view.*;
+import android.webkit.WebView;
 
 /**
  * Created by plateau on 2013/05/20.
@@ -32,8 +30,10 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
     private SensorMonitorService sensorService;
 
     // ad service
+    /*
     private static final String MY_AD_UNIT_ID = "a1519f30be4a645";
     private AdView adView;
+    */
     // ---
 
     @Override
@@ -64,6 +64,7 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
         addPreferencesFromResource(R.xml.widget_configure);
         setContentView(R.layout.activity_settings);
 
+        showChangelogDialogCheck();
     }
 
     @Override
@@ -95,6 +96,11 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
+            case R.id.menu_changelog:
+            {
+                showChangelogDialog();
+                return true;
+            }
             case R.id.menu_playstore_url:
             {
                 String url = getString(R.string.playstore_url);
@@ -267,5 +273,42 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
             cbpLandscape.setEnabled(false);
         }
 
+    }
+
+    private void showChangelogDialogCheck(){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        int currentVersionCode = 0;
+        int viewedVersionCode = sp.getInt(CV.PREF_VIEWED_VERSION_CODE,0);
+
+        try {
+            PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), 0);
+            currentVersionCode = pi.versionCode;
+        } catch (Exception e) {e.printStackTrace();}
+
+        if (currentVersionCode > viewedVersionCode) {
+            showChangelogDialog();
+
+            SharedPreferences.Editor editor   = sp.edit();
+            editor.putInt(CV.PREF_VIEWED_VERSION_CODE, currentVersionCode);
+            editor.commit();
+        }
+    }
+
+    private void showChangelogDialog(){
+        //load some kind of a view
+        LayoutInflater li = LayoutInflater.from(this);
+        View view = li.inflate(R.layout.changelogdlg, null);
+        WebView wv = (WebView) view.findViewById(R.id.wv_changelog);
+        wv.loadData(getString(R.string.changelog_html),"text/html; charset=UTF-8", null);
+
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.title_changelog))
+                .setIcon(android.R.drawable.ic_menu_info_details)
+                .setView(view)
+                .setNegativeButton(getString(android.R.string.ok), new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //
+                    }
+                }).show();
     }
 }

@@ -11,6 +11,7 @@
     <string name="title_playstore">給我評價</string>
     <string name="title_codesite">前往 GitHub</string>
     <string name="title_about">關於</string>
+    <string name="title_changelog">版本差異</string>
 
     <string name="dialog_about_title">關於</string>
     <string name="dialog_about_message" formatted="false">%s\n版本：%s</string>
@@ -45,4 +46,16 @@
 
     <string name="dlg_uninstall_title">移除程式</string>
     <string name="dlg_uninstall_message">你確定要移除本程式嗎？</string>
+
+    <string name="changelog_html">
+        <![CDATA[
+        <b>版本 1.8:</b>
+        <ul>
+         <li>重開機後，自動生效</li>
+         <li>升級後，顯示版本更新內容</li>
+         <li>設定中的延遲時間可以正常顯示更新</li>
+        </ul>
+        ]]>
+    </string>
+
 </resources>
