@@ -31,6 +31,12 @@ android {
             assets.srcDirs = ['assets']
         }
 
-        instrumentTest.setRoot('tests')
+        instrumentTest.setRoot('PowerOffTest')
+        instrumentTest {
+            java.srcDirs = ['PowerOffTest/src']
+            res.srcDirs = ['PowerOffTest/res']
+            assets.srcDirs = ['PowerOffTest/assets']
+            resources.srcDirs = ['PowerOffTest/src']
+        }
     }
 }
