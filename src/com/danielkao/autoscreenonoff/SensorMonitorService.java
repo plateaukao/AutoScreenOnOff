@@ -55,9 +55,12 @@ public class SensorMonitorService extends Service implements
         // being restarted
         if (intent == null) {
             CV.logi("onStartCommand: no intent");
-            if (CV.getPrefAutoOnoff(this) == false) {
-                unregisterSensor();
-            } else {
+            // start monitoring when
+            // 1. autoOn is on
+            // 2. charging is on and is plugged in
+            if (CV.getPrefAutoOnoff(this)){
+                registerSensor();
+            }else if(CV.getPrefChargingOn(this)&&CV.isPlugged(this)){
                 registerSensor();
             }
 
@@ -191,9 +194,6 @@ public class SensorMonitorService extends Service implements
 	public void registerSensor() {
 		CV.logi("registerSensor");
 		if (mIsRegistered) {
-			Toast.makeText(SensorMonitorService.this,
-					"Auto Screen On/off is already turned on",
-					Toast.LENGTH_SHORT).show();
 			return;
 		}
 		
@@ -357,6 +357,13 @@ public class SensorMonitorService extends Service implements
             CV.logi("sensor: turn on thread");
             if (!screenLock.isHeld()) {
                 screenLock.acquire();
+                /*
+                KeyguardManager mKeyGuardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+                KeyguardManager.KeyguardLock mLock = mKeyGuardManager.newKeyguardLock("com.danielkao.autoscreenonoff");
+                if(mKeyGuardManager.isKeyguardLocked())
+                    mLock.disableKeyguard();
+                mLock.reenableKeyguard();
+                */
                 resetHandler();
 
                 // screenLock.release();

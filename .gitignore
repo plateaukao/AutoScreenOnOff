@@ -2,3 +2,9 @@ bin/
 .idea/
 build/
 .gradle/
+
+PowerOffTest/gen/com/danielkao/autoscreenonoff/tests/BuildConfig.java
+
+PowerOffTest/gen/com/danielkao/autoscreenonoff/tests/Manifest.java
+
+PowerOffTest/gen/com/danielkao/autoscreenonoff/tests/R.java

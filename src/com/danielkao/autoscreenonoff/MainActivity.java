@@ -30,7 +30,7 @@ public class MainActivity extends Activity {
 			if (resultCode == Activity.RESULT_OK) {
 				// Has become the device administrator.
 				if(false == mIsAutoOn){
-					shutdown();
+					//shutdown();
 				}
 				Log.v(TAG, "add device admin okay!!");
 			} else {

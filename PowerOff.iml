@@ -41,6 +41,12 @@
       <sourceFolder url="file://$MODULE_DIR$/assets" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/main/jni" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/res" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/PowerOffTest/aidl" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/PowerOffTest/assets" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/PowerOffTest/src" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/PowerOffTest/jni" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/PowerOffTest/rs" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/PowerOffTest/res" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/.git" />
       <excludeFolder url="file://$MODULE_DIR$/.gradle" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
