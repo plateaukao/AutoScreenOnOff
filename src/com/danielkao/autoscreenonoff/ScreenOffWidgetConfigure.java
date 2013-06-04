@@ -1,8 +1,6 @@
 package com.danielkao.autoscreenonoff;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
+import android.app.*;
 import android.app.admin.DevicePolicyManager;
 import android.appwidget.AppWidgetManager;
 import android.content.*;
@@ -11,9 +9,14 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.*;
+import android.preference.ListPreference;
+import android.preference.PreferenceActivity;
+import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 import android.view.*;
 import android.webkit.WebView;
+
+import java.util.Calendar;
 
 /**
  * Created by plateau on 2013/05/20.
@@ -28,6 +31,8 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
 
     //service
     private SensorMonitorService sensorService;
+    // schedule
+    AlarmManager am;
 
     // ad service
     /*
@@ -35,6 +40,14 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
     private AdView adView;
     */
     // ---
+
+    private AlarmManager getAlarmManager(){
+        if(am==null)
+        {
+            am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        }
+        return am;
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -208,6 +221,14 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
         updatePrefState();
 
         if(key.equals(CV.PREF_AUTO_ON)){
+            if(CV.getPrefAutoOnoff(this)==false)
+                cancelSchedule();
+            else{
+                if(CV.getPrefSleeping(this)){
+                    setSchedule();
+                }
+            }
+
             // send intent to service
             Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
             i.putExtra(CV.SERVICEACTION,
@@ -242,9 +263,90 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
             ListPreference lp = (ListPreference) findPreference(CV.PREF_TIMEOUT_UNLOCK);
             String str = getString(R.string.pref_summary_timeout_unlock);
             lp.setSummary(String.format(str,lp.getEntry()));
-        }
+        }else if(key.equals(CV.PREF_SLEEPING)){
+            // not turned on: just igonre the change
+            if(CV.getPrefAutoOnoff(this)==false)
+                return;
 
+            if(CV.getPrefSleeping(this)){
+                // on:register the alarmmanager
+                CV.logv("set schedule");
+                setSchedule();
+            }else{
+                // off: cancel alarmmanager
+                CV.logv("cancel schedule");
+                cancelSchedule();
+
+                // if autoOn is on, should turn it on again
+                Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
+                i.putExtra(CV.SERVICEACTION,
+                        CV.SERVICEACTION_TOGGLE);
+                i.putExtra(CV.SERVICETYPE,
+                        CV.SERVICETYPE_SETTING);
+                startService(i);
+            }
+
+
+        }else if(key.equals(CV.PREF_SLEEP_START)||key.equals(CV.PREF_SLEEP_STOP)){
+            // re-register alarm manager
+            CV.logv("isInSleepTime:%b",CV.isInSleepTime(this));
+            if(CV.getPrefSleeping(this)){
+                setSchedule();
+            }
+
+        }
     }
+
+    //<editor-fold description="schedule related">
+    private void setSchedule() {
+        cancelSchedule();
+        //alarm: sleep start
+        int hour = TimePreference.getHour(CV.getPrefSleepStart(this));
+        int minute = TimePreference.getMinute(CV.getPrefSleepStart(this));
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
+
+        Intent intent = new Intent(this, SensorMonitorService.class);
+        intent.setData(Uri.parse("timer://1")); // identifier for this alarm
+        intent.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_MODE_SLEEP);
+        intent.putExtra(CV.SLEEP_MODE_START,true);
+        PendingIntent pi = PendingIntent.getService(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        getAlarmManager().setRepeating(AlarmManager.RTC_WAKEUP
+                ,calendar.getTimeInMillis()
+                ,AlarmManager.INTERVAL_DAY, pi);
+        //alarm: sleep stop
+        hour = TimePreference.getHour(CV.getPrefSleepStop(this));
+        minute = TimePreference.getMinute(CV.getPrefSleepStop(this));
+
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+
+        intent = new Intent(this, SensorMonitorService.class);
+        intent.setData(Uri.parse("timer://2"));
+        intent.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_MODE_SLEEP);
+        intent.putExtra(CV.SLEEP_MODE_START,false);
+        pi = PendingIntent.getService(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        getAlarmManager().setRepeating(AlarmManager.RTC_WAKEUP
+                ,calendar.getTimeInMillis()
+                ,AlarmManager.INTERVAL_DAY, pi);
+    }
+
+    private void cancelSchedule() {
+        Intent intent = new Intent(this, SensorMonitorService.class);
+        intent.setData(Uri.parse("timer://1"));
+        PendingIntent pi = PendingIntent.getService(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        getAlarmManager().cancel(pi);
+
+        intent.setData(Uri.parse("timer://2"));
+        pi = PendingIntent.getService(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        getAlarmManager().cancel(pi);
+    }
+    //</editor-fold>
 
     // when auto on is turned on; user can't set charging mode
     // only when auto on is turned on, use can set landscape mode
@@ -268,6 +370,7 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
         }
     }
 
+    //<editor-fold description: changlog dialog>
     private void showChangelogDialogCheck(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         int currentVersionCode = 0;
@@ -304,4 +407,5 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
                     }
                 }).show();
     }
+    //</editor-fold>
 }

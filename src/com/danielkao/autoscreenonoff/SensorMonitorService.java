@@ -130,6 +130,24 @@ public class SensorMonitorService extends Service implements
                 }
                 break;
             }
+            case CV.SERVICEACTION_MODE_SLEEP:
+            {
+                if(CV.getPrefAutoOnoff(this)==false)
+                    return START_STICKY;
+
+                CV.logv("service:mode sleep action");
+                CV.logv("Sleep Mode:%b",intent.getBooleanExtra(CV.SLEEP_MODE_START,false));
+                boolean bSleepModeStart = intent.getBooleanExtra(CV.SLEEP_MODE_START, false);
+
+                if(CV.isInSleepTime(this)){
+                    unregisterSensor();
+                }
+                else{
+                    registerSensor();
+                }
+
+                break;
+            }
             default:
                 CV.logi("onStartCommand: others");
         }

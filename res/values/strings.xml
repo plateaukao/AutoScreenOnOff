@@ -15,10 +15,10 @@
     <string name="pref_power_setting">Power Settings</string>
     <string name="pref_advanced_setting">Advanced</string>
 
-    <string name="pref_summary_charging_on">Enable AutoScreen function during charging; and disable it once unplugged.</string>
+    <string name="pref_summary_charging_on">only works during charging.</string>
     <string name="pref_title_charging_on">Only when plugged</string>
 
-    <string name="pref_summary_auto_on">Turn off Screen when proximity sensor is covered; turn on screen when it\'s uncovered.</string>
+    <string name="pref_summary_auto_on">Screen On/Off automatically</string>
     <string name="pref_title_auto_on">Enable</string>
     <string name="uninstall_app">Uninstall App</string>
 
@@ -27,7 +27,7 @@
     <string name="title_about">About</string>
     <string name="title_changelog">Changelog</string>
 
-    <string name="pref_summary_disable_in_landscape">Temporarily Disable turning off screen when sensor is covered. Users may take photos or watch movies now.</string>
+    <string name="pref_summary_disable_in_landscape">Useful for taking photos or watching movies in landscape.</string>
     <string name="pref_title_disable_in_landscape">Temporarily Disable in Landscape</string>
 
     <string name="dialog_about_title">About</string>
@@ -99,6 +99,11 @@
     <!-- no translation -->
     <string name="author_url">https://github.com/plateaukao/PowerOff</string>
     <string name="playstore_url">https://play.google.com/store/apps/details?id=com.danielkao.autoscreenonoff</string>
+    <string name="pref_sleep_setting">Sleep Time Setting</string>
+    <string name="pref_summary_sleeping">to save power consumption</string>
+    <string name="pref_title_sleeping">Disable while Sleep</string>
+    <string name="sleep_start_title">Sleep Start</string>
+    <string name="sleep_stop_title">Sleep Ends</string>
 
 
 </resources>

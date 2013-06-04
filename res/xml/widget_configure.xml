@@ -40,5 +40,23 @@
         </ListPreference>
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/pref_sleep_setting" >
+        <SwitchPreference
+                android:defaultValue="false"
+                android:key="prefSleeping"
+                android:summary="@string/pref_summary_sleeping"
+                android:title="@string/pref_title_sleeping" >
+        </SwitchPreference>
+        <com.danielkao.autoscreenonoff.TimePreference
+                android:key="prefSleepStart"
+                android:negativeButtonText="@null"
+                android:defaultValue="22:00"
+                android:title="@string/sleep_start_title"/>
+        <com.danielkao.autoscreenonoff.TimePreference
+                android:key="prefSleepStop"
+                android:negativeButtonText="@null"
+                android:defaultValue="08:00"
+                android:title="@string/sleep_stop_title"/>
+    </PreferenceCategory>
 
 </PreferenceScreen>
