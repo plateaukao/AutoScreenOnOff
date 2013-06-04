@@ -116,7 +116,7 @@ public final class CV {
     }
 
     public static boolean isPlugged(Context context){
-        Intent intentBat = context.registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+        Intent intentBat = context.getApplicationContext().registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
         return (intentBat.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) > 0);
     }
 }
