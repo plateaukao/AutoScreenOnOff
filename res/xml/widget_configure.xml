@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <PreferenceCategory android:title="@string/pref_auto_setting" >
+    <com.danielkao.autoscreenonoff.MyPreferenceCategory android:title="@string/pref_auto_setting" >
         <SwitchPreference
                 android:defaultValue="false"
                 android:key="prefAutoOn"
                 android:summary="@string/pref_summary_auto_on"
                 android:title="@string/pref_title_auto_on" >
         </SwitchPreference>
-    </PreferenceCategory>
+    </com.danielkao.autoscreenonoff.MyPreferenceCategory>
         <SwitchPreference
                 android:defaultValue="false"
                 android:key="prefChargingOn"
                 android:summary="@string/pref_summary_charging_on"
                 android:title="@string/pref_title_charging_on" >
         </SwitchPreference>
-    <PreferenceCategory android:title="@string/pref_advanced_setting" >
+    <com.danielkao.autoscreenonoff.MyPreferenceCategory android:title="@string/pref_advanced_setting" >
         <CheckBoxPreference
                 android:defaultValue="false"
                 android:key="prefDisableInLandscape"
@@ -38,9 +38,9 @@
                 android:summary="@string/pref_summary_timeout_unlock"
                 android:title="@string/pref_title_timeout_unlock" >
         </ListPreference>
-    </PreferenceCategory>
+    </com.danielkao.autoscreenonoff.MyPreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_sleep_setting" >
+    <com.danielkao.autoscreenonoff.MyPreferenceCategory android:title="@string/pref_sleep_setting" >
         <SwitchPreference
                 android:defaultValue="false"
                 android:key="prefSleeping"
@@ -57,6 +57,6 @@
                 android:negativeButtonText="@null"
                 android:defaultValue="08:00"
                 android:title="@string/sleep_stop_title"/>
-    </PreferenceCategory>
+    </com.danielkao.autoscreenonoff.MyPreferenceCategory>
 
 </PreferenceScreen>

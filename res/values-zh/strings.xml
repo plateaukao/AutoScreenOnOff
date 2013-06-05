@@ -22,14 +22,14 @@
     <string name="pref_auto_setting">自動螢幕控制</string>
     <string name="pref_power_setting">插入電源時的設定</string>
 
-    <string name="pref_summary_charging_on">當接上 USB 線時，開啟本功能；當拔出 USB 時,自動關閉本功能。</string>
+    <string name="pref_summary_charging_on">當接上 USB 線時開啟本功能；當拔出 USB 時自動關閉本功能。</string>
     <string name="pref_title_charging_on">僅在接上電源時啟動</string>
 
-    <string name="pref_summary_auto_on">啟動後，當"測近感側器"被遮蓋時，畫面自動關閉；當無遮蓋時，則自動點亮畫面。</string>
+    <string name="pref_summary_auto_on">當"測近感側器"被遮蓋時，畫面自動關閉；當無遮蓋時則自動點亮畫面。</string>
     <string name="pref_title_auto_on">啟動</string>
     <string name="uninstall_app">移除本軟體</string>
 
-    <string name="pref_summary_disable_in_landscape">手機在橫放時，暫時不關閉螢幕。因為此時可能在看影片，或是要拍照，很容易誤遮到感測器。</string>
+    <string name="pref_summary_disable_in_landscape">手機橫放時暫不關閉螢幕。適用於看影片或是拍照。</string>
     <string name="pref_title_disable_in_landscape">橫屏時暫時無作用</string>
 
     <string name="pref_summary_timeout_lock">遮蓋時，延遲多久才關閉畫面。可避免誤觸\n\n目前設定: %s</string>
@@ -44,18 +44,29 @@
     <string name="timeout_2">2 秒</string>
     <string name="timeout_3">3 秒</string>
 
-    <string name="dlg_uninstall_title">移除程式</string>
-    <string name="dlg_uninstall_message">你確定要移除本程式嗎？</string>
+    <string name="dlg_uninstall_title">移除軟體</string>
+    <string name="dlg_uninstall_message">你確定要移除本軟體嗎？</string>
 
     <string name="changelog_html">
         <![CDATA[
+        <b>版本 1.9:</b>
+        <ul>
+         <li>新增睡眠時間設定，可以有效降低耗電量</li>
+         <li>更新軟體圖案</li>
+         <li>修正有時\"插電時啟動\"會失效的問題</li>
+        </ul>
         <b>版本 1.8:</b>
         <ul>
-         <li>重開機後，自動生效</li>
+         <li>重開機後自動生效</li>
          <li>升級後，顯示版本更新內容</li>
          <li>設定中的延遲時間可以正常顯示更新</li>
         </ul>
         ]]>
     </string>
 
+    <string name="pref_sleep_setting">睡眠時間設定(測試中功能)</string>
+    <string name="pref_summary_sleeping">可有效減少耗電量(仍在測試中，有問題請幫忙回報，謝謝)</string>
+    <string name="pref_title_sleeping">睡眠時間無作用</string>
+    <string name="sleep_start_title">睡眠開始時間</string>
+    <string name="sleep_stop_title">睡眠結束時間</string>
 </resources>

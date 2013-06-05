@@ -87,6 +87,12 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 1.9:</b>
+        <ul>
+         <li>Add sleep time settings, to better reduce power consumption.</li>
+         <li>Change application logo icon</li>
+         <li>Issue fix: sometimes \"Enable while plugged\" can\'t function well.</li>
+        </ul>
         <b>Version 1.8:</b>
         <ul>
          <li>works after rebooting the device. You don\'t have to manually turn on the function again.</li>
@@ -96,14 +102,15 @@
         ]]>
     </string>
 
+    <string name="pref_sleep_setting">Sleep Time Setting (Beta)</string>
+    <string name="pref_summary_sleeping">to save power consumption.(Still buggy. report to me if you find bugs.)</string>
+    <string name="pref_title_sleeping">Disable while Sleep</string>
+    <string name="sleep_start_title">Sleep Start Time</string>
+    <string name="sleep_stop_title">Sleep End Time</string>
+
     <!-- no translation -->
     <string name="author_url">https://github.com/plateaukao/PowerOff</string>
     <string name="playstore_url">https://play.google.com/store/apps/details?id=com.danielkao.autoscreenonoff</string>
-    <string name="pref_sleep_setting">Sleep Time Setting</string>
-    <string name="pref_summary_sleeping">to save power consumption</string>
-    <string name="pref_title_sleeping">Disable while Sleep</string>
-    <string name="sleep_start_title">Sleep Start</string>
-    <string name="sleep_stop_title">Sleep Ends</string>
 
 
 </resources>
