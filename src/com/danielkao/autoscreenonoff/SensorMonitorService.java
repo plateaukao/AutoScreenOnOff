@@ -59,6 +59,10 @@ public class SensorMonitorService extends Service implements
             // 1. autoOn is on
             // 2. charging is on and is plugged in
             if (CV.getPrefAutoOnoff(this)){
+                // before registering, need to check whether it's in sleeping time period
+                // if so, do nothing
+                if(CV.getPrefSleeping(this) && CV.isInSleepTime(this))
+                    return START_NOT_STICKY;
                 registerSensor();
             }else if(CV.getPrefChargingOn(this)&&CV.isPlugged(this)){
                 registerSensor();
@@ -93,6 +97,10 @@ public class SensorMonitorService extends Service implements
                 if (CV.getPrefAutoOnoff(this) == false) {
                     unregisterSensor();
                 } else {
+                    // before registering, need to check whether it's in sleeping time period
+                    // if so, do nothing
+                    if(CV.getPrefSleeping(this) && CV.isInSleepTime(this))
+                        return START_NOT_STICKY;
                     registerSensor();
                 }
                 break;
