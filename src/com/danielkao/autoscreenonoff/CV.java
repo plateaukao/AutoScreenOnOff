@@ -29,6 +29,7 @@ public final class CV {
     public static final String PREF_SLEEPING = "prefSleeping";
     public static final String PREF_SLEEP_START = "prefSleepStart";
     public static final String PREF_SLEEP_STOP = "prefSleepStop";
+    public static final String PREF_SHOW_NOTIFICATION = "prefShowNotification";
 
     //
     public static final String SERVICEACTION = "serviceaction";
@@ -37,6 +38,10 @@ public final class CV {
     public static final int SERVICEACTION_TURNOFF = 2;
     public static final int SERVICEACTION_UPDATE_DISABLE_IN_LANDSCAPE = 4;
     public static final int SERVICEACTION_MODE_SLEEP = 5;
+    public static final int SERVICEACTION_SCREENOFF = 6;
+    public static final int SERVICEACTION_SHOW_NOTIFICATION = 7;
+
+    public static String CLOSE_AFTER="close_after";
 
     public static String SLEEP_MODE_START = "sleep_mode_start";
     //
@@ -116,6 +121,13 @@ public final class CV {
         String s  = sp.getString(PREF_SLEEP_STOP, "22:00");
         CV.logv("prefSleepStop: %s", s);
         return s;
+    }
+
+    public static boolean getPrefShowNotification(Context context){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean b  = sp.getBoolean(PREF_SHOW_NOTIFICATION, false);
+        CV.logv("prefShowNotification: %b", b);
+        return b;
     }
 
     //return milliseconds

@@ -21,6 +21,7 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
 import android.view.OrientationEventListener;
+import android.widget.RemoteViews;
 import android.widget.Toast;
 
 public class SensorMonitorService extends Service implements
@@ -80,6 +81,30 @@ public class SensorMonitorService extends Service implements
         int action = intent.getIntExtra(CV.SERVICEACTION, -1);
 
         switch(action){
+            case CV.SERVICEACTION_SHOW_NOTIFICATION:
+            {
+                if(CV.getPrefShowNotification(this))
+                    showNotification();
+                else
+                    hideNotification();
+
+                return START_NOT_STICKY;
+            }
+            case CV.SERVICEACTION_SCREENOFF:
+            {
+                CV.logi("onStartCommand: screenoff");
+                // grant device management
+                if(!isActiveAdmin()){
+                    Intent i = new Intent(this, MainActivity.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    i.putExtra(CV.CLOSE_AFTER,true);
+                    this.startActivity(i);
+                }
+                else{
+                    deviceManager.lockNow();
+                }
+                return START_NOT_STICKY;
+            }
             // from widget or setting
             case CV.SERVICEACTION_TOGGLE:
             {
@@ -130,7 +155,7 @@ public class SensorMonitorService extends Service implements
                     unregisterSensor();
                 if(!CV.getPrefAutoOnoff(this))
                     updateWidgetCharging(false);
-                break;
+                return START_NOT_STICKY;
             }
             case CV.SERVICEACTION_UPDATE_DISABLE_IN_LANDSCAPE:
             {
@@ -230,8 +255,6 @@ public class SensorMonitorService extends Service implements
 			return;
 		}
 
-        showNotification();
-
 		// grant device management
 		if(!isActiveAdmin()){
 			Intent i = new Intent(this, MainActivity.class);
@@ -278,10 +301,6 @@ public class SensorMonitorService extends Service implements
 		return mIsRegistered;
 	}
     //</editor-fold>
-
-	//
-	// listener
-	//
 
 	@Override
 	public final void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -425,15 +444,26 @@ public class SensorMonitorService extends Service implements
 
     private void showNotification(){
 
-        Intent intent = new Intent(CV.SERVICE_INTENT_ACTION);
-        intent.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_TOGGLE);
-        PendingIntent pi = PendingIntent.getService(this, 0, intent, 0);
+        Intent intentApp = new Intent(this,ScreenOffWidgetConfigure.class);
+        intentApp.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        PendingIntent piApp = PendingIntent.getActivity(this, 0, intentApp, 0);
+
+        Intent intentOnOff = new Intent(CV.SERVICE_INTENT_ACTION);
+        intentOnOff.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_TOGGLE);
+        PendingIntent piOnOff = PendingIntent.getService(this, 0, intentOnOff, 0);
+
+        Intent intentScreenOff = new Intent(CV.SERVICE_INTENT_ACTION);
+        intentScreenOff.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_SCREENOFF);
+        PendingIntent piScreenOff = PendingIntent.getService(this, 1, intentScreenOff, 0);
+
+        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.layout_notification);
+        remoteViews.setOnClickPendingIntent(R.id.image_logo, piApp);
+        remoteViews.setOnClickPendingIntent(R.id.image_status, piOnOff);
+        remoteViews.setOnClickPendingIntent(R.id.image_screenoff, piScreenOff);
 
         Notification noti = new Notification.Builder(this)
-                .setContentTitle("Turn on AutoScreenOnOff")
-                .setContentText("Abc")
+                .setContent(remoteViews)
                 .setSmallIcon(R.drawable.ic_launcher)
-                .setContentIntent(pi)
                 .setOngoing(true)
                 .build();
 

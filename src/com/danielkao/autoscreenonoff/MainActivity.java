@@ -18,21 +18,22 @@ public class MainActivity extends Activity {
     
     //service
     private SensorMonitorService sensorService;
-    // pref: turn on auto on/off
-    private boolean mIsAutoOn;
-    
-    
+
+    // check if intent is from screenOff request
+    private boolean bCloseAfter = false;
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (REQUEST_CODE_ENABLE_ADMIN == requestCode)
 		{
 			if (resultCode == Activity.RESULT_OK) {
+                Log.v(TAG, "add device admin okay!!");
 				// Has become the device administrator.
-				if(false == mIsAutoOn){
-					//shutdown();
-				}
-				Log.v(TAG, "add device admin okay!!");
+                if(bCloseAfter){
+                    shutdown();
+                    bCloseAfter=false;
+                }
 			} else {
 				//Canceled or failed: turn off Enabler
 				Log.v(TAG, "add device admin not okay");
@@ -46,11 +47,14 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		//get pref
-		mIsAutoOn = CV.getPrefAutoOnoff(this.getApplicationContext());
-
 		deviceManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
 		mDeviceAdmin = new ComponentName(this, TurnOffReceiver.class);
+
+        // get value from intent
+        Intent i = getIntent();
+        if(null != i){
+            bCloseAfter = i.getBooleanExtra(CV.CLOSE_AFTER,false);
+        }
 
 		// handle activeAdmin previlige
 		if(!isActiveAdmin())
@@ -58,7 +62,6 @@ public class MainActivity extends Activity {
 			sendDeviceAdminIntent();
 			return;
 		}
-		
 	}
 
 
@@ -99,7 +102,7 @@ public class MainActivity extends Activity {
             // We've bound to LocalService, cast the IBinder and get LocalService instance
             LocalBinder binder = (LocalBinder) service;
             sensorService = binder.getService();
-            if(mIsAutoOn){
+            if(CV.getPrefAutoOnoff(MainActivity.this)){
             	sensorService.registerSensor();
             }
             else {

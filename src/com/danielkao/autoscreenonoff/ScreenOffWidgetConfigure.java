@@ -245,6 +245,12 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
                             : CV.SERVICEACTION_TURNOFF);
                 startService(i);
         }
+        else if(key.equals(CV.PREF_SHOW_NOTIFICATION)){
+            // if it's on mode, then should notify service to enable onOrientationListener
+            Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
+            i.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_SHOW_NOTIFICATION);
+            startService(i);
+        }
         //notify service when Pref of temp disable in land is changed.
         else if(key.equals(CV.PREF_DISABLE_IN_LANDSCAPE)){
             // if it's on mode, then should notify service to enable onOrientationListener

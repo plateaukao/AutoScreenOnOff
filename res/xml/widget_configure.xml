@@ -18,6 +18,12 @@
     <com.danielkao.autoscreenonoff.MyPreferenceCategory android:title="@string/pref_advanced_setting" >
         <CheckBoxPreference
                 android:defaultValue="false"
+                android:key="prefShowNotification"
+                android:summary="@string/pref_summary_show_notification"
+                android:title="@string/pref_title_show_notification" >
+        </CheckBoxPreference>
+        <CheckBoxPreference
+                android:defaultValue="false"
                 android:key="prefDisableInLandscape"
                 android:summary="@string/pref_summary_disable_in_landscape"
                 android:title="@string/pref_title_disable_in_landscape" >
