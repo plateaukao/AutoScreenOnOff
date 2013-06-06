@@ -241,7 +241,8 @@ public class SensorMonitorService extends Service implements
 	@Override
 	public void onDestroy() {
 		CV.logi("onDestroy");
-		unregisterSensor();
+        if(mIsRegistered)
+		    unregisterSensor();
 		super.onDestroy();
 	}
 
@@ -281,7 +282,7 @@ public class SensorMonitorService extends Service implements
 			partialLock.acquire();
 
         // show hint text if the screen is on
-        if (mPowerManager.isScreenOn()) {
+        if (mPowerManager.isScreenOn() && !bForeground) {
             String s = getString(R.string.turn_autoscreen_on);
             Toast.makeText(SensorMonitorService.this, s, Toast.LENGTH_SHORT).show();
         }
@@ -291,8 +292,11 @@ public class SensorMonitorService extends Service implements
 		CV.logi("unregisterSensor");
 		if (mIsRegistered) {
 			mSensorManager.unregisterListener(this);
-			String s = getString(R.string.turn_autoscreen_off);
-			Toast.makeText(SensorMonitorService.this, s, Toast.LENGTH_SHORT).show();
+            if(!bForeground)
+            {
+                String s = getString(R.string.turn_autoscreen_off);
+			    Toast.makeText(SensorMonitorService.this, s, Toast.LENGTH_SHORT).show();
+            }
 		}
 
 		if (partialLock != null && partialLock.isHeld())
@@ -478,9 +482,17 @@ public class SensorMonitorService extends Service implements
                 remoteViews.setImageViewResource(R.id.image_status,R.drawable.widget_off);
         }
 
+        String ticker;
+        if(CV.getPrefChargingOn(this)&&CV.isPlugged(this)){
+            ticker = "Charging!";
+        }else{
+            ticker = (CV.getPrefAutoOnoff(this))?"turn on":"turn off";
+
+        }
         // build the notification
         Notification noti = new Notification.Builder(this)
                 .setContent(remoteViews)
+                .setTicker(ticker)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setOngoing(true)
                 .build();
