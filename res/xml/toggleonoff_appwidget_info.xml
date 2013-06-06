@@ -3,7 +3,7 @@
     android:minWidth="64dp"
     android:minHeight="64dp"
     android:updatePeriodMillis="0"
-    android:previewImage="@drawable/ic_launcher"
+    android:previewImage="@drawable/widget_on"
     android:initialLayout="@layout/toggleonoff_appwidget"
     android:resizeMode="horizontal|vertical"
     android:widgetCategory="home_screen" >
