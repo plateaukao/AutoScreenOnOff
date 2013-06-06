@@ -49,6 +49,7 @@ public class SensorMonitorService extends Service implements
 		return deviceManager.isAdminActive(mDeviceAdmin);
 	}
 
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         CV.logi("onStartCommand");
@@ -214,7 +215,8 @@ public class SensorMonitorService extends Service implements
 		}
 	}
 
-	//
+    //<editor-fold desc="sensor registration">
+    //
 	// pubilc API for client
 	//
 	public void registerSensor() {
@@ -266,6 +268,7 @@ public class SensorMonitorService extends Service implements
 	public boolean isRegistered() {
 		return mIsRegistered;
 	}
+    //</editor-fold>
 
 	//
 	// listener
@@ -340,6 +343,7 @@ public class SensorMonitorService extends Service implements
         else return false;
     }
 
+    //<editor-fold desc="orientation registration">
     private void registerOrientationChange(){
         if(null != mOrientationListener && mOrientationListener.canDetectOrientation())
             return;
@@ -359,7 +363,9 @@ public class SensorMonitorService extends Service implements
             mOrientationListener = null;
         }
     }
+    //</editor-fold>
 
+    //<editor-fold desc="time out handler">
     private void resetHandler(){
         CV.logv("reset Handler");
         handler.removeMessages(CALLBACK_EXISTS);
@@ -406,4 +412,5 @@ public class SensorMonitorService extends Service implements
             }
         }
     };
+    //</editor-fold>
 }
