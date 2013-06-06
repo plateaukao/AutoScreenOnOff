@@ -1,6 +1,8 @@
 package com.danielkao.autoscreenonoff;
 
 import android.annotation.SuppressLint;
+import android.app.Notification;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
@@ -45,6 +47,9 @@ public class SensorMonitorService extends Service implements
     //private Timer timer;
     private Handler handler = new Handler();
 
+    // for notification logic
+    private boolean bForeground = false;
+    private int NOTIFICATION_ONGOING = 12345;
 	private boolean isActiveAdmin() {
 		return deviceManager.isAdminActive(mDeviceAdmin);
 	}
@@ -224,7 +229,9 @@ public class SensorMonitorService extends Service implements
 		if (mIsRegistered) {
 			return;
 		}
-		
+
+        showNotification();
+
 		// grant device management
 		if(!isActiveAdmin()){
 			Intent i = new Intent(this, MainActivity.class);
@@ -262,7 +269,9 @@ public class SensorMonitorService extends Service implements
 			partialLock.release();
 		mIsRegistered = false;
 
-		stopSelf();
+        // do not close service if the notification is shown
+        if(!bForeground)
+		    stopSelf();
 	}
 
 	public boolean isRegistered() {
@@ -413,4 +422,32 @@ public class SensorMonitorService extends Service implements
         }
     };
     //</editor-fold>
+
+    private void showNotification(){
+
+        Intent intent = new Intent(CV.SERVICE_INTENT_ACTION);
+        intent.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_TOGGLE);
+        PendingIntent pi = PendingIntent.getService(this, 0, intent, 0);
+
+        Notification noti = new Notification.Builder(this)
+                .setContentTitle("Turn on AutoScreenOnOff")
+                .setContentText("Abc")
+                .setSmallIcon(R.drawable.ic_launcher)
+                .setContentIntent(pi)
+                .setOngoing(true)
+                .build();
+
+        startForeground(NOTIFICATION_ONGOING, noti);
+        bForeground = true;
+    }
+
+    private void hideNotification(){
+        bForeground = false;
+        stopForeground(true);
+
+    }
+
+    private void updateNotification(){
+
+    }
 }
