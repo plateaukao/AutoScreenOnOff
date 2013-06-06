@@ -2,6 +2,7 @@ package com.danielkao.autoscreenonoff;
 
 import android.annotation.SuppressLint;
 import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.app.admin.DevicePolicyManager;
@@ -124,6 +125,7 @@ public class SensorMonitorService extends Service implements
                 }
 
                 updateWidgetCharging(false);
+                updateNotification();
 
                 if (CV.getPrefAutoOnoff(this) == false) {
                     unregisterSensor();
@@ -144,6 +146,7 @@ public class SensorMonitorService extends Service implements
                     registerSensor();
 
                     updateWidgetCharging(CV.isPlugged(this));
+                    updateNotification();
                 }
                 break;
             }
@@ -229,6 +232,10 @@ public class SensorMonitorService extends Service implements
 				PowerManager.ACQUIRE_CAUSES_WAKEUP
 						| PowerManager.FULL_WAKE_LOCK
 						| PowerManager.ON_AFTER_RELEASE, "TAG");
+
+        // show notification if it's set
+        if(CV.getPrefShowNotification(this))
+            showNotification();
 	}
 
 	@Override
@@ -442,8 +449,8 @@ public class SensorMonitorService extends Service implements
     };
     //</editor-fold>
 
-    private void showNotification(){
-
+    private Notification createNotification(){
+        // setup pending intents
         Intent intentApp = new Intent(this,ScreenOffWidgetConfigure.class);
         intentApp.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent piApp = PendingIntent.getActivity(this, 0, intentApp, 0);
@@ -456,18 +463,34 @@ public class SensorMonitorService extends Service implements
         intentScreenOff.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_SCREENOFF);
         PendingIntent piScreenOff = PendingIntent.getService(this, 1, intentScreenOff, 0);
 
+        // setup remoteview
         RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.layout_notification);
         remoteViews.setOnClickPendingIntent(R.id.image_logo, piApp);
         remoteViews.setOnClickPendingIntent(R.id.image_status, piOnOff);
         remoteViews.setOnClickPendingIntent(R.id.image_screenoff, piScreenOff);
 
+        if(CV.getPrefChargingOn(this) && CV.isPlugged(this)){
+            remoteViews.setImageViewResource(R.id.image_status,R.drawable.widget_charging_on);
+        }else{
+            if(CV.getPrefAutoOnoff(this))
+                remoteViews.setImageViewResource(R.id.image_status,R.drawable.widget_on);
+            else
+                remoteViews.setImageViewResource(R.id.image_status,R.drawable.widget_off);
+        }
+
+        // build the notification
         Notification noti = new Notification.Builder(this)
                 .setContent(remoteViews)
                 .setSmallIcon(R.drawable.ic_launcher)
                 .setOngoing(true)
                 .build();
+       return noti;
+    }
 
-        startForeground(NOTIFICATION_ONGOING, noti);
+    private void showNotification(){
+        Notification notify = createNotification();
+
+        startForeground(NOTIFICATION_ONGOING, notify);
         bForeground = true;
     }
 
@@ -478,6 +501,14 @@ public class SensorMonitorService extends Service implements
     }
 
     private void updateNotification(){
+        if(!bForeground)
+            return;
+
+        Notification notify = createNotification();
+        final NotificationManager notificationManager = (NotificationManager) getApplicationContext()
+                .getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
+
+        notificationManager.notify(NOTIFICATION_ONGOING, notify);
 
     }
 }

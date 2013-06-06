@@ -21,9 +21,9 @@
             android:padding="2dp"
             android:id="@+id/image_status"
             android:src="@drawable/widget_on"
-            android:layout_toRightOf="@+id/image_logo"
+            android:layout_toLeftOf="@+id/image_screenoff"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
             android:scaleType="fitCenter"/>
 
     <ImageView
@@ -31,9 +31,9 @@
             android:layout_height="fill_parent"
             android:padding="2dp"
             android:id="@+id/image_screenoff"
-            android:src="@drawable/widget_off"
-            android:layout_toRightOf="@+id/image_status"
+            android:src="@drawable/screenoff"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
             android:scaleType="fitCenter"/>
 </RelativeLayout>
