@@ -70,4 +70,10 @@
     <string name="pref_title_sleeping">睡眠時間無作用</string>
     <string name="sleep_start_title">睡眠開始時間</string>
     <string name="sleep_stop_title">睡眠結束時間</string>
+
+    <string name="pref_summary_show_notification">快速開關，包含一顆關閉螢幕的按鈕</string>
+    <string name="pref_title_show_notification">顯示在訊息欄內</string>
+    <string name="statusbar_charging">充電中！開啟自動螢幕控制</string>
+    <string name="statusbar_autoscreen_on">開啟 自動螢幕控制</string>
+    <string name="statusbar_autoscreen_off">關閉 自動螢幕控制</string>
 </resources>

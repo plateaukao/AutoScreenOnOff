@@ -15,15 +15,14 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Binder;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.PowerManager;
+import android.os.*;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
 import android.view.OrientationEventListener;
 import android.widget.RemoteViews;
 import android.widget.Toast;
+
+import java.lang.reflect.Method;
 
 public class SensorMonitorService extends Service implements
 		SensorEventListener {
@@ -111,8 +110,9 @@ public class SensorMonitorService extends Service implements
             {
                 CV.logi("onStartCommand: toggle");
 
+                String servicetype = intent.getStringExtra(CV.SERVICETYPE);
                 // it's from widget, need to do the toggle first
-                if(!intent.getStringExtra(CV.SERVICETYPE).equals(CV.SERVICETYPE_SETTING)){
+                if(servicetype!=null && !servicetype.equals(CV.SERVICETYPE_SETTING)){
                     // in charging state and pref charging on is turned on
                     if(CV.isPlugged(this)&&CV.getPrefChargingOn(this)){
                         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -156,8 +156,10 @@ public class SensorMonitorService extends Service implements
                 // from charging receiver
                 if(isRegistered())
                     unregisterSensor();
-                if(!CV.getPrefAutoOnoff(this))
+                if(!CV.getPrefAutoOnoff(this)){
                     updateWidgetCharging(false);
+                    updateNotification();
+                }
                 return START_NOT_STICKY;
             }
             case CV.SERVICEACTION_UPDATE_DISABLE_IN_LANDSCAPE:
@@ -197,6 +199,10 @@ public class SensorMonitorService extends Service implements
 		return START_STICKY;
 	}
 
+    /**
+     * send broadcast to update appWidget UI
+     * @param b whether the Charging Icon should be shown
+     */
     private void updateWidgetCharging(boolean b) {
         Intent i = new Intent(this, ToggleAutoScreenOnOffAppWidgetProvider.class);
         i.setAction(CV.UPDATE_WIDGET_ACTION);
@@ -421,7 +427,6 @@ public class SensorMonitorService extends Service implements
         }
     };
 
-    //timeout
     private Runnable runnableTurnOn = new Runnable() {
         @Override
         public void run() {
@@ -453,6 +458,10 @@ public class SensorMonitorService extends Service implements
     };
     //</editor-fold>
 
+    /**
+     * create notification for bringing service to foreground, also for update notification info
+     * @return a notification for showing on notificaion panel
+     */
     private Notification createNotification(){
         // setup pending intents
         Intent intentApp = new Intent(this,ScreenOffWidgetConfigure.class);
@@ -484,16 +493,21 @@ public class SensorMonitorService extends Service implements
 
         String ticker;
         if(CV.getPrefChargingOn(this)&&CV.isPlugged(this)){
-            ticker = "Charging!";
+            ticker = getString(R.string.statusbar_charging);
         }else{
-            ticker = (CV.getPrefAutoOnoff(this))?"turn on":"turn off";
-
+            ticker = getString((CV.getPrefAutoOnoff(this))?R.string.statusbar_autoscreen_on:R.string.statusbar_autoscreen_off);
         }
+
+        boolean bStatusOn = false;
+        if(CV.getPrefAutoOnoff(this)
+                || (CV.getPrefChargingOn(this)&&CV.isPlugged(this)))
+            bStatusOn = true;
+
         // build the notification
         Notification noti = new Notification.Builder(this)
                 .setContent(remoteViews)
                 .setTicker(ticker)
-                .setSmallIcon(R.drawable.ic_launcher)
+                .setSmallIcon((bStatusOn)?R.drawable.statusbar_on:R.drawable.statusbar_off)
                 .setOngoing(true)
                 .build();
        return noti;
@@ -519,8 +533,24 @@ public class SensorMonitorService extends Service implements
         Notification notify = createNotification();
         final NotificationManager notificationManager = (NotificationManager) getApplicationContext()
                 .getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
-
         notificationManager.notify(NOTIFICATION_ONGOING, notify);
 
+        // hack
+        try{
+            Object service  = getSystemService("statusbar");
+            Class<?> statusbarManager = Class.forName("android.app.StatusBarManager");
+
+            if (Build.VERSION.SDK_INT <= 16) {
+                Method collapse = statusbarManager.getMethod("collapse");
+                collapse.setAccessible(true);
+                collapse.invoke(service);
+            } else {
+                Method collapse2 = statusbarManager.getMethod("collapsePanels");
+                collapse2.setAccessible(true);
+                collapse2.invoke(service);
+            }
+            //collapse.setAccessible(true);
+        }catch(Exception ex){}
     }
+
 }
