@@ -10,6 +10,10 @@
     <item android:id="@+id/menu_playstore_url"
           android:icon="@android:drawable/ic_menu_help"
           android:title="@string/title_playstore" />
+    <item android:id="@+id/menu_uninstall_app"
+          android:icon="@android:drawable/ic_menu_delete"
+          android:showAsAction="always"
+          android:title="@string/uninstall_app" />
     <item android:id="@+id/menu_about"
           android:icon="@android:drawable/ic_menu_help"
           android:title="@string/title_about" />

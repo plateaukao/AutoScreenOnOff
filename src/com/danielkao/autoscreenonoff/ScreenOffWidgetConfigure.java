@@ -109,6 +109,11 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
+            case R.id.menu_uninstall_app:
+            {
+                uninstallApp(null);
+                return true;
+            }
             case R.id.menu_changelog:
             {
                 showChangelogDialog();
@@ -190,12 +195,15 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
         return deviceManager.isAdminActive(mDeviceAdmin);
     }
 
-    // uninstall button clicked
+    /**
+     * uninstall button clicked or from menu item
+      * @param view indicate which button is pressed
+     */
     public void uninstallApp(View view){
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.dlg_uninstall_title))
                 .setMessage(getString(R.string.dlg_uninstall_message))
-                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setIcon(android.R.drawable.ic_menu_delete)
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
