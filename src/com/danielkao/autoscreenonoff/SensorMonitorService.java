@@ -504,12 +504,22 @@ public class SensorMonitorService extends Service implements
             bStatusOn = true;
 
         // build the notification
+        /*
         Notification noti = new Notification.Builder(this)
                 .setContent(remoteViews)
                 .setTicker(ticker)
                 .setSmallIcon((bStatusOn)?R.drawable.statusbar_on:R.drawable.statusbar_off)
                 .setOngoing(true)
                 .build();
+                */
+        Notification noti = new Notification(
+                (bStatusOn)?R.drawable.statusbar_on:R.drawable.statusbar_off,
+                null,
+                System.currentTimeMillis());
+        noti.tickerText = ticker;
+        noti.contentView = remoteViews;
+        noti.flags |= Notification.FLAG_ONGOING_EVENT|Notification.FLAG_NO_CLEAR;
+
        return noti;
     }
 
