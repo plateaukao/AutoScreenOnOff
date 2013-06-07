@@ -87,6 +87,10 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.0 (2013/06/07):</b>
+        <ul>
+         <li>Add notification: now you can toggle the feature more conveniently!</li>
+        </ul>
         <b>Version 1.9:</b>
         <ul>
          <li>Largely shrink the app file size by removing unwanted libs</li>
