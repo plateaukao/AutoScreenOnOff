@@ -23,3 +23,7 @@ or
 
 ## Development
 This project is built using Android Studio. If you want to clone the git and modify the codes, please use Android Studio too.
+
+## Screenshots
+Preference Screen
+<img src="https://github.com/plateaukao/AutoScreenOnOff/raw/master/screenshots/autoscreenonoff_preferences.png" alt="preference" style="width: 400px;"/>
