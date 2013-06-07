@@ -1,7 +1,25 @@
-# PowerOff
-*an android widget to turn on/off screen automatically by detecting values from proximity sensor*
-a handy app for devices of which power button is hard to reach or users who don't want to access power H/W button that often.
+# Auto Screen OnOff
+
+## Overview
+*an android app to turn on/off screen automatically by detecting values from proximity sensor.*
+
+## Features
+1. By detecting p-sensor, automatically turn on/off the screen for you.
+2. Allows you to only enable the function during charging.
+3. Allows you to disable the feature when the screen is rotated.
+4. Separate timeout values for screen on/off delay to prevent from accidentally triggering the feature.
+5. A widget is supported to quickly toggle the function.
+6. Notification is supported to quickly toggle function, or directly turn screen off.
 
 ### How it works
-- if it's first added to home launcher and pressed, it will ask for Device Admin's privilege in order to access this feature from device.
-- if user accepts the privilege, it will start to detect whether the screen should be on or off based on the value from proximity sensor
+Modify Settings in "Auto Screen Settings" app and enable the function
+
+or 
+
+1. Add widget "AutoScreenOnOff" to your home screen
+2. Press once on the icon to trigger Device Management Confirmation Dialog.
+3. Agree to activate device management. (This is required to turn off the screen)
+4. Now everything should work now. Try cover your hand over the top area of the screen (where the proximity sensor might be located) to see if it works.
+
+## Development
+This project is built using Android Studio. If you want to clone the git and modify the codes, please use Android Studio too.
