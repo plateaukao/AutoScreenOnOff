@@ -87,6 +87,11 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.0.1 (2013/06/08):</b>
+        <ul>
+         <li>Issue fix: if you are using Android 2.x devices, make sure you update this version, so that notification can work for you.</li>
+         <li>Move \"Uninstall App\" button to actionbar; make room for preferences.</li>
+        </ul>
         <b>Version 2.0 (2013/06/07):</b>
         <ul>
          <li>Add notification: now you can toggle the feature more conveniently!</li>

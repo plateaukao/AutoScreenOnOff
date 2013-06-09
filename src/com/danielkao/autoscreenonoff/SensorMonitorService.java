@@ -353,7 +353,10 @@ public class SensorMonitorService extends Service implements
                         }
                         else{
                             long timeout = (long) CV.getPrefTimeoutLock(this);
-                            handler.postDelayed(runnableTurnOff,timeout);
+                            if(timeout == 0)
+                                TurnOff();
+                            else
+                                handler.postDelayed(runnableTurnOff, timeout);
                         }
                     }
                 }
@@ -361,7 +364,10 @@ public class SensorMonitorService extends Service implements
                 else {
                     if (!mPowerManager.isScreenOn()) {
                         long timeout = (long) CV.getPrefTimeoutUnlock(this);
-                        handler.postDelayed(runnableTurnOn,timeout);
+                        if(timeout==0)
+                            TurnOn();
+                        else
+                            handler.postDelayed(runnableTurnOn, timeout);
                     }
                 }
             }
@@ -418,11 +424,32 @@ public class SensorMonitorService extends Service implements
         handler.removeCallbacks(runnableTurnOff);
     }
 
+    private void TurnOn(){
+        if (!screenLock.isHeld()) {
+            screenLock.acquire();
+            new Thread(new Runnable() {
+                public void run() {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    screenLock.release();
+                }
+            }).start();
+        }
+    }
+
+    private void TurnOff(){
+        CV.logv("sensor: turn off thread");
+        deviceManager.lockNow();
+    }
+
+
     private Runnable runnableTurnOff = new Runnable() {
         @Override
         public void run() {
-            CV.logv("sensor: turn off thread");
-            deviceManager.lockNow();
+            TurnOff();
             resetHandler();
         }
     };
