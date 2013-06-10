@@ -17,18 +17,14 @@ public class BootReceiver extends BroadcastReceiver {
             CV.logv("start service by boot receiver");
             // send intent to service
             Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
-            i.putExtra(CV.SERVICEACTION,
-                    CV.SERVICEACTION_TOGGLE);
-            i.putExtra(CV.SERVICETYPE,
-                    CV.SERVICETYPE_SETTING);
+            i.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_TOGGLE);
+            i.putExtra(CV.SERVICETYPE, CV.SERVICETYPE_SETTING);
             context.startService(i);
         }// check whether pre charging is on, and is under charging
         else if(CV.getPrefChargingOn(context) && CV.isPlugged(context)){
             Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
-            i.putExtra(CV.SERVICEACTION,
-                    CV.SERVICEACTION_TURNON);
-            i.putExtra(CV.SERVICETYPE,
-                    CV.SERVICETYPE_CHARGING);
+            i.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_TURNON);
+            i.putExtra(CV.SERVICETYPE, CV.SERVICETYPE_CHARGING);
             context.startService(i);
         }
     }

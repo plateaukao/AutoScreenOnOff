@@ -111,7 +111,7 @@ public class SensorMonitorService extends Service implements
                 CV.logi("onStartCommand: toggle");
 
                 String servicetype = intent.getStringExtra(CV.SERVICETYPE);
-                // it's from widget, need to do the toggle first
+                // it's from widget or notification, need to do the toggle first
                 if(servicetype!=null && !servicetype.equals(CV.SERVICETYPE_SETTING)){
                     // in charging state and pref charging on is turned on
                     if(CV.isPlugged(this)&&CV.getPrefChargingOn(this)){
@@ -375,11 +375,12 @@ public class SensorMonitorService extends Service implements
 	}
 
 	private void togglePreference() {
+        CV.logv("togglePreference");
 		SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
 		boolean IsAutoOn = sp.getBoolean(CV.PREF_AUTO_ON, false);
 		Editor editor = sp.edit();
 		editor.putBoolean(CV.PREF_AUTO_ON, !IsAutoOn);
-        // if it's meant to turn on pref, then we should make sure which-charging is off
+        // if original value is false, it's meant to turn on pref, then we should make sure which-charging is off
         if(!IsAutoOn)
             editor.putBoolean(CV.PREF_CHARGING_ON, false);
 		editor.commit();
@@ -497,6 +498,7 @@ public class SensorMonitorService extends Service implements
 
         Intent intentOnOff = new Intent(CV.SERVICE_INTENT_ACTION);
         intentOnOff.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_TOGGLE);
+        intentOnOff.putExtra(CV.SERVICETYPE, CV.SERVICETYPE_NOTIFICATION);
         PendingIntent piOnOff = PendingIntent.getService(this, 0, intentOnOff, 0);
 
         Intent intentScreenOff = new Intent(CV.SERVICE_INTENT_ACTION);
@@ -567,11 +569,6 @@ public class SensorMonitorService extends Service implements
         if(!bForeground)
             return;
 
-        Notification notify = createNotification();
-        final NotificationManager notificationManager = (NotificationManager) getApplicationContext()
-                .getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
-        notificationManager.notify(NOTIFICATION_ONGOING, notify);
-
         // hack
         try{
             Object service  = getSystemService("statusbar");
@@ -588,6 +585,13 @@ public class SensorMonitorService extends Service implements
             }
             //collapse.setAccessible(true);
         }catch(Exception ex){}
+
+        Notification notify = createNotification();
+        final NotificationManager notificationManager = (NotificationManager) getApplicationContext()
+                .getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
+        notificationManager.notify(NOTIFICATION_ONGOING, notify);
+
     }
+
 
 }

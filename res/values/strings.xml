@@ -87,6 +87,11 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.0.2 (2013/06/10):</b>
+        <ul>
+         <li>Issue fix: some people may encounter notification not working issue. it\'s fixed in this version</li>
+         <li>Restart service after upgrading app.</li>
+        </ul>
         <b>Version 2.0.1 (2013/06/08):</b>
         <ul>
          <li>Issue fix: if you are using Android 2.x devices, make sure you update this version, so that notification can work for you.</li>

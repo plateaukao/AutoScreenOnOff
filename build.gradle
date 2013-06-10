@@ -8,11 +8,9 @@ buildscript {
 }
 apply plugin: 'android'
 
-/*
 dependencies {
     compile fileTree(dir: 'libs', include: '*.jar')
 }
-*/
 
 android {
     compileSdkVersion 17

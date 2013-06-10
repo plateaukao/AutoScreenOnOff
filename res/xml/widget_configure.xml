@@ -37,7 +37,7 @@
                 android:title="@string/pref_title_timeout_lock" >
         </ListPreference>
         <ListPreference
-                android:defaultValue="-1"
+                android:defaultValue="0"
                 android:key="prefTimeoutUnlock"
                 android:entries="@array/timeout_unlock_entries"
                 android:entryValues="@array/timeout_unlock_values"
