@@ -400,7 +400,7 @@ public class SensorMonitorService extends Service implements
         if(null != mOrientationListener && mOrientationListener.canDetectOrientation())
             return;
 
-        mOrientationListener = new OrientationEventListener(this, SensorManager.SENSOR_DELAY_UI) {
+        mOrientationListener = new OrientationEventListener(this, SensorManager.SENSOR_DELAY_NORMAL) {
             public void onOrientationChanged (int orientation) {
                 mRotationAngle = orientation;
                 //CV.logv("onOrientationChanged:%d",orientation);
