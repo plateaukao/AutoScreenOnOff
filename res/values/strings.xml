@@ -25,7 +25,7 @@
     <string name="title_playstore">Rank my App!</string>
     <string name="title_codesite">goto GitHub</string>
     <string name="title_about">About</string>
-    <string name="title_changelog">Changelog</string>
+    <string name="title_changelog">What\'s New</string>
 
     <string name="pref_summary_disable_in_landscape">Useful for taking photos or watching movies in landscape.</string>
     <string name="pref_title_disable_in_landscape">Temporarily Disable in Landscape</string>
@@ -87,6 +87,10 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.0.4 (2013/06/13):</b>
+        <ul>
+         <li>Issue fix: fix crash issue on android 2.x devices.</li>
+        </ul>
         <b>Version 2.0.3 (2013/06/11):</b>
         <ul>
          <li>Fine tuning: fine tune sensor parameter in order to save more power.</li>

@@ -2,19 +2,19 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <com.danielkao.autoscreenonoff.MyPreferenceCategory android:title="@string/pref_auto_setting" >
-        <CheckBoxPreference
+        <SwitchPreference
                 android:defaultValue="false"
                 android:key="prefAutoOn"
                 android:summary="@string/pref_summary_auto_on"
                 android:title="@string/pref_title_auto_on" >
-        </CheckBoxPreference>
+        </SwitchPreference>
     </com.danielkao.autoscreenonoff.MyPreferenceCategory>
-        <CheckBoxPreference
+        <SwitchPreference
                 android:defaultValue="false"
                 android:key="prefChargingOn"
                 android:summary="@string/pref_summary_charging_on"
                 android:title="@string/pref_title_charging_on" >
-        </CheckBoxPreference>
+        </SwitchPreference>
     <com.danielkao.autoscreenonoff.MyPreferenceCategory android:title="@string/pref_advanced_setting" >
         <CheckBoxPreference
                 android:defaultValue="false"
@@ -47,12 +47,12 @@
     </com.danielkao.autoscreenonoff.MyPreferenceCategory>
 
     <com.danielkao.autoscreenonoff.MyPreferenceCategory android:title="@string/pref_sleep_setting" >
-        <CheckBoxPreference
+        <SwitchPreference
                 android:defaultValue="false"
                 android:key="prefSleeping"
                 android:summary="@string/pref_summary_sleeping"
                 android:title="@string/pref_title_sleeping" >
-        </CheckBoxPreference>
+        </SwitchPreference>
         <com.danielkao.autoscreenonoff.TimePreference
                 android:key="prefSleepStart"
                 android:negativeButtonText="@null"

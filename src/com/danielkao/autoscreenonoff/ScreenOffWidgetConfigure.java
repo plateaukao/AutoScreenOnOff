@@ -10,9 +10,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
-import android.preference.SwitchPreference;
 import android.view.*;
 import android.webkit.WebView;
 
@@ -366,8 +366,10 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
     // only when auto on is turned on, use can set landscape mode
     private void updatePrefState(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        SwitchPreference spCharging = (SwitchPreference) findPreference(CV.PREF_CHARGING_ON);
-        SwitchPreference spAuto = (SwitchPreference) findPreference(CV.PREF_AUTO_ON);
+        Preference spCharging, spAuto;
+         spCharging = findPreference(CV.PREF_CHARGING_ON);
+         spAuto = findPreference(CV.PREF_AUTO_ON);
+
 
         if(sp.getBoolean(CV.PREF_AUTO_ON, false)){
             spAuto.setEnabled(false);
