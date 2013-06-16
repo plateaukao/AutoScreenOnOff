@@ -180,13 +180,16 @@ public class SensorMonitorService extends Service implements
                     return START_STICKY;
 
                 CV.logv("service:mode sleep action");
-                CV.logv("Sleep Mode:%b",intent.getBooleanExtra(CV.SLEEP_MODE_START,false));
                 boolean bSleepModeStart = intent.getBooleanExtra(CV.SLEEP_MODE_START, false);
+                CV.logv("Sleep Mode:%b",bSleepModeStart);
 
-                if(CV.isInSleepTime(this)){
+                //if(CV.isInSleepTime(this)){
+                if(bSleepModeStart){
+                    CV.logi("sleep mode starts: turn off sensor");
                     unregisterSensor();
                 }
                 else{
+                    CV.logi("sleep mode stops: turn on sensor");
                     registerSensor();
                 }
 
@@ -233,11 +236,11 @@ public class SensorMonitorService extends Service implements
 		mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
 
 		partialLock = mPowerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK,
-				"TAG");
+				"autoscreenonoff partiallock");
 		screenLock = mPowerManager.newWakeLock(
 				PowerManager.ACQUIRE_CAUSES_WAKEUP
 						| PowerManager.FULL_WAKE_LOCK
-						| PowerManager.ON_AFTER_RELEASE, "TAG");
+						| PowerManager.ON_AFTER_RELEASE, "autoscreenonoff fulllock");
 
         // show notification if it's set
         if(CV.getPrefShowNotification(this))
@@ -321,7 +324,7 @@ public class SensorMonitorService extends Service implements
 
 	@Override
 	public final void onAccuracyChanged(Sensor sensor, int accuracy) {
-		CV.logv("onAccuracyChanged");
+		CV.logv("onAccuracyChanged:%d", accuracy);
 	}
 
 	@SuppressLint("Wakelock")
@@ -334,7 +337,7 @@ public class SensorMonitorService extends Service implements
             float lux = event.values[0];
 
             // Do something with this sensor value.
-            CV.logv("onSensorChanged:%f", lux);
+            CV.logv("onSensorChanged proximity:%f", lux);
             if (isActiveAdmin()) {
                 // reset handler if there's already one
                 if(handler.hasMessages(CALLBACK_EXISTS)){
@@ -371,6 +374,12 @@ public class SensorMonitorService extends Service implements
                     }
                 }
             }
+        }
+        else if(type == Sensor.TYPE_LIGHT){
+            float lux = event.values[0];
+            // Do something with this sensor value.
+            CV.logv("onSensorChanged light:%f", lux);
+
         }
 	}
 

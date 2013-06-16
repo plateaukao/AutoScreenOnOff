@@ -87,6 +87,10 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.0.5 (2013/06/15):</b>
+        <ul>
+         <li>Issue fix: When sleep time is up, the function is not enabled again.</li>
+        </ul>
         <b>Version 2.0.4 (2013/06/13):</b>
         <ul>
          <li>Issue fix: fix crash issue on android 2.x devices.</li>
