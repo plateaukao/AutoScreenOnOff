@@ -87,6 +87,10 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.0.6 (2013/06/19):</b>
+        <ul>
+         <li>Reduce power consumption by removing partial wakelock</li>
+        </ul>
         <b>Version 2.0.5 (2013/06/15):</b>
         <ul>
          <li>Issue fix: When sleep time is up, the function is not enabled again.</li>

@@ -49,6 +49,10 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>版本 2.0.6 (2013/06/19):</b>
+        <ul>
+         <li>減少耗電量 (移除partial wakelock)
+        </ul>
         <b>版本 2.0.5 (2013/06/15):</b>
         <ul>
          <li>解決在睡眠時間結束後，本功能沒有自動再開啟
