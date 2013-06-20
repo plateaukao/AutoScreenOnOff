@@ -49,6 +49,10 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>版本 2.0.7 (2013/06/20):</b>
+        <ul>
+         <li>會造成部分設備無法正常叫醒螢幕：加回 partial wakelock</li>
+        </ul>
         <b>版本 2.0.6 (2013/06/19):</b>
         <ul>
          <li>減少耗電量 (移除partial wakelock)

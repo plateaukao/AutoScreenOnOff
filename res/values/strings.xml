@@ -87,6 +87,10 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.0.7 (2013/06/20):</b>
+        <ul>
+         <li>Add partial wakelock back</li>
+        </ul>
         <b>Version 2.0.6 (2013/06/19):</b>
         <ul>
          <li>Reduce power consumption by removing partial wakelock</li>

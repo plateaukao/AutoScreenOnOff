@@ -287,11 +287,8 @@ public class SensorMonitorService extends Service implements
 
 		mIsRegistered = true;
 
-        //test
-        /*
 		if (partialLock != null)
 			partialLock.acquire();
-			*/
 
         // show hint text if the screen is on
         if (mPowerManager.isScreenOn() && !bForeground) {
