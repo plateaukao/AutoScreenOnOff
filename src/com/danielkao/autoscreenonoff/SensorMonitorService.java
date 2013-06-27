@@ -357,7 +357,7 @@ public class SensorMonitorService extends Service implements
                         else{
                             long timeout = (long) CV.getPrefTimeoutLock(this);
                             if(timeout == 0)
-                                TurnOff();
+                                turnOff();
                             else
                                 handler.postDelayed(runnableTurnOff, timeout);
                         }
@@ -368,7 +368,7 @@ public class SensorMonitorService extends Service implements
                     if (!mPowerManager.isScreenOn()) {
                         long timeout = (long) CV.getPrefTimeoutUnlock(this);
                         if(timeout==0)
-                            TurnOn();
+                            turnOn();
                         else
                             handler.postDelayed(runnableTurnOn, timeout);
                     }
@@ -434,24 +434,36 @@ public class SensorMonitorService extends Service implements
         handler.removeCallbacks(runnableTurnOff);
     }
 
-    private void TurnOn(){
+    private void turnOn(){
         if (!screenLock.isHeld()) {
             screenLock.acquire();
+                /*
+                KeyguardManager mKeyGuardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+                KeyguardManager.KeyguardLock mLock = mKeyGuardManager.newKeyguardLock("com.danielkao.autoscreenonoff");
+                if(mKeyGuardManager.isKeyguardLocked())
+                    mLock.disableKeyguard();
+                mLock.reenableKeyguard();
+                */
             new Thread(new Runnable() {
                 public void run() {
                     try {
-                        Thread.sleep(1000);
+                        //Thread.sleep(1000);
+                        // try to fix phonepad and galaxy note's issue
+                        Thread.sleep(10000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    screenLock.release();
+                    if(screenLock.isHeld())
+                        screenLock.release();
                 }
             }).start();
         }
     }
 
-    private void TurnOff(){
+    private void turnOff(){
         CV.logv("sensor: turn off thread");
+        if(screenLock.isHeld())
+            screenLock.release();
         deviceManager.lockNow();
     }
 
@@ -459,7 +471,7 @@ public class SensorMonitorService extends Service implements
     private Runnable runnableTurnOff = new Runnable() {
         @Override
         public void run() {
-            TurnOff();
+            turnOff();
             resetHandler();
         }
     };
@@ -468,29 +480,8 @@ public class SensorMonitorService extends Service implements
         @Override
         public void run() {
             CV.logi("sensor: turn on thread");
-            if (!screenLock.isHeld()) {
-                screenLock.acquire();
-                /*
-                KeyguardManager mKeyGuardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-                KeyguardManager.KeyguardLock mLock = mKeyGuardManager.newKeyguardLock("com.danielkao.autoscreenonoff");
-                if(mKeyGuardManager.isKeyguardLocked())
-                    mLock.disableKeyguard();
-                mLock.reenableKeyguard();
-                */
-                resetHandler();
-
-                // screenLock.release();
-                new Thread(new Runnable() {
-                    public void run() {
-                        try {
-                            Thread.sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        screenLock.release();
-                    }
-                }).start();
-            }
+            turnOn();
+            resetHandler();
         }
     };
     //</editor-fold>
