@@ -1,10 +1,7 @@
 package com.danielkao.autoscreenonoff;
 
 import android.annotation.SuppressLint;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.app.Service;
+import android.app.*;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -15,6 +12,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.net.Uri;
 import android.os.*;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
@@ -23,6 +21,7 @@ import android.widget.RemoteViews;
 import android.widget.Toast;
 
 import java.lang.reflect.Method;
+import java.util.Calendar;
 
 public class SensorMonitorService extends Service implements
 		SensorEventListener {
@@ -33,6 +32,16 @@ public class SensorMonitorService extends Service implements
 	private PowerManager mPowerManager;
 	private Sensor mProximity;
     OrientationEventListener mOrientationListener;
+
+    // schedule
+    AlarmManager am;
+    private AlarmManager getAlarmManager(){
+        if(am==null)
+        {
+            am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        }
+        return am;
+    }
 
 	private boolean mIsRegistered;
 
@@ -205,6 +214,16 @@ public class SensorMonitorService extends Service implements
                     partialLock.acquire();
                 }
 
+                break;
+            }
+            case CV.SERVICEACTION_SET_SCHEDULE:
+            {
+                setSchedule();
+                break;
+            }
+            case CV.SERVICEACTION_CANCEL_SCHEDULE:
+            {
+                cancelSchedule();
                 break;
             }
             default:
@@ -617,4 +636,53 @@ public class SensorMonitorService extends Service implements
 
     }
 
+    //-- for alarm settings
+    private void setSchedule() {
+        cancelSchedule();
+        //alarm: sleep start
+        int hour = TimePreference.getHour(CV.getPrefSleepStart(this));
+        int minute = TimePreference.getMinute(CV.getPrefSleepStart(this));
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, 0);
+
+        Intent intent = new Intent(this, SensorMonitorService.class);
+        intent.setData(Uri.parse("timer://1")); // identifier for this alarm
+        intent.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_MODE_SLEEP);
+        intent.putExtra(CV.SLEEP_MODE_START,true);
+        PendingIntent pi = PendingIntent.getService(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        getAlarmManager().setRepeating(AlarmManager.RTC_WAKEUP
+                ,calendar.getTimeInMillis()
+                ,AlarmManager.INTERVAL_DAY, pi);
+        //alarm: sleep stop
+        hour = TimePreference.getHour(CV.getPrefSleepStop(this));
+        minute = TimePreference.getMinute(CV.getPrefSleepStop(this));
+
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+
+        intent = new Intent(this, SensorMonitorService.class);
+        intent.setData(Uri.parse("timer://2"));
+        intent.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_MODE_SLEEP);
+        intent.putExtra(CV.SLEEP_MODE_START,false);
+        pi = PendingIntent.getService(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        getAlarmManager().setRepeating(AlarmManager.RTC_WAKEUP
+                ,calendar.getTimeInMillis()
+                ,AlarmManager.INTERVAL_DAY, pi);
+    }
+
+    private void cancelSchedule() {
+        Intent intent = new Intent(this, SensorMonitorService.class);
+        intent.setData(Uri.parse("timer://1"));
+        PendingIntent pi = PendingIntent.getService(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        getAlarmManager().cancel(pi);
+
+        intent.setData(Uri.parse("timer://2"));
+        pi = PendingIntent.getService(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
+        getAlarmManager().cancel(pi);
+    }
 }

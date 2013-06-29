@@ -42,6 +42,8 @@ public final class CV {
     public static final int SERVICEACTION_SCREENOFF = 6;
     public static final int SERVICEACTION_SHOW_NOTIFICATION = 7;
     public static final int SERVICEACTION_PARTIALLOCK_TOGGLE = 8;
+    public static final int SERVICEACTION_SET_SCHEDULE = 9;
+    public static final int SERVICEACTION_CANCEL_SCHEDULE = 10;
 
     public static String CLOSE_AFTER="close_after";
 

@@ -16,8 +16,6 @@ import android.preference.PreferenceManager;
 import android.view.*;
 import android.webkit.WebView;
 
-import java.util.Calendar;
-
 /**
  * Created by plateau on 2013/05/20.
  */
@@ -31,8 +29,6 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
 
     //service
     private SensorMonitorService sensorService;
-    // schedule
-    AlarmManager am;
 
     // ad service
     /*
@@ -41,6 +37,8 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
     */
     // ---
 
+    // schedule
+    AlarmManager am;
     private AlarmManager getAlarmManager(){
         if(am==null)
         {
@@ -320,52 +318,17 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
 
     //<editor-fold description="schedule related">
     private void setSchedule() {
-        cancelSchedule();
-        //alarm: sleep start
-        int hour = TimePreference.getHour(CV.getPrefSleepStart(this));
-        int minute = TimePreference.getMinute(CV.getPrefSleepStart(this));
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-        calendar.set(Calendar.SECOND, 0);
-
-        Intent intent = new Intent(this, SensorMonitorService.class);
-        intent.setData(Uri.parse("timer://1")); // identifier for this alarm
-        intent.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_MODE_SLEEP);
-        intent.putExtra(CV.SLEEP_MODE_START,true);
-        PendingIntent pi = PendingIntent.getService(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
-
-        getAlarmManager().setRepeating(AlarmManager.RTC_WAKEUP
-                ,calendar.getTimeInMillis()
-                ,AlarmManager.INTERVAL_DAY, pi);
-        //alarm: sleep stop
-        hour = TimePreference.getHour(CV.getPrefSleepStop(this));
-        minute = TimePreference.getMinute(CV.getPrefSleepStop(this));
-
-        calendar.set(Calendar.HOUR_OF_DAY, hour);
-        calendar.set(Calendar.MINUTE, minute);
-
-        intent = new Intent(this, SensorMonitorService.class);
-        intent.setData(Uri.parse("timer://2"));
-        intent.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_MODE_SLEEP);
-        intent.putExtra(CV.SLEEP_MODE_START,false);
-        pi = PendingIntent.getService(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
-
-        getAlarmManager().setRepeating(AlarmManager.RTC_WAKEUP
-                ,calendar.getTimeInMillis()
-                ,AlarmManager.INTERVAL_DAY, pi);
+        Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
+        i.putExtra(CV.SERVICEACTION,
+                CV.SERVICEACTION_SET_SCHEDULE);
+        startService(i);
     }
 
     private void cancelSchedule() {
-        Intent intent = new Intent(this, SensorMonitorService.class);
-        intent.setData(Uri.parse("timer://1"));
-        PendingIntent pi = PendingIntent.getService(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
-        getAlarmManager().cancel(pi);
-
-        intent.setData(Uri.parse("timer://2"));
-        pi = PendingIntent.getService(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
-        getAlarmManager().cancel(pi);
+        Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
+        i.putExtra(CV.SERVICEACTION,
+                CV.SERVICEACTION_CANCEL_SCHEDULE);
+        startService(i);
     }
     //</editor-fold>
 
