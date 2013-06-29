@@ -105,6 +105,9 @@
     <string name="sleep_start_title">睡眠開始時間</string>
     <string name="sleep_stop_title">睡眠結束時間</string>
 
+    <string name="pref_summary_partiallock">只適用於某些手機。\n其他手機會造成原本功能常會失效。請自行試用看看。正常的話再使用</string>
+    <string name="pref_title_partiallock">省電模式!</string>
+
     <string name="pref_summary_show_notification">快速開關，包含一顆關閉螢幕的按鈕</string>
     <string name="pref_title_show_notification">顯示在訊息欄內</string>
     <string name="statusbar_charging">充電中！開啟自動螢幕控制</string>

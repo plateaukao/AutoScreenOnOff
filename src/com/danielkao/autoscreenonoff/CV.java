@@ -30,6 +30,7 @@ public final class CV {
     public static final String PREF_SLEEP_START = "prefSleepStart";
     public static final String PREF_SLEEP_STOP = "prefSleepStop";
     public static final String PREF_SHOW_NOTIFICATION = "prefShowNotification";
+    public static final String PREF_NO_PARTIAL_LOCK = "prefNoPartialLock";
 
     //
     public static final String SERVICEACTION = "serviceaction";
@@ -40,6 +41,7 @@ public final class CV {
     public static final int SERVICEACTION_MODE_SLEEP = 5;
     public static final int SERVICEACTION_SCREENOFF = 6;
     public static final int SERVICEACTION_SHOW_NOTIFICATION = 7;
+    public static final int SERVICEACTION_PARTIALLOCK_TOGGLE = 8;
 
     public static String CLOSE_AFTER="close_after";
 
@@ -127,6 +129,13 @@ public final class CV {
     public static boolean getPrefShowNotification(Context context){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         boolean b  = sp.getBoolean(PREF_SHOW_NOTIFICATION, false);
+        CV.logv("prefShowNotification: %b", b);
+        return b;
+    }
+
+    public static boolean getPrefNoPartialLock(Context context){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean b  = sp.getBoolean(PREF_NO_PARTIAL_LOCK, false);
         CV.logv("prefShowNotification: %b", b);
         return b;
     }

@@ -195,6 +195,18 @@ public class SensorMonitorService extends Service implements
 
                 break;
             }
+            case CV.SERVICEACTION_PARTIALLOCK_TOGGLE:
+            {
+                // no need to use partial lock
+                if(CV.getPrefNoPartialLock(this)  && partialLock.isHeld()){
+                    partialLock.release();
+                // need partial lock. make sure the sensor is registered.
+                }else if (!CV.getPrefNoPartialLock(this) && isRegistered()){
+                    partialLock.acquire();
+                }
+
+                break;
+            }
             default:
                 CV.logi("onStartCommand: others");
         }
@@ -287,7 +299,8 @@ public class SensorMonitorService extends Service implements
 
 		mIsRegistered = true;
 
-		if (partialLock != null)
+        // partial lock exists, and need partial lock
+		if (partialLock != null && !CV.getPrefNoPartialLock(this))
 			partialLock.acquire();
 
         // show hint text if the screen is on

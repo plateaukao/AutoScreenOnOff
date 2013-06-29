@@ -36,8 +36,11 @@
     <string name="pref_summary_timeout_lock">Delay how long before Screen Off take effects. \n\nCurrent setting:%s</string>
     <string name="pref_title_timeout_lock">Screen Off Timeout Value</string>
 
-    <string name="pref_summary_timeout_unlock">Delay how long before Screen On take effects. \n\nCurrent setting:%s</string>
+    <string name="pref_summary_timeoutunlock">Delay how long before Screen On take effects. \n\nCurrent setting:%s</string>
     <string name="pref_title_timeout_unlock">Screen On Timeout Value</string>
+
+    <string name="pref_summary_partiallock">ONLY WORKS on SOME devices. On other devices, the on/off function will not work well. Try by yourself.</string>
+    <string name="pref_title_partiallock">Power Save Mode</string>
 
     <string name="timeout_same">Same as Lock Timeout Value</string>
     <string name="timeout_0">Right Away</string>

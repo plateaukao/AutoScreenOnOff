@@ -308,6 +308,13 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
                 setSchedule();
             }
 
+        }else if(key.equals(CV.PREF_NO_PARTIAL_LOCK)){
+            CV.logv("change whether to use partial lock");
+
+            Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
+            i.putExtra(CV.SERVICEACTION,
+                    CV.SERVICEACTION_PARTIALLOCK_TOGGLE);
+            startService(i);
         }
     }
 

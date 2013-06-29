@@ -28,6 +28,12 @@
                 android:summary="@string/pref_summary_disable_in_landscape"
                 android:title="@string/pref_title_disable_in_landscape" >
         </CheckBoxPreference>
+        <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="prefNoPartialLock"
+                android:summary="@string/pref_summary_partiallock"
+                android:title="@string/pref_title_partiallock" >
+        </CheckBoxPreference>
         <ListPreference
                 android:defaultValue="500"
                 android:key="prefTimeout"
