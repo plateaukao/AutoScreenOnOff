@@ -90,6 +90,12 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.0.8 (2013/06/30):</b>
+        <ul>
+         <li>Feature: Add Power Save Mode. ONLY Works on Some devices. If it makes screen on/off not working. Don\'t use it.</li>
+         <li>Issue Fix: Sleeping time not working, after rebooting the device.</li>
+         <li>Issue Fix: Auto turn on Screen (but turn off right away) should work normally on Samsung devices now. I hope so, since I don\'t have one to verify.</li>
+        </ul>
         <b>Version 2.0.7 (2013/06/20):</b>
         <ul>
          <li>Add partial wakelock back</li>
