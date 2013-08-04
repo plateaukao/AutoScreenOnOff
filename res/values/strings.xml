@@ -90,6 +90,11 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.0.10 (2013/08/04):</b>
+        <ul>
+         <li>Improvement: Improves sensitivity of Landscape disabling</li>
+         <li>Add Vietnamese translation: Thanks for Hai Long Hoang\' help</li>
+        </ul>
         <b>Version 2.0.9 (2013/07/04):</b>
         <ul>
          <li>Issue Fix: Turning on feature, and scroll settings, it will cause turn off feature (Google\'s issue)</li>
