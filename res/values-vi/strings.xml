@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Tự động tắt/mở màn hình</string>
+    <string name="setting_name">Cài đặt màn hình tự động tắt/mở</string>
+    <string name="action_settings">Cài đặt</string>
+    <string name="hello_world">Xin chào!</string>
+
+    <string name="turn_autoscreen_on">Mở tự động tắt/mở</string>
+    <string name="turn_autoscreen_off">Tắt tự động tắt/mở</string>
+    <string name="device_management_explanation">Cần quyền này để tắt màn hình</string>
+    <string name="widget_title">Tắt/mở màn hình</string>
+
+    <string name="pref_auto_setting">Cài đặt màn hình tự động</string>
+    <string name="pref_power_setting">Cài đặt pin</string>
+    <string name="pref_advanced_setting">Nâng cao</string>
+
+    <string name="pref_summary_charging_on">Chỉ chạy khi sạc.</string>
+    <string name="pref_title_charging_on">Chỉ khi cắm sạc</string>
+
+    <string name="pref_summary_auto_on">Màn hình tắt/mở tự động</string>
+    <string name="pref_title_auto_on">Kích hoạt</string>
+    <string name="uninstall_app">Gỡ ứng dụng</string>
+
+    <string name="title_playstore">Bầu chọn cho ứng dụng!</string>
+    <string name="title_codesite">vào GitHub</string>
+    <string name="title_about">Thông tin</string>
+    <string name="title_changelog">Có gì mới?</string>
+
+    <string name="pref_summary_disable_in_landscape">Tiện khi màn hình xoay ngang để chụp ảnh hay xem phim.</string>
+    <string name="pref_title_disable_in_landscape">Tạm dừng khi màn hình xoay ngang</string>
+
+    <string name="dialog_about_title">Thông tin</string>
+    <string name="dialog_about_message" formatted="false">%s\nv%s</string>
+
+    <string name="pref_summary_timeout_lock">Độ trễ khi Tắt màn hình có hiệu lực. \n\nCài đặt hiện tại:%s</string>
+    <string name="pref_title_timeout_lock">Thời gian chờ Tắt màn hình</string>
+
+    <string name="pref_summary_timeout_unlock">Độ trễ khi Mở màn hình có hiệu lực. \n\nCài đặt hiện tại:%s</string>
+    <string name="pref_title_timeout_unlock">Thời gian chờ Mở màn hình</string>
+
+    <string name="pref_summary_partiallock">CHỈ HOẠT ĐỘNG với MỘT SỐ thiết bị. Trên vài thiết bị khác, tính năng tắt/mở sẽ không hoạt động tốt. Bạn hãy tự trải nghiệm.</string>
+    <string name="pref_title_partiallock">Tiết kiệm pin</string>
+
+    <string name="timeout_same">Bằng thời lượng khóa màn hình</string>
+    <string name="timeout_0">Ngay lập tức</string>
+    <string name="timeout_05">0.5 giây</string>
+    <string name="timeout_1">1 giây</string>
+    <string name="timeout_2">2 giây</string>
+    <string name="timeout_3">3 giây</string>
+
+    <string-array name="timeout_lock_entries">
+        <item>@string/timeout_0</item>
+        <item>@string/timeout_05</item>
+        <item>@string/timeout_1</item>
+        <item>@string/timeout_2</item>
+        <item>@string/timeout_3</item>
+    </string-array>
+
+    <!-- no translation -->
+    <string-array name="timeout_lock_values">
+        <item>0</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+    </string-array>
+
+    <string-array name="timeout_unlock_entries">
+        <item>@string/timeout_same</item>
+        <item>@string/timeout_0</item>
+        <item>@string/timeout_05</item>
+        <item>@string/timeout_1</item>
+        <item>@string/timeout_2</item>
+        <item>@string/timeout_3</item>
+    </string-array>
+
+    <!-- no translation -->
+    <string-array name="timeout_unlock_values">
+        <item>-1</item>
+        <item>0</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+    </string-array>
+
+    <string name="dlg_uninstall_title">Gỡ ứng dụng</string>
+    <string name="dlg_uninstall_message">Bạn thực sự muốn gỡ ứng dụng?</string>
+
+    <string name="changelog_html">
+        <![CDATA[
+        <b>Bản 2.0.9 (2013/07/04):</b>
+        <ul>
+         <li>Sửa lỗi: Tính năng mở, và cuộn trong phần cài đặt, khiến tắt ứng dụng (vấn đề thuộc Google)</li>
+        </ul>
+        <b>Bản 2.0.8 (2013/06/30):</b>
+        <ul>
+         <li>Tính năng: Thêm chế độ tiết kiệm pin. Chỉ chạy trên một số thiết bị. Nếu nó làm màn hình không tắt/mở. Thôi dùng nó.</li>
+         <li>Sửa lỗi: Thời gian ngủ không hoạt động, sau khi khởi chạy máy.</li>
+         <li>Sửa lỗi: Tự động mở màn hình (nhưng tắt ngay) hiện có thể chạy tốt trên các thiết bị Samsung. Mình hy vọng thế, Vì hiện mình không có máy để xác nhận.</li>
+        </ul>
+        <b>Bản 2.0.7 (2013/06/20):</b>
+        <ul>
+         <li>Thêm trở lại phần tự khóa</li>
+        </ul>
+        <b>Bản 2.0.6 (2013/06/19):</b>
+        <ul>
+         <li>Giảm tiêu hao điện năng bằng cách bỏ đi tính năng tự khóa</li>
+        </ul>
+        <b>Bản 2.0.5 (2013/06/15):</b>
+        <ul>
+         <li>Sửa lỗi: Khi chỉnh tăng thời gian ngủ, tính năng không chạy lại.</li>
+        </ul>
+        <b>Bản 2.0.4 (2013/06/13):</b>
+        <ul>
+         <li>Sửa lỗi: sửa lỗi treo ở các thiết bị chạy android 2.x.</li>
+        </ul>
+        <b>Bản 2.0.3 (2013/06/11):</b>
+        <ul>
+         <li>Tinh chỉnh: tinh chỉnh các tham số ở cảm biến để thiết kiệm pin.</li>
+        </ul>
+        <b>Bản 2.0.2 (2013/06/10):</b>
+        <ul>
+         <li>Sửa lỗi: vài người gặp phải vấn đề không hoạt động trên thanh thông báo. Bản này sẽ khắc phục nó.</li>
+         <li>Khởi động lại ứng dụng sau khi nâng cấp.</li>
+        </ul>
+        <b>Bản 2.0.1 (2013/06/08):</b>
+        <ul>
+         <li>Sửa lỗi: nếu bạn đang dùng thiết bị chạy Android 2.x, hãy dùng bản này, mục thông báo có thể sẽ hoạt động.</li>
+         <li>Chuyển nút \"Gỡ ứng dụng\" lên thanh hoạt động; tạo không gian cho phần cài đặt.</li>
+        </ul>
+        <b>Bản 2.0 (2013/06/07):</b>
+        <ul>
+         <li>Thêm mục thông báo: giờ bạn có thể truy cập các tính năng tiện hơn!</li>
+        </ul>
+        <b>Bản 1.9:</b>
+        <ul>
+         <li>Thu gọn dung lượng ứng dụng đáng kể bằng cách bỏ các đoạn mã không cần thiết.</li>
+         <li>Thêm cài đặt thời gian ngủ, để tiết kiệm pin tốt hơn.</li>
+         <li>Đổi biểu tượng ứng dụng</li>
+         <li>Sửa lỗi: thi thoảng tính năng \"Chạy khi cắm sạc\" không chạy tốt.</li>
+        </ul>
+        <b>Bản 1.8:</b>
+        <ul>
+         <li>hoạt động sau khi khởi động lại máy. Bạn không phải mở tính năng lại.</li>
+         <li>Thêm danh mục các thay đổi ở từng bản. Mỗi khi một bản mới có, bạn sẽ biết có gì mới dễ dàng hơn.</li>
+         <li>Thời lượng có thể được cập nhật chính xác hơn!</li>
+        </ul>
+        ]]>
+    </string>
+
+    <string name="pref_sleep_setting">Cài đặt khi ngủ (Beta)</string>
+    <string name="pref_summary_sleeping">để giảm thiểu tiêu hao năng lượng.(Còn lỗi. Thông báo cho mình nếu bạn tìm thấy lỗi.)</string>
+    <string name="pref_title_sleeping">Dừng khi ngủ</string>
+    <string name="sleep_start_title">Thời điểm bắt đầu ngủ</string>
+    <string name="sleep_stop_title">Thời điểm thức dậy</string>
+
+    <string name="pref_summary_show_notification">Nút chuyển nhanh;gồm cả nút tắt màn hình</string>
+    <string name="pref_title_show_notification">Hiển thị trên thanh thông báo</string>
+    <string name="statusbar_charging">Đang sạc! Kích hoạt tự động tắt/mở màn hình.</string>
+    <string name="statusbar_autoscreen_on">Đã kích hoạt màn hình tự động.</string>
+    <string name="statusbar_autoscreen_off">Đã dừng màn hình tự động.</string>
+
+    <!-- no translation -->
+    <string name="author_url">https://github.com/plateaukao/PowerOff</string>
+    <string name="playstore_url">https://play.google.com/store/apps/details?id=com.danielkao.autoscreenonoff</string>
+
+
+</resources>
