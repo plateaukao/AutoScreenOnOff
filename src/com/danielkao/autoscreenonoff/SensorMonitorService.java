@@ -12,6 +12,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.*;
 import android.os.PowerManager.WakeLock;
@@ -497,6 +498,8 @@ public class SensorMonitorService extends Service implements
         if(screenLock.isHeld())
             screenLock.release();
         deviceManager.lockNow();
+        playCloseSound();
+
     }
 
 
@@ -684,5 +687,13 @@ public class SensorMonitorService extends Service implements
         intent.setData(Uri.parse("timer://2"));
         pi = PendingIntent.getService(this, 0, intent,PendingIntent.FLAG_UPDATE_CURRENT);
         getAlarmManager().cancel(pi);
+    }
+
+    private void playCloseSound(){
+        if(CV.getPrefPlayCloseSound(this)){
+            AudioManager am = (AudioManager)getSystemService(AUDIO_SERVICE);
+            float vol = 1.0f; //This will be half of the default system sound
+            am.playSoundEffect(AudioManager.FX_KEYPRESS_STANDARD, vol);
+        }
     }
 }

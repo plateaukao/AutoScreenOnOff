@@ -31,6 +31,7 @@ public final class CV {
     public static final String PREF_SLEEP_STOP = "prefSleepStop";
     public static final String PREF_SHOW_NOTIFICATION = "prefShowNotification";
     public static final String PREF_NO_PARTIAL_LOCK = "prefNoPartialLock";
+    public static final String PREF_PLAY_CLOSE_SOUND = "prefPlayCloseSound";
 
     //
     public static final String SERVICEACTION = "serviceaction";
@@ -139,6 +140,13 @@ public final class CV {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         boolean b  = sp.getBoolean(PREF_NO_PARTIAL_LOCK, false);
         CV.logv("prefShowNotification: %b", b);
+        return b;
+    }
+
+    public static boolean getPrefPlayCloseSound(Context context){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean b  = sp.getBoolean(PREF_PLAY_CLOSE_SOUND, false);
+        CV.logv("prefPlayCloseSound: %b", b);
         return b;
     }
 

@@ -92,8 +92,8 @@
         <![CDATA[
         <b>Version 2.0.10 (2013/08/04):</b>
         <ul>
-         <li>Sửa lỗi: Improves sensitivity of Landscape disabling</li>
-         <li>Add Vietnamese translation: Thanks for Hai Long Hoang\' help</li>
+        <li>*Cải tiến: Tăng cường độ nhạy cho tính năng \"Tạm dừng khi màn hình xoay ngang\"</li>
+        <li>*Thêm ngôn ngữ tiếng Việt bởi Hoàng Hải Long</li>
         </ul>
         <b>Bản 2.0.9 (2013/07/04):</b>
         <ul>
@@ -170,6 +170,8 @@
     <!-- no translation -->
     <string name="author_url">https://github.com/plateaukao/PowerOff</string>
     <string name="playstore_url">https://play.google.com/store/apps/details?id=com.danielkao.autoscreenonoff</string>
+    <string name="pref_play_close_sound">Play sound while auto turning off screen</string>
+    <string name="pref_title_play_close_sound">Play Close Sound</string>
 
 
 </resources>
