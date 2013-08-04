@@ -59,7 +59,7 @@ public final class CV {
     public static final String SERVICETYPE_WIDGET = "widget";
     public static final String SERVICETYPE_NOTIFICATION = "notification";
     // rotation threshold
-    public static final int ROTATION_THRESHOLD = 15;
+    public static final int ROTATION_THRESHOLD = 45;
 
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
 	public static void logv(Object...argv){
