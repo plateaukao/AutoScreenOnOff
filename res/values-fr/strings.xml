@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Extinction Auto</string>
+    <string name="setting_name">Paramètres de l\'extinction auto</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="turn_autoscreen_on">Extinction automatique activé</string>
+    <string name="turn_autoscreen_off">Extinction automatique desactivé</string>
+    <string name="device_management_explanation">Nécessite ce privilège pour pouvoir éteindre l\'écran</string>
+    <string name="widget_title">Extinction automatique</string>
+
+    <string name="pref_auto_setting">Paramètres de l\'extinction automatique</string>
+    <string name="pref_power_setting">Paramètres de l\'alimentation</string>
+    <string name="pref_advanced_setting">Avancé</string>
+
+    <string name="pref_summary_charging_on">ne fonctionne que pendant le chargement</string>
+    <string name="pref_title_charging_on">Seulement quand branché</string>
+
+    <string name="pref_summary_auto_on">Allume/Éteint l\'écran automatiquement</string>
+    <string name="pref_title_auto_on">Activer</string>
+    <string name="uninstall_app">Désinstaller l\'application</string>
+
+    <string name="title_playstore">Évaluer l\'application !</string>
+    <string name="title_codesite">Voir sur GitHub</string>
+    <string name="title_about">À propos</string>
+    <string name="title_changelog">Quoi de neuf</string>
+
+    <string name="pref_summary_disable_in_landscape">Pratique pour prendre des photos ou regarder des vidéos en mode paysage.</string>
+    <string name="pref_title_disable_in_landscape">Désactiver en mode paysage</string>
+
+    <string name="dialog_about_title">À propos</string>
+    <string name="dialog_about_message" formatted="false">%s\nv%s</string>
+
+    <string name="pref_summary_timeout_lock">Laps de temps avant que l\'écran se désactive. \n\nParamètre actuel:%s</string>
+    <string name="pref_title_timeout_lock">Temps avant désactivation</string>
+
+    <string name="pref_summary_timeout_unlock">Laps de temps avant que l\'écran s\'active. \n\nParamètre actuel:%s</string>
+    <string name="pref_title_timeout_unlock">Temps avant activation</string>
+
+    <string name="pref_summary_partiallock">Fonctionne seulement sur QUELQUES appareils. Sur les autres, cette fonction ne marchera pas correctement. Essayez par vous-même.</string>
+    <string name="pref_title_partiallock">Mode économie d\'énergie</string>
+
+    <string name="timeout_same">Comme la désactivation</string>
+    <string name="timeout_0">Directement</string>
+    <string name="timeout_05">0.5 secondes</string>
+    <string name="timeout_1">1 secondes</string>
+    <string name="timeout_2">2 secondes</string>
+    <string name="timeout_3">3 secondes</string>
+
+    <string-array name="timeout_lock_entries">
+        <item>@string/timeout_0</item>
+        <item>@string/timeout_05</item>
+        <item>@string/timeout_1</item>
+        <item>@string/timeout_2</item>
+        <item>@string/timeout_3</item>
+    </string-array>
+
+    <!-- no translation -->
+    <string-array name="timeout_lock_values">
+        <item>0</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+    </string-array>
+
+    <string-array name="timeout_unlock_entries">
+        <item>@string/timeout_same</item>
+        <item>@string/timeout_0</item>
+        <item>@string/timeout_05</item>
+        <item>@string/timeout_1</item>
+        <item>@string/timeout_2</item>
+        <item>@string/timeout_3</item>
+    </string-array>
+
+    <!-- no translation -->
+    <string-array name="timeout_unlock_values">
+        <item>-1</item>
+        <item>0</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+    </string-array>
+
+    <string name="dlg_uninstall_title">Désinstaller l\'application</string>
+    <string name="dlg_uninstall_message">Voulez-vous vraiment désinstaller cette application ?</string>
+
+    <string name="changelog_html">
+        <![CDATA[
+        <b>Version 2.1.0 (19/08/2013) :</b>
+        <ul>
+         <li>Amelioration : Joue un son lors de l\'extinction automatique de l\'écran</li>
+         <li>Ajout d\'une traduction français. Merci de l\'aide de Geoffrey Frogeye\'</li>
+        </ul>
+        <b>Version 2.0.10 (04/08/2013) :</b>
+        <ul>
+         <li>Amelioration : Ameliore la sensitivité de la désactivation en mode paysage</li>
+         <li>Ajout d\'une traduction vietnamienne. Merci de l\'aide de Hai Long Hoang\'</li>
+        </ul>
+        <b>Version 2.0.9 (04/07/2013) :</b>
+        <ul>
+         <li>Bug résolu : Activer la fonction principale et descendre dans les paramètres désactivera la fonction (bug de Google)</li>
+        </ul>
+        <b>Version 2.0.8 (30/06/2013) :</b>
+        <ul>
+         <li>Fonctionnalité : Ajout du mode économie d\'énergie. Ne fonctionne que sur QUELQUES appareils. Si cette option empêche le fonctionnement de la désactivation automatique de l\'écran, désactivez-la.</li>
+         <li>Bug résolu : Le temps de nuit ne fonctionne pas après avoir redémarré l\'appareil.</li>
+         <li>Bug résolu : La fonction d\'activation automatique de l\'écran devrait maintenant fonctionner normalement sur les appareils Samsung.</li>
+        </ul>
+        <b>Version 2.0.7 (20/06/2013) :</b>
+        <ul>
+         <li>Retour du WaveLock partiel</li>
+        </ul>
+        <b>Version 2.0.6 (19/06/2013) :</b>
+        <ul>
+         <li>Consommation de batterie réduite en enlevant le WaveLock partiel</li>
+        </ul>
+        <b>Version 2.0.5 (15/06/2013) :</b>
+        <ul>
+         <li>Bug résolu : La fonction n\'est pas re-activée lors de la sortie du temps de nuit.</li>
+        </ul>
+        <b>Version 2.0.4 (13/06/2013) :</b>
+        <ul>
+         <li>Bug résolu : Crash sur les appareils Android 2.x</li>
+        </ul>
+        <b>Version 2.0.3 (11/06/2013) :</b>
+        <ul>
+         <li>Réglage précis : Ajuste les paramètres du capteur pour économiser plus d\'énergie</li>
+        </ul>
+        <b>Version 2.0.2 (10/06/2013) :</b>
+        <ul>
+         <li>Bug résolu : Certaines personnes peuvent renconstrer une notification indiquant que la fonction ne marche pas</li>
+         <li>Redémarre le service après avoir fait la mise à jour</li>
+        </ul>
+        <b>Version 2.0.1 (08/06/2013) :</b>
+        <ul>
+         <li>Bug résolu : Si vous utilisez un appareil Android 2.x, mettez à jour cette application pour que la notification fonctionne pour vous</li>
+         <li>Le boutton \"Désinstaller l\'application\" a été déplacé vers la barrer d\'action pour faire de la place dans les préférences</li>
+        </ul>
+        <b>Version 2.0 (07/06/2013) :</b>
+        <ul>
+         <li>Ajout d\'une notification : vous pouvez maintenant activer ou désactiver l\'extinction automatique de l\'écran plus commodément !</li>
+        </ul>
+        <b>Version 1.9 :</b>
+        <ul>
+         <li>Grandement réduit la taille de l\'application en enlevant les bibliothèques inutilisées</li>
+         <li>Ajout du temps de nuit, pour réduire la consommation de batterie</li>
+         <li>Logo de l\'application changé</li>
+         <li>Bug résolu : Parfois la fonction \"Activer quand branché\" ne fonctionne pas bien</li>
+        </ul>
+        <b>Version 1.8 :</b>
+        <ul>
+         <li>Fonctionne maintenant après avoir redémarré l\'appareil. Plus besoin de réactiver la fonction manuellement.</li>
+         <li>Un journal des modifications a été ajouté. À chaque fois qu\'une nouvelle version arrive, il est plus facile de savoir ce qui a été ajouté.</li>
+         <li>Bug résolu : Les valeurs de laps de temps peuvent maintenant être correctement modifiées</li>
+        </ul>
+        ]]>
+    </string>
+
+    <string name="pref_sleep_setting">Mode nuit (Beta)</string>
+    <string name="pref_summary_sleeping">pour réduire l\'usage de la batterie (encore un peu buggué, reportez les bugs si vous en trouvez)</string>
+    <string name="pref_title_sleeping">Désactiver pendant la nuit</string>
+    <string name="sleep_start_title">Heure de démarrage du mode nuit</string>
+    <string name="sleep_stop_title">Heure d\'arrêt du mode nuit</string>
+
+    <string name="pref_summary_show_notification">Inclut deux boutons pour activer ou non de l\'extinction automatique et pour éteindre l\'écran</string>
+    <string name="pref_title_show_notification">Activer la notification</string>
+    <string name="statusbar_charging">Chargement en cours. Extinction automatique activée</string>
+    <string name="statusbar_autoscreen_on">Extinction automatique activée</string>
+    <string name="statusbar_autoscreen_off">Extinction automatique désactivée</string>
+
+    <!-- no translation -->
+    <string name="author_url">https://github.com/plateaukao/PowerOff</string>
+    <string name="playstore_url">https://play.google.com/store/apps/details?id=com.danielkao.autoscreenonoff</string>
+    <string name="pref_play_close_sound">Joue un son lors de l\'extinction automatique de l\'écran</string>
+    <string name="pref_title_play_close_sound">Écouter le son</string>
+
+
+</resources>

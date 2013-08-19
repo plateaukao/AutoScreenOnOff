@@ -49,6 +49,11 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.1.0 (2013/08/19):</b>
+        <ul>
+         <li>新功能：螢幕關閉時，會發出聲音</li>
+         <li>增加法文翻譯，感謝 Geoffrey Frogeye 的協助</li>
+        </ul>
         <b>Version 2.0.10 (2013/08/04):</b>
         <ul>
          <li>解問題：增加橫畫面暫時停用的靈敏度，作用範圍由原先的15度改為45度</li>

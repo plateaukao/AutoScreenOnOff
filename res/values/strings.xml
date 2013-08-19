@@ -90,6 +90,11 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.1.0 (2013/08/19):</b>
+        <ul>
+         <li>Improvement: It\'s possible to hear cover close sound now</li>
+         <li>Add French translation: Thanks for Geoffrey Frogeye\' help</li>
+        </ul>
         <b>Version 2.0.10 (2013/08/04):</b>
         <ul>
          <li>Improvement: Improves sensitivity of Landscape disabling</li>
