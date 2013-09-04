@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AutoScreenOnOff</string>
+    <string name="setting_name">Auto Screen nastavenia</string>
+    <string name="action_settings">Nastavenia</string>
+    <string name="hello_world">Hello world!</string>
+
+    <string name="turn_autoscreen_on">AutoScreen ZAP</string>
+    <string name="turn_autoscreen_off">AutoScreen VYP</string>
+    <string name="device_management_explanation">Je potrebné pre vypnutie obrazovky.</string>
+    <string name="widget_title">Obrazovka ZAP/VYP</string>
+
+    <string name="pref_auto_setting">Nastavenia Auto Screen</string>
+    <string name="pref_power_setting">Nastavenie napájania</string>
+    <string name="pref_advanced_setting">Pokročilé</string>
+
+    <string name="pref_summary_charging_on">funguje iba pri nabíjaní.</string>
+    <string name="pref_title_charging_on">Iba ak je zariadenie pripojené</string>
+
+    <string name="pref_summary_auto_on">vypínanie/zapínanie obrazovky automaticky</string>
+    <string name="pref_title_auto_on">Povoliť</string>
+    <string name="uninstall_app">Odinštalovať aplikáciu</string>
+
+    <string name="title_playstore">Ohodnotiť aplikáciu!</string>
+    <string name="title_codesite">Ísť na GitHub</string>
+    <string name="title_about">O aplikácii</string>
+    <string name="title_changelog">Čo je nové</string>
+
+    <string name="pref_summary_disable_in_landscape">Užitočné pri sledovaní videí, alebo pri fotení v režime na šírku.</string>
+    <string name="pref_title_disable_in_landscape">Pri režime na šírku dočasne neaktívne</string>
+
+    <string name="dialog_about_title">O aplikácii</string>
+    <string name="dialog_about_message" formatted="false">%s\nv%s</string>
+
+    <string name="pref_summary_timeout_lock">Oneskorenie, kým sa obrazovka vypne. \n\nAktuálne nastavenie:%s</string>
+    <string name="pref_title_timeout_lock">Hodnota uzamknutia obrazovky</string>
+
+    <string name="pref_summary_timeout_unlock">Oneskorenie, kým sa obrazovka zapne. \n\nAktuálne nastavenie:%s</string>
+    <string name="pref_title_timeout_unlock">Hodnota odomknutia obrazovky</string>
+
+    <string name="pref_summary_partiallock">FUNGUJE IBA NA NIEKTORÝCH ZARIADENIACH. Na ostatných zariadeniach nebude funkcia ZAP/VYP fungovať správne. Skúste to.</string>
+    <string name="pref_title_partiallock">Úsporný režim</string>
+
+    <string name="timeout_same">Rovnaké ako hodnota zamknutia</string>
+    <string name="timeout_0">Okamžite</string>
+    <string name="timeout_05">0.5 sek</string>
+    <string name="timeout_1">1 sek</string>
+    <string name="timeout_2">2 sek</string>
+    <string name="timeout_3">3 sek</string>
+
+    <string-array name="timeout_lock_entries">
+        <item>@string/timeout_0</item>
+        <item>@string/timeout_05</item>
+        <item>@string/timeout_1</item>
+        <item>@string/timeout_2</item>
+        <item>@string/timeout_3</item>
+    </string-array>
+
+    <!-- no translation -->
+    <string-array name="timeout_lock_values">
+        <item>0</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+    </string-array>
+
+    <string-array name="timeout_unlock_entries">
+        <item>@string/timeout_same</item>
+        <item>@string/timeout_0</item>
+        <item>@string/timeout_05</item>
+        <item>@string/timeout_1</item>
+        <item>@string/timeout_2</item>
+        <item>@string/timeout_3</item>
+    </string-array>
+
+    <!-- no translation -->
+    <string-array name="timeout_unlock_values">
+        <item>-1</item>
+        <item>0</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+    </string-array>
+
+    <string name="dlg_uninstall_title">Odinštalovať aplikáciu</string>
+    <string name="dlg_uninstall_message">Ste si istý, že chcete odinštalovať túto aplikáciu?</string>
+
+    <string name="changelog_html">
+   <![CDATA[
+        <b>Version 2.1.0 (2013/08/19):</b>
+        <ul>
+         <li>Improvement: It\'s possible to hear cover close sound now</li>
+         <li>Add French translation: Thanks for Geoffrey Frogeye\' help</li>
+        </ul>
+        <b>Version 2.0.10 (2013/08/04):</b>
+        <ul>
+         <li>Improvement: Improves sensitivity of Landscape disabling</li>
+         <li>Add Vietnamese translation: Thanks for Hai Long Hoang\' help</li>
+        </ul>
+        <b>Version 2.0.9 (2013/07/04):</b>
+        <ul>
+         <li>Issue Fix: Turning on feature, and scroll settings, it will cause turn off feature (Google\'s issue)</li>
+        </ul>
+        <b>Version 2.0.8 (2013/06/30):</b>
+        <ul>
+         <li>Feature: Add Power Save Mode. ONLY Works on Some devices. If it makes screen on/off not working. Don\'t use it.</li>
+         <li>Issue Fix: Sleeping time not working, after rebooting the device.</li>
+         <li>Issue Fix: Auto turn on Screen (but turn off right away) should work normally on Samsung devices now. I hope so, since I don\'t have one to verify.</li>
+        </ul>
+        <b>Version 2.0.7 (2013/06/20):</b>
+        <ul>
+         <li>Add partial wakelock back</li>
+        </ul>
+        <b>Version 2.0.6 (2013/06/19):</b>
+        <ul>
+         <li>Reduce power consumption by removing partial wakelock</li>
+        </ul>
+        <b>Version 2.0.5 (2013/06/15):</b>
+        <ul>
+         <li>Issue fix: When sleep time is up, the function is not enabled again.</li>
+        </ul>
+        <b>Version 2.0.4 (2013/06/13):</b>
+        <ul>
+         <li>Issue fix: fix crash issue on android 2.x devices.</li>
+        </ul>
+        <b>Version 2.0.3 (2013/06/11):</b>
+        <ul>
+         <li>Fine tuning: fine tune sensor parameter in order to save more power.</li>
+        </ul>
+        <b>Version 2.0.2 (2013/06/10):</b>
+        <ul>
+         <li>Issue fix: some people may encounter notification not working issue. it\'s fixed in this version</li>
+         <li>Restart service after upgrading app.</li>
+        </ul>
+        <b>Version 2.0.1 (2013/06/08):</b>
+        <ul>
+         <li>Issue fix: if you are using Android 2.x devices, make sure you update this version, so that notification can work for you.</li>
+         <li>Move \"Uninstall App\" button to actionbar; make room for preferences.</li>
+        </ul>
+        <b>Version 2.0 (2013/06/07):</b>
+        <ul>
+         <li>Add notification: now you can toggle the feature more conveniently!</li>
+        </ul>
+        <b>Version 1.9:</b>
+        <ul>
+         <li>Largely shrink the app file size by removing unwanted libs</li>
+         <li>Add sleep time settings, to better reduce power consumption.</li>
+         <li>Change application logo icon</li>
+         <li>Issue fix: sometimes \"Enable while plugged\" can\'t function well.</li>
+        </ul>
+        <b>Version 1.8:</b>
+        <ul>
+         <li>works after rebooting the device. You don\'t have to manually turn on the function again.</li>
+         <li>A version changelog dialog is added. Every time a new version arrives, it\'s easier for you to know what\'s been added.</li>
+         <li>Timeout value can be correctly updated now!</li>
+        </ul>
+        ]]>
+    </string>
+
+    <string name="pref_sleep_setting">Nastavenia času spánku (Beta)</string>
+    <string name="pref_summary_sleeping">pre zníženie spotreby.(Stále to má chybičky. Prosím nahláste mi ak sa nejaká vyskytne.)</string>
+    <string name="pref_title_sleeping">Deaktivovať počas spánku</string>
+    <string name="sleep_start_title">Začiatok spánku</string>
+    <string name="sleep_stop_title">Koniec spánku</string>
+
+    <string name="pref_summary_show_notification">Rýchlejšie prepínanie, taktiež obsahuje tlačítko pre vypnutie obrazovky.</string>
+    <string name="pref_title_show_notification">Zobraziť oznámenie</string>
+    <string name="statusbar_charging">Nabíjanie! AutoScreen nie je aktívny.</string>
+    <string name="statusbar_autoscreen_on">AutoScreen je aktívny.</string>
+    <string name="statusbar_autoscreen_off">AutoScreen nie je aktívny.</string>
+
+    <!-- no translation -->
+    <string name="author_url">https://github.com/plateaukao/PowerOff</string>
+    <string name="playstore_url">https://play.google.com/store/apps/details?id=com.danielkao.autoscreenonoff</string>
+    <string name="pref_play_close_sound">Prehrá zvuk keď sa automaticky vypne obrazovka.</string>
+    <string name="pref_title_play_close_sound">Prehrať zvuk</string>
+
+
+</resources>

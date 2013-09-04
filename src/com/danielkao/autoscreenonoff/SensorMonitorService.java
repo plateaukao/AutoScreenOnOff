@@ -692,7 +692,7 @@ public class SensorMonitorService extends Service implements
     private void playCloseSound(){
         if(CV.getPrefPlayCloseSound(this)){
             AudioManager am = (AudioManager)getSystemService(AUDIO_SERVICE);
-            float vol = 1.0f; //This will be half of the default system sound
+            float vol = 1.0f;
             am.playSoundEffect(AudioManager.FX_KEYPRESS_STANDARD, vol);
         }
     }

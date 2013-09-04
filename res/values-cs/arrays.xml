@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="timeout_lock_entries">
+        <item>@string/timeout_0</item>
+        <item>@string/timeout_05</item>
+        <item>@string/timeout_1</item>
+        <item>@string/timeout_2</item>
+        <item>@string/timeout_3</item>
+    </string-array>
+    <string-array name="timeout_lock_values">
+        <item>0</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+    </string-array>
+    <string-array name="timeout_unlock_entries">
+        <item>@string/timeout_same</item>
+        <item>@string/timeout_0</item>
+        <item>@string/timeout_05</item>
+        <item>@string/timeout_1</item>
+        <item>@string/timeout_2</item>
+        <item>@string/timeout_3</item>
+    </string-array>
+    <string-array name="timeout_unlock_values">
+        <item>-1</item>
+        <item>0</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>2000</item>
+        <item>3000</item>
+    </string-array>
+</resources>
