@@ -1,6 +1,9 @@
 package com.danielkao.autoscreenonoff;
 
-import android.app.*;
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.admin.DevicePolicyManager;
 import android.appwidget.AppWidgetManager;
 import android.content.*;
@@ -15,6 +18,7 @@ import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 import android.view.*;
 import android.webkit.WebView;
+import android.widget.Toast;
 
 /**
  * Created by plateau on 2013/05/20.
@@ -131,6 +135,21 @@ public class AutoScreenOnOffPreferenceActivity extends PreferenceActivity implem
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));
                 startActivity(i);
+                return true;
+            }
+            case R.id.menu_send_feedback:
+            {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("message/rfc822");
+                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"leinadkao@gmail.com"});
+                i.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.feedback_subject));
+                i.putExtra(Intent.EXTRA_TEXT   , "");
+                try {
+                    startActivity(Intent.createChooser(i, "Send mail..."));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(this, getString(R.string.no_mail_client_warning), Toast.LENGTH_SHORT).show();
+                }
+
                 return true;
             }
             case R.id.menu_about:
