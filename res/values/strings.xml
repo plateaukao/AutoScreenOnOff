@@ -178,5 +178,35 @@
     <string name="pref_play_close_sound">Play sound while auto turning off screen</string>
     <string name="pref_title_play_close_sound">Play Close Sound</string>
 
+    <!-- toggle strategy -->
+    <string name="pref_onoff_related">On/Off Related Settings</string>
+    <string name="pref_summary_turnon_strategy">How to turn on screen</string>
+    <string name="pref_title_turnon_strategy">Turn on screen method</string>
+    <string name="pref_summary_turnoff_strategy">How to turn off screen</string>
+    <string name="pref_title_turnoff_strategy">Turn off screen method</string>
+
+    <string name="strategy_uncover">Uncover sensor</string>
+    <string name="strategy_cover">Cover sensor</string>
+    <string name="strategy_swipe_twice">Swipe Twice</string>
+    <string name="strategy_swipe_triple">Swipe Tree Times</string>
+    <string-array name="turnon_strategy">
+        <item>@string/strategy_uncover</item>
+        <item>@string/strategy_swipe_twice</item>
+        <item>@string/strategy_swipe_triple</item>
+    </string-array>
+
+    <string-array name="turnoff_strategy">
+        <item>@string/strategy_cover</item>
+        <item>@string/strategy_swipe_twice</item>
+        <item>@string/strategy_swipe_triple</item>
+    </string-array>
+
+    <!-- no translation -->
+    <string-array name="strategy_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
 
 </resources>

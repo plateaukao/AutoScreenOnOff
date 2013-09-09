@@ -19,7 +19,7 @@ import android.webkit.WebView;
 /**
  * Created by plateau on 2013/05/20.
  */
-public class ScreenOffWidgetConfigure extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
+public class AutoScreenOnOffPreferenceActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
     private static String CONFIGURE_ACTION="android.appwidget.action.APPWIDGET_CONFIGURE";
 
     private static final int REQUEST_CODE_DISABLE_ADMIN = 1;
@@ -206,7 +206,7 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         deviceManager = (DevicePolicyManager) getSystemService(Context.DEVICE_POLICY_SERVICE);
-                        mDeviceAdmin = new ComponentName(ScreenOffWidgetConfigure.this, TurnOffReceiver.class);
+                        mDeviceAdmin = new ComponentName(AutoScreenOnOffPreferenceActivity.this, TurnOffReceiver.class);
 
                         // handle activeAdmin previlige
                         if(isActiveAdmin()) {
@@ -263,6 +263,11 @@ public class ScreenOffWidgetConfigure extends PreferenceActivity implements Shar
             Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
             i.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_UPDATE_DISABLE_IN_LANDSCAPE);
             startService(i);
+
+
+        }else if(key.equals(CV.PREF_STRATEGY_TURNOFF)){
+
+        }else if(key.equals(CV.PREF_STRATEGY_TURNON)){
 
         }else if(key.equals(CV.PREF_TIMEOUT_LOCK)){
             // for updating list preference summary

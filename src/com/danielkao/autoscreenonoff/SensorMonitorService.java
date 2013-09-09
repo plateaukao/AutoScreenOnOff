@@ -547,7 +547,7 @@ public class SensorMonitorService extends Service implements
         // for version > 2.3.x
         if (Build.VERSION.SDK_INT > 10) {
             // setup pending intents
-            Intent intentApp = new Intent(this,ScreenOffWidgetConfigure.class);
+            Intent intentApp = new Intent(this,AutoScreenOnOffPreferenceActivity.class);
             intentApp.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             PendingIntent piApp = PendingIntent.getActivity(this, 0, intentApp, 0);
 

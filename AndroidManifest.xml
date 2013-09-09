@@ -33,7 +33,7 @@
         </activity>
 
         <activity
-                android:name=".ScreenOffWidgetConfigure"
+                android:name=".AutoScreenOnOffPreferenceActivity"
                 android:label="@string/setting_name">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />

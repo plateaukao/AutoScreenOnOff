@@ -32,6 +32,8 @@ public final class CV {
     public static final String PREF_SHOW_NOTIFICATION = "prefShowNotification";
     public static final String PREF_NO_PARTIAL_LOCK = "prefNoPartialLock";
     public static final String PREF_PLAY_CLOSE_SOUND = "prefPlayCloseSound";
+    public static final String PREF_STRATEGY_TURNON = "prefStrategyTurnOn";
+    public static final String PREF_STRATEGY_TURNOFF = "prefStrategyTurnOff";
 
     //
     public static final String SERVICEACTION = "serviceaction";

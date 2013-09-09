@@ -40,6 +40,24 @@
                 android:summary="@string/pref_play_close_sound"
                 android:title="@string/pref_title_play_close_sound" >
         </CheckBoxPreference>
+    </com.danielkao.autoscreenonoff.MyPreferenceCategory>
+    <com.danielkao.autoscreenonoff.MyPreferenceCategory android:title="@string/pref_onoff_related" >
+        <ListPreference
+                android:defaultValue="0"
+                android:key="prefStrategyTurnOff"
+                android:entries="@array/turnoff_strategy"
+                android:entryValues="@array/strategy_values"
+                android:summary="@string/pref_summary_turnoff_strategy"
+                android:title="@string/pref_title_turnoff_strategy" >
+        </ListPreference>
+        <ListPreference
+                android:defaultValue="0"
+                android:key="prefStrategyTurnOn"
+                android:entries="@array/turnon_strategy"
+                android:entryValues="@array/strategy_values"
+                android:summary="@string/pref_summary_turnon_strategy"
+                android:title="@string/pref_title_turnon_strategy" >
+        </ListPreference>
         <ListPreference
                 android:defaultValue="500"
                 android:key="prefTimeout"
