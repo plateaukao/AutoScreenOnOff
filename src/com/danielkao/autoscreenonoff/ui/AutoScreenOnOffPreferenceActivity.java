@@ -1,4 +1,4 @@
-package com.danielkao.autoscreenonoff;
+package com.danielkao.autoscreenonoff.ui;
 
 import android.app.Activity;
 import android.app.AlarmManager;
@@ -19,6 +19,10 @@ import android.preference.PreferenceManager;
 import android.view.*;
 import android.webkit.WebView;
 import android.widget.Toast;
+import com.danielkao.autoscreenonoff.R;
+import com.danielkao.autoscreenonoff.receiver.TurnOffReceiver;
+import com.danielkao.autoscreenonoff.service.SensorMonitorService;
+import com.danielkao.autoscreenonoff.util.CV;
 
 /**
  * Created by plateau on 2013/05/20.

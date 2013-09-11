@@ -1,7 +1,7 @@
 package com.danielkao.autoscreenonoff.tests;
 
 import android.test.ActivityInstrumentationTestCase2;
-import com.danielkao.autoscreenonoff.MainActivity;
+import com.danielkao.autoscreenonoff.ui.MainActivity;
 
 /**
  * This is a simple framework for a test of an Application.  See

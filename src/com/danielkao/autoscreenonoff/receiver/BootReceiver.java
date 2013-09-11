@@ -1,8 +1,9 @@
-package com.danielkao.autoscreenonoff;
+package com.danielkao.autoscreenonoff.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import com.danielkao.autoscreenonoff.util.CV;
 
 /**
  * Created by plateau on 2013/06/03.

@@ -1,4 +1,4 @@
-package com.danielkao.autoscreenonoff;
+package com.danielkao.autoscreenonoff.ui;
 
 import android.content.Context;
 import android.graphics.Color;

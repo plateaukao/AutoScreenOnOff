@@ -1,4 +1,4 @@
-package com.danielkao.autoscreenonoff;
+package com.danielkao.autoscreenonoff.provider;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -7,6 +7,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
+import com.danielkao.autoscreenonoff.R;
+import com.danielkao.autoscreenonoff.util.CV;
 
 public class ToggleAutoScreenOnOffAppWidgetProvider extends AppWidgetProvider {
 

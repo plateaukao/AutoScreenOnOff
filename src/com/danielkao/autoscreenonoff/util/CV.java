@@ -1,4 +1,4 @@
-package com.danielkao.autoscreenonoff;
+package com.danielkao.autoscreenonoff.util;
 
 import android.annotation.TargetApi;
 import android.content.Context;

@@ -2,8 +2,8 @@ package com.danielkao.autoscreenonoff.tests;
 
 import android.preference.SwitchPreference;
 import android.test.ActivityInstrumentationTestCase2;
-import com.danielkao.autoscreenonoff.AutoScreenOnOffPreferenceActivity;
-import com.danielkao.autoscreenonoff.CV;
+import com.danielkao.autoscreenonoff.ui.AutoScreenOnOffPreferenceActivity;
+import com.danielkao.autoscreenonoff.util.CV;
 
 /**
  * Created by plateau on 2013/06/03.

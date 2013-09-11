@@ -1,7 +1,9 @@
-package com.danielkao.autoscreenonoff;
+package com.danielkao.autoscreenonoff.service;
 
-import android.annotation.SuppressLint;
-import android.app.*;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -20,6 +22,13 @@ import android.preference.PreferenceManager;
 import android.view.OrientationEventListener;
 import android.widget.RemoteViews;
 import android.widget.Toast;
+import com.danielkao.autoscreenonoff.*;
+import com.danielkao.autoscreenonoff.provider.ToggleAutoScreenOnOffAppWidgetProvider;
+import com.danielkao.autoscreenonoff.receiver.TurnOffReceiver;
+import com.danielkao.autoscreenonoff.ui.AutoScreenOnOffPreferenceActivity;
+import com.danielkao.autoscreenonoff.ui.MainActivity;
+import com.danielkao.autoscreenonoff.ui.TimePreference;
+import com.danielkao.autoscreenonoff.util.CV;
 
 import java.lang.reflect.Method;
 import java.util.Calendar;
@@ -289,7 +298,7 @@ public class SensorMonitorService extends Service implements
 
 	// to return service class
 	public class LocalBinder extends Binder {
-		SensorMonitorService getService() {
+		public SensorMonitorService getService() {
 			return SensorMonitorService.this;
 		}
 	}
@@ -360,11 +369,8 @@ public class SensorMonitorService extends Service implements
 		CV.logv("onAccuracyChanged:%d", accuracy);
 	}
 
-	@SuppressLint("Wakelock")
 	@Override
 	public final void onSensorChanged(SensorEvent event) {
-		// The light sensor returns a single value.
-		// Many sensors return 3 values, one for each axis.
         int type = event.sensor.getType();
         if(type == Sensor.TYPE_PROXIMITY){
             float lux = event.values[0];
@@ -407,12 +413,6 @@ public class SensorMonitorService extends Service implements
                     }
                 }
             }
-        }
-        else if(type == Sensor.TYPE_LIGHT){
-            float lux = event.values[0];
-            // Do something with this sensor value.
-            CV.logv("onSensorChanged light:%f", lux);
-
         }
 	}
 
@@ -633,10 +633,7 @@ public class SensorMonitorService extends Service implements
         }catch(Exception ex){}
 
         Notification notify = createNotification();
-        final NotificationManager notificationManager = (NotificationManager) getApplicationContext()
-                .getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
-        notificationManager.notify(NOTIFICATION_ONGOING, notify);
-
+        startForeground(NOTIFICATION_ONGOING, notify);
     }
 
     //-- for alarm settings
