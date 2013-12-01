@@ -17,7 +17,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public final class CV {
-	static final boolean debug = false;
+	static final boolean debug = true;
 
 	public static final String TAG = "SensorMonitor";
     public static final String PREF_CHARGING_ON = "prefChargingOn";

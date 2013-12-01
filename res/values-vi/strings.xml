@@ -49,47 +49,16 @@
     <string name="timeout_2">2 giây</string>
     <string name="timeout_3">3 giây</string>
 
-    <string-array name="timeout_lock_entries">
-        <item>@string/timeout_0</item>
-        <item>@string/timeout_05</item>
-        <item>@string/timeout_1</item>
-        <item>@string/timeout_2</item>
-        <item>@string/timeout_3</item>
-    </string-array>
-
-    <!-- no translation -->
-    <string-array name="timeout_lock_values">
-        <item>0</item>
-        <item>500</item>
-        <item>1000</item>
-        <item>2000</item>
-        <item>3000</item>
-    </string-array>
-
-    <string-array name="timeout_unlock_entries">
-        <item>@string/timeout_same</item>
-        <item>@string/timeout_0</item>
-        <item>@string/timeout_05</item>
-        <item>@string/timeout_1</item>
-        <item>@string/timeout_2</item>
-        <item>@string/timeout_3</item>
-    </string-array>
-
-    <!-- no translation -->
-    <string-array name="timeout_unlock_values">
-        <item>-1</item>
-        <item>0</item>
-        <item>500</item>
-        <item>1000</item>
-        <item>2000</item>
-        <item>3000</item>
-    </string-array>
-
     <string name="dlg_uninstall_title">Gỡ ứng dụng</string>
     <string name="dlg_uninstall_message">Bạn thực sự muốn gỡ ứng dụng?</string>
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.2 (2013/12/02):</b>
+        <ul>
+         <li>Improvement: Add swipe feature. You can set up in Timeout settings.</li>
+         <li>Improvement: Add Disable TurnOn or TurnOff feature. in Timeout settings too.</li>
+        </ul>
         <b>Version 2.0.10 (2013/08/04):</b>
         <ul>
         <li>*Cải tiến: Tăng cường độ nhạy cho tính năng \"Tạm dừng khi màn hình xoay ngang\"</li>

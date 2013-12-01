@@ -48,6 +48,8 @@
     <string name="timeout_1">1 sec</string>
     <string name="timeout_2">2 sec</string>
     <string name="timeout_3">3 sec</string>
+    <string name="timeout_4">Swipe Twice</string>
+    <string name="timeout_5">Never</string>
 
     <string-array name="timeout_lock_entries">
         <item>@string/timeout_0</item>
@@ -55,6 +57,8 @@
         <item>@string/timeout_1</item>
         <item>@string/timeout_2</item>
         <item>@string/timeout_3</item>
+        <item>@string/timeout_4</item>
+        <item>@string/timeout_5</item>
     </string-array>
 
     <!-- no translation -->
@@ -64,6 +68,10 @@
         <item>1000</item>
         <item>2000</item>
         <item>3000</item>
+        <!-- swipe twice -->
+        <item>2</item>
+        <!-- never -->
+        <item>10</item>
     </string-array>
 
     <string-array name="timeout_unlock_entries">
@@ -73,6 +81,8 @@
         <item>@string/timeout_1</item>
         <item>@string/timeout_2</item>
         <item>@string/timeout_3</item>
+        <item>@string/timeout_4</item>
+        <item>@string/timeout_5</item>
     </string-array>
 
     <!-- no translation -->
@@ -83,6 +93,10 @@
         <item>1000</item>
         <item>2000</item>
         <item>3000</item>
+        <!-- swipe twice -->
+        <item>2</item>
+        <!-- never -->
+        <item>10</item>
     </string-array>
 
     <string name="dlg_uninstall_title">Uninstall App</string>
@@ -90,6 +104,11 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.2 (2013/12/02):</b>
+        <ul>
+         <li>Improvement: Add swipe feature. You can set up in Timeout settings.</li>
+         <li>Improvement: Add Disable TurnOn or TurnOff feature. in Timeout settings too.</li>
+        </ul>
         <b>Version 2.1.0 (2013/08/19):</b>
         <ul>
          <li>Improvement: It\'s possible to hear cover close sound now</li>
@@ -180,34 +199,6 @@
 
     <!-- toggle strategy -->
     <string name="pref_onoff_related">On/Off Related Settings</string>
-    <string name="pref_summary_turnon_strategy">How to turn on screen</string>
-    <string name="pref_title_turnon_strategy">Turn on screen method</string>
-    <string name="pref_summary_turnoff_strategy">How to turn off screen</string>
-    <string name="pref_title_turnoff_strategy">Turn off screen method</string>
-
-    <string name="strategy_uncover">Uncover sensor</string>
-    <string name="strategy_cover">Cover sensor</string>
-    <string name="strategy_swipe_twice">Swipe Twice</string>
-    <string name="strategy_swipe_triple">Swipe Tree Times</string>
-    <string-array name="turnon_strategy">
-        <item>@string/strategy_uncover</item>
-        <item>@string/strategy_swipe_twice</item>
-        <item>@string/strategy_swipe_triple</item>
-    </string-array>
-
-    <string-array name="turnoff_strategy">
-        <item>@string/strategy_cover</item>
-        <item>@string/strategy_swipe_twice</item>
-        <item>@string/strategy_swipe_triple</item>
-    </string-array>
-
-    <!-- no translation -->
-    <string-array name="strategy_values">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
 
     <string name="send_feedback">Send feedback</string>
     <string name="no_mail_client_warning">There are no email clients installed.</string>

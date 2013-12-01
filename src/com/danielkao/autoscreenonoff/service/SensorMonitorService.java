@@ -74,6 +74,13 @@ public class SensorMonitorService extends Service implements
 		return deviceManager.isAdminActive(mDeviceAdmin);
 	}
 
+    // swipe counter
+    private float currentSensorValue;
+    private long tsLastChange;
+    private int swipeCount=0;
+    private void resetSwipeCount(){
+        swipeCount = 0;
+    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -375,6 +382,20 @@ public class SensorMonitorService extends Service implements
         if(type == Sensor.TYPE_PROXIMITY){
             float lux = event.values[0];
 
+            // calculate swipe count
+            long tsCurrent = System.currentTimeMillis();
+            if(lux != currentSensorValue){
+                currentSensorValue = lux;
+                if(tsCurrent - tsLastChange < 2000){
+                    swipeCount +=1;
+                } else{
+                    swipeCount = 1;
+                    tsLastChange = tsCurrent;
+                }
+
+            }
+            CV.logv("log swipe count:%d", swipeCount);
+
             // Do something with this sensor value.
             CV.logv("onSensorChanged proximity:%f", lux);
             if (isActiveAdmin()) {
@@ -397,7 +418,16 @@ public class SensorMonitorService extends Service implements
                             long timeout = (long) CV.getPrefTimeoutLock(this);
                             if(timeout == 0)
                                 turnOff();
-                            else
+                            else if(timeout == 2){
+                                if(swipeCount >=4){
+                                    resetSwipeCount();
+                                    turnOff();
+                                }
+                            }
+                            else if(timeout == 10){
+                                // never: do nothing
+                                return;
+                            } else
                                 handler.postDelayed(runnableTurnOff, timeout);
                         }
                     }
@@ -408,7 +438,16 @@ public class SensorMonitorService extends Service implements
                         long timeout = (long) CV.getPrefTimeoutUnlock(this);
                         if(timeout==0)
                             turnOn();
-                        else
+                        else if(timeout == 2){
+                            if(swipeCount >=4){
+                                resetSwipeCount();
+                                turnOn();
+                            }
+                        }
+                        else if(timeout == 10){
+                            // never: do nothing
+                            return;
+                        } else
                             handler.postDelayed(runnableTurnOn, timeout);
                     }
                 }

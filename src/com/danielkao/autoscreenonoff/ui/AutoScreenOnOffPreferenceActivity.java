@@ -12,10 +12,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceActivity;
-import android.preference.PreferenceManager;
+import android.preference.*;
 import android.view.*;
 import android.webkit.WebView;
 import android.widget.Toast;
@@ -286,12 +283,6 @@ public class AutoScreenOnOffPreferenceActivity extends PreferenceActivity implem
             Intent i = new Intent(CV.SERVICE_INTENT_ACTION);
             i.putExtra(CV.SERVICEACTION, CV.SERVICEACTION_UPDATE_DISABLE_IN_LANDSCAPE);
             startService(i);
-
-
-        }else if(key.equals(CV.PREF_STRATEGY_TURNOFF)){
-
-        }else if(key.equals(CV.PREF_STRATEGY_TURNON)){
-
         }else if(key.equals(CV.PREF_TIMEOUT_LOCK)){
             // for updating list preference summary
             ListPreference lp = (ListPreference) findPreference(CV.PREF_TIMEOUT_LOCK);
