@@ -43,12 +43,19 @@
     <string name="timeout_1">1 秒</string>
     <string name="timeout_2">2 秒</string>
     <string name="timeout_3">3 秒</string>
+    <string name="timeout_4">感應器上手划兩下</string>
+    <string name="timeout_5">不使用此功能</string>
 
     <string name="dlg_uninstall_title">移除軟體</string>
     <string name="dlg_uninstall_message">你確定要移除本軟體嗎？</string>
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.2 (2013/12/02):</b>
+        <ul>
+         <li>新功能：增加手划兩下啟動或關閉畫面，在 畫面延遲 中可設定</li>
+         <li>新功能：增加 個別取消 啟動或關閉畫面功能，在 畫面延遲 中可設定</li>
+        </ul>
         <b>Version 2.1.0 (2013/08/19):</b>
         <ul>
          <li>新功能：螢幕關閉時，會發出聲音</li>

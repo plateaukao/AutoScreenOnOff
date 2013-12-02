@@ -1,7 +1,7 @@
 package com.danielkao.autoscreenonoff.tests;
 
 import android.test.ServiceTestCase;
-import com.danielkao.autoscreenonoff.SensorMonitorService;
+import com.danielkao.autoscreenonoff.service.SensorMonitorService;
 
 /**
  * Created by plateau on 2013/06/04.

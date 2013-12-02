@@ -1,4 +1,4 @@
-package com.danielkao.autoscreenonoff;
+package com.danielkao.autoscreenonoff.ui;
 
 import android.app.Activity;
 import android.app.admin.DevicePolicyManager;
@@ -6,7 +6,11 @@ import android.content.*;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
-import com.danielkao.autoscreenonoff.SensorMonitorService.LocalBinder;
+import com.danielkao.autoscreenonoff.R;
+import com.danielkao.autoscreenonoff.receiver.TurnOffReceiver;
+import com.danielkao.autoscreenonoff.service.SensorMonitorService;
+import com.danielkao.autoscreenonoff.service.SensorMonitorService.LocalBinder;
+import com.danielkao.autoscreenonoff.util.CV;
 
 public class MainActivity extends Activity {
 

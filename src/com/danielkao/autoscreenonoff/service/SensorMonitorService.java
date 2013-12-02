@@ -1,7 +1,9 @@
-package com.danielkao.autoscreenonoff;
+package com.danielkao.autoscreenonoff.service;
 
-import android.annotation.SuppressLint;
-import android.app.*;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.PendingIntent;
+import android.app.Service;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -20,6 +22,13 @@ import android.preference.PreferenceManager;
 import android.view.OrientationEventListener;
 import android.widget.RemoteViews;
 import android.widget.Toast;
+import com.danielkao.autoscreenonoff.*;
+import com.danielkao.autoscreenonoff.provider.ToggleAutoScreenOnOffAppWidgetProvider;
+import com.danielkao.autoscreenonoff.receiver.TurnOffReceiver;
+import com.danielkao.autoscreenonoff.ui.AutoScreenOnOffPreferenceActivity;
+import com.danielkao.autoscreenonoff.ui.MainActivity;
+import com.danielkao.autoscreenonoff.ui.TimePreference;
+import com.danielkao.autoscreenonoff.util.CV;
 
 import java.lang.reflect.Method;
 import java.util.Calendar;
@@ -65,6 +74,13 @@ public class SensorMonitorService extends Service implements
 		return deviceManager.isAdminActive(mDeviceAdmin);
 	}
 
+    // swipe counter
+    private float currentSensorValue;
+    private long tsLastChange;
+    private int swipeCount=0;
+    private void resetSwipeCount(){
+        swipeCount = 0;
+    }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -289,7 +305,7 @@ public class SensorMonitorService extends Service implements
 
 	// to return service class
 	public class LocalBinder extends Binder {
-		SensorMonitorService getService() {
+		public SensorMonitorService getService() {
 			return SensorMonitorService.this;
 		}
 	}
@@ -360,14 +376,25 @@ public class SensorMonitorService extends Service implements
 		CV.logv("onAccuracyChanged:%d", accuracy);
 	}
 
-	@SuppressLint("Wakelock")
 	@Override
 	public final void onSensorChanged(SensorEvent event) {
-		// The light sensor returns a single value.
-		// Many sensors return 3 values, one for each axis.
         int type = event.sensor.getType();
         if(type == Sensor.TYPE_PROXIMITY){
             float lux = event.values[0];
+
+            // calculate swipe count
+            long tsCurrent = System.currentTimeMillis();
+            if(lux != currentSensorValue){
+                currentSensorValue = lux;
+                if(tsCurrent - tsLastChange < 2000){
+                    swipeCount +=1;
+                } else{
+                    swipeCount = 1;
+                    tsLastChange = tsCurrent;
+                }
+
+            }
+            CV.logv("log swipe count:%d", swipeCount);
 
             // Do something with this sensor value.
             CV.logv("onSensorChanged proximity:%f", lux);
@@ -391,7 +418,16 @@ public class SensorMonitorService extends Service implements
                             long timeout = (long) CV.getPrefTimeoutLock(this);
                             if(timeout == 0)
                                 turnOff();
-                            else
+                            else if(timeout == 2){
+                                if(swipeCount >=4){
+                                    resetSwipeCount();
+                                    turnOff();
+                                }
+                            }
+                            else if(timeout == 10){
+                                // never: do nothing
+                                return;
+                            } else
                                 handler.postDelayed(runnableTurnOff, timeout);
                         }
                     }
@@ -402,17 +438,20 @@ public class SensorMonitorService extends Service implements
                         long timeout = (long) CV.getPrefTimeoutUnlock(this);
                         if(timeout==0)
                             turnOn();
-                        else
+                        else if(timeout == 2){
+                            if(swipeCount >=4){
+                                resetSwipeCount();
+                                turnOn();
+                            }
+                        }
+                        else if(timeout == 10){
+                            // never: do nothing
+                            return;
+                        } else
                             handler.postDelayed(runnableTurnOn, timeout);
                     }
                 }
             }
-        }
-        else if(type == Sensor.TYPE_LIGHT){
-            float lux = event.values[0];
-            // Do something with this sensor value.
-            CV.logv("onSensorChanged light:%f", lux);
-
         }
 	}
 
@@ -633,10 +672,7 @@ public class SensorMonitorService extends Service implements
         }catch(Exception ex){}
 
         Notification notify = createNotification();
-        final NotificationManager notificationManager = (NotificationManager) getApplicationContext()
-                .getSystemService(getApplicationContext().NOTIFICATION_SERVICE);
-        notificationManager.notify(NOTIFICATION_ONGOING, notify);
-
+        startForeground(NOTIFICATION_ONGOING, notify);
     }
 
     //-- for alarm settings

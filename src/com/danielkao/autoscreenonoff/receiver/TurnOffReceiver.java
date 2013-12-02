@@ -1,4 +1,4 @@
-package com.danielkao.autoscreenonoff;
+package com.danielkao.autoscreenonoff.receiver;
 
 import android.app.admin.DeviceAdminReceiver;
 import android.content.Context;

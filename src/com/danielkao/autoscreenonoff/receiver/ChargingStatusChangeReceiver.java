@@ -1,8 +1,9 @@
-package com.danielkao.autoscreenonoff;
+package com.danielkao.autoscreenonoff.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import com.danielkao.autoscreenonoff.util.CV;
 
 import static android.content.Intent.ACTION_POWER_CONNECTED;
 import static android.content.Intent.ACTION_POWER_DISCONNECTED;

@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
           package="com.danielkao.autoscreenonoff"
-    android:versionCode="25"
-    android:versionName="2.1.1" >
+    android:versionCode="26"
+    android:versionName="2.2.0" >
 
     <uses-sdk
         android:minSdkVersion="8"
@@ -25,15 +25,16 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
+        android:debuggable="false"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.danielkao.autoscreenonoff.MainActivity"
+            android:name=".ui.MainActivity"
             android:excludeFromRecents="true"
             android:label="@string/app_name" >
         </activity>
 
         <activity
-                android:name=".AutoScreenOnOffPreferenceActivity"
+                android:name=".ui.AutoScreenOnOffPreferenceActivity"
                 android:label="@string/setting_name">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -47,7 +48,7 @@
          -->
 
         <receiver
-            android:name=".TurnOffReceiver"
+            android:name=".receiver.TurnOffReceiver"
 	        android:label="@string/app_name"
             android:permission="android.permission.BIND_DEVICE_ADMIN" >
             <meta-data
@@ -60,14 +61,14 @@
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".ChargingStatusChangeReceiver" android:label="@string/app_name">
+        <receiver android:name=".receiver.ChargingStatusChangeReceiver" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
             </intent-filter>
         </receiver>
 
-        <receiver android:name=".BootReceiver">
+        <receiver android:name=".receiver.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.QUICKBOOT_POWERON" />
@@ -75,7 +76,7 @@
         </receiver>
 
         <service
-            android:name="com.danielkao.autoscreenonoff.SensorMonitorService"
+            android:name=".service.SensorMonitorService"
             android:enabled="true"
             android:exported="true" >
             <intent-filter>
@@ -83,7 +84,7 @@
             </intent-filter>
         </service>
 
-        <receiver android:name="ToggleAutoScreenOnOffAppWidgetProvider"
+        <receiver android:name=".provider.ToggleAutoScreenOnOffAppWidgetProvider"
                   android:configure="com.danielkao.autoscreenonoff.ScreenOffWidgetConfigure"
                 >
 
@@ -96,7 +97,7 @@
                 android:resource="@xml/toggleonoff_appwidget_info" />
         </receiver>
         <receiver
-                android:name=".AppReplaceReceiver"
+                android:name=".receiver.AppReplaceReceiver"
                 android:label="app_replace">
         <intent-filter>
             <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
