@@ -20,6 +20,7 @@ import com.danielkao.autoscreenonoff.R;
 import com.danielkao.autoscreenonoff.receiver.TurnOffReceiver;
 import com.danielkao.autoscreenonoff.service.SensorMonitorService;
 import com.danielkao.autoscreenonoff.util.CV;
+import com.danielkao.autoscreenonoff.util.EnvironmentInfoUtils;
 
 /**
  * Created by plateau on 2013/05/20.
@@ -144,7 +145,7 @@ public class AutoScreenOnOffPreferenceActivity extends PreferenceActivity implem
                 i.setType("message/rfc822");
                 i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"leinadkao@gmail.com"});
                 i.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.feedback_subject));
-                i.putExtra(Intent.EXTRA_TEXT   , "");
+                i.putExtra(Intent.EXTRA_TEXT   , "\n\n\n- - - - - - -\n" + EnvironmentInfoUtils.getApplicationInfo(this));
                 try {
                     startActivity(Intent.createChooser(i, "Send mail..."));
                 } catch (android.content.ActivityNotFoundException ex) {
