@@ -406,6 +406,27 @@ public class SensorMonitorService extends Service implements
                     return;
                 }
 
+                // check swipe scenario first
+                if(2 == CV.getPrefTimeoutLock(this)){
+                    // screen on: swipe twice -> lock
+                    if(mPowerManager.isScreenOn() && swipeCount >=4){
+                        resetSwipeCount();
+                        turnOff();
+                        return;
+                    }
+                    // not in the criteria: do nothing
+                }
+                if(2 == CV.getPrefTimeoutUnlock(this)){
+                    // screen off: swipe twice -> unlock
+                    if(!mPowerManager.isScreenOn() && swipeCount >=4){
+                            resetSwipeCount();
+                            turnOn();
+                            return;
+                    }
+                    // not in the criteria: do nothing
+                }
+                // end swipe checking
+
                 // value == 0; should turn screen off
                 if (lux == 0f) {
                     if (mPowerManager.isScreenOn()) {
@@ -418,13 +439,7 @@ public class SensorMonitorService extends Service implements
                             long timeout = (long) CV.getPrefTimeoutLock(this);
                             if(timeout == 0)
                                 turnOff();
-                            else if(timeout == 2){
-                                if(swipeCount >=4){
-                                    resetSwipeCount();
-                                    turnOff();
-                                }
-                            }
-                            else if(timeout == 10){
+                            else if(timeout == 10 || timeout == 2){
                                 // never: do nothing
                                 return;
                             } else
@@ -438,13 +453,7 @@ public class SensorMonitorService extends Service implements
                         long timeout = (long) CV.getPrefTimeoutUnlock(this);
                         if(timeout==0)
                             turnOn();
-                        else if(timeout == 2){
-                            if(swipeCount >=4){
-                                resetSwipeCount();
-                                turnOn();
-                            }
-                        }
-                        else if(timeout == 10){
+                        else if(timeout == 10 || timeout == 2){
                             // never: do nothing
                             return;
                         } else
