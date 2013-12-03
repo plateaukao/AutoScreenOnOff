@@ -1,9 +1,6 @@
 package com.danielkao.autoscreenonoff.service;
 
-import android.app.AlarmManager;
-import android.app.Notification;
-import android.app.PendingIntent;
-import android.app.Service;
+import android.app.*;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
 import android.content.Context;
@@ -22,7 +19,7 @@ import android.preference.PreferenceManager;
 import android.view.OrientationEventListener;
 import android.widget.RemoteViews;
 import android.widget.Toast;
-import com.danielkao.autoscreenonoff.*;
+import com.danielkao.autoscreenonoff.R;
 import com.danielkao.autoscreenonoff.provider.ToggleAutoScreenOnOffAppWidgetProvider;
 import com.danielkao.autoscreenonoff.receiver.TurnOffReceiver;
 import com.danielkao.autoscreenonoff.ui.AutoScreenOnOffPreferenceActivity;
@@ -384,7 +381,7 @@ public class SensorMonitorService extends Service implements
 
             // calculate swipe count
             long tsCurrent = System.currentTimeMillis();
-            if(lux != currentSensorValue){
+            if(lux - currentSensorValue < 0.5 || lux - currentSensorValue > - 0.5){
                 currentSensorValue = lux;
                 if(tsCurrent - tsLastChange < 2000){
                     swipeCount +=1;
@@ -409,7 +406,7 @@ public class SensorMonitorService extends Service implements
                 // check swipe scenario first
                 if(2 == CV.getPrefTimeoutLock(this)){
                     // screen on: swipe twice -> lock
-                    if(mPowerManager.isScreenOn() && swipeCount >=4){
+                    if(mPowerManager.isScreenOn() && swipeCount >=8){
                         resetSwipeCount();
                         turnOff();
                         return;
@@ -418,10 +415,10 @@ public class SensorMonitorService extends Service implements
                 }
                 if(2 == CV.getPrefTimeoutUnlock(this)){
                     // screen off: swipe twice -> unlock
-                    if(!mPowerManager.isScreenOn() && swipeCount >=4){
-                            resetSwipeCount();
-                            turnOn();
-                            return;
+                    if(!mPowerManager.isScreenOn() && swipeCount >=8){
+                        resetSwipeCount();
+                        turnOn();
+                        return;
                     }
                     // not in the criteria: do nothing
                 }
@@ -518,13 +515,12 @@ public class SensorMonitorService extends Service implements
     private void turnOn(){
         if (!screenLock.isHeld()) {
             screenLock.acquire();
-                /*
-                KeyguardManager mKeyGuardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
-                KeyguardManager.KeyguardLock mLock = mKeyGuardManager.newKeyguardLock("com.danielkao.autoscreenonoff");
-                if(mKeyGuardManager.isKeyguardLocked())
-                    mLock.disableKeyguard();
-                mLock.reenableKeyguard();
-                */
+            KeyguardManager mKeyGuardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
+            KeyguardManager.KeyguardLock mLock = mKeyGuardManager.newKeyguardLock("com.danielkao.autoscreenonoff");
+            if(mKeyGuardManager.isKeyguardLocked())
+                mLock.disableKeyguard();
+            //mLock.reenableKeyguard();
+
             new Thread(new Runnable() {
                 public void run() {
                     try {
