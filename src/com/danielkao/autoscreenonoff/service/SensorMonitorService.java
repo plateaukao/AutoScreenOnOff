@@ -406,7 +406,7 @@ public class SensorMonitorService extends Service implements
                 // check swipe scenario first
                 if(2 == CV.getPrefTimeoutLock(this)){
                     // screen on: swipe twice -> lock
-                    if(mPowerManager.isScreenOn() && swipeCount >=8){
+                    if(mPowerManager.isScreenOn() && swipeCount >=6){
                         resetSwipeCount();
                         turnOff();
                         return;
@@ -415,7 +415,7 @@ public class SensorMonitorService extends Service implements
                 }
                 if(2 == CV.getPrefTimeoutUnlock(this)){
                     // screen off: swipe twice -> unlock
-                    if(!mPowerManager.isScreenOn() && swipeCount >=8){
+                    if(!mPowerManager.isScreenOn() && swipeCount >=6){
                         resetSwipeCount();
                         turnOn();
                         return;
