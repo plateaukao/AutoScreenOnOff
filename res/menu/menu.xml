@@ -11,8 +11,7 @@
           android:icon="@android:drawable/ic_menu_help"
           android:title="@string/title_playstore" />
     <item android:id="@+id/menu_uninstall_app"
-          android:icon="@android:drawable/ic_menu_delete"
-          android:showAsAction="always"
+          android:showAsAction="always|withText"
           android:title="@string/uninstall_app" />
     <item android:id="@+id/menu_send_feedback"
           android:icon="@android:drawable/ic_menu_send"

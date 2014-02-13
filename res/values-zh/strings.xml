@@ -27,7 +27,7 @@
 
     <string name="pref_summary_auto_on">當"測近感側器"被遮蓋時，畫面自動關閉；當無遮蓋時則自動點亮畫面。</string>
     <string name="pref_title_auto_on">啟動</string>
-    <string name="uninstall_app">移除本軟體</string>
+    <string name="uninstall_app">移除</string>
 
     <string name="pref_summary_disable_in_landscape">手機橫放時暫不關閉螢幕。適用於看影片或是拍照。</string>
     <string name="pref_title_disable_in_landscape">橫屏時暫時無作用</string>

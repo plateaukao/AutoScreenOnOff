@@ -20,7 +20,7 @@
 
     <string name="pref_summary_auto_on">Screen On/Off automatically</string>
     <string name="pref_title_auto_on">Enable</string>
-    <string name="uninstall_app">Uninstall App</string>
+    <string name="uninstall_app">Uninstall</string>
 
     <string name="title_playstore">Rank my App!</string>
     <string name="title_codesite">goto GitHub</string>
