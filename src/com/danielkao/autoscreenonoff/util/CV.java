@@ -32,6 +32,7 @@ public final class CV {
     public static final String PREF_SHOW_NOTIFICATION = "prefShowNotification";
     public static final String PREF_NO_PARTIAL_LOCK = "prefNoPartialLock";
     public static final String PREF_PLAY_CLOSE_SOUND = "prefPlayCloseSound";
+    public static final String PREF_VIBRATE_WHILE_CLOSE = "prefVibrateWhileClose";
     public static final String PREF_STRATEGY_TURNON = "prefStrategyTurnOn";
     public static final String PREF_STRATEGY_TURNOFF = "prefStrategyTurnOff";
 
@@ -149,6 +150,13 @@ public final class CV {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
         boolean b  = sp.getBoolean(PREF_PLAY_CLOSE_SOUND, false);
         CV.logv("prefPlayCloseSound: %b", b);
+        return b;
+    }
+
+    public static boolean getVibrateWhileClose(Context context){
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        boolean b  = sp.getBoolean(PREF_VIBRATE_WHILE_CLOSE, false);
+        CV.logv("prefVibrateWhileClose: %b", b);
         return b;
     }
 

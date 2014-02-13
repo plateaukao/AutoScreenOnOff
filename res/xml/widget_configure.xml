@@ -40,6 +40,12 @@
                 android:summary="@string/pref_play_close_sound"
                 android:title="@string/pref_title_play_close_sound" >
         </CheckBoxPreference>
+        <CheckBoxPreference
+                android:defaultValue="false"
+                android:key="prefVibrateWhileClose"
+                android:summary="@string/pref_vibrate_while_close"
+                android:title="@string/pref_title_vibrate_while_close" >
+        </CheckBoxPreference>
         <ListPreference
                 android:defaultValue="500"
                 android:key="prefTimeout"

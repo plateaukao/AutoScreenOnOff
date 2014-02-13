@@ -543,6 +543,7 @@ public class SensorMonitorService extends Service implements
             screenLock.release();
         deviceManager.lockNow();
         playCloseSound();
+        vibrateWhileClose();
 
     }
 
@@ -735,6 +736,14 @@ public class SensorMonitorService extends Service implements
             AudioManager am = (AudioManager)getSystemService(AUDIO_SERVICE);
             float vol = 1.0f;
             am.playSoundEffect(AudioManager.FX_KEYPRESS_STANDARD, vol);
+        }
+    }
+
+    private void vibrateWhileClose(){
+        if(CV.getVibrateWhileClose(this)){
+            Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
+            // Vibrate for 500 milliseconds
+            v.vibrate(200);
         }
     }
 }

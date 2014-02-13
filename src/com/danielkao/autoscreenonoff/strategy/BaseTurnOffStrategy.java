@@ -3,6 +3,7 @@ package com.danielkao.autoscreenonoff.strategy;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.PowerManager.WakeLock;
+import android.os.Vibrator;
 import com.danielkao.autoscreenonoff.util.CV;
 
 /**
@@ -54,6 +55,7 @@ public class BaseTurnOffStrategy extends BaseStrategy{
             screenLock.release();
         deviceManager.lockNow();
         playCloseSound();
+        vibrateWhileClose();
 
     }
 
@@ -61,6 +63,14 @@ public class BaseTurnOffStrategy extends BaseStrategy{
         if(CV.getPrefPlayCloseSound(context)){
             float vol = 1.0f;
             am.playSoundEffect(AudioManager.FX_KEYPRESS_STANDARD, vol);
+        }
+    }
+
+    private void vibrateWhileClose(){
+        if(CV.getVibrateWhileClose(context)){
+            Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+            // Vibrate for 500 milliseconds
+            v.vibrate(200);
         }
     }
 

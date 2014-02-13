@@ -2,54 +2,54 @@
 <resources>
 
     <string name="app_name">AutoScreenOnOff</string>
-    <string name="setting_name">Auto Screen Settings</string>
-    <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="setting_name">Auto Screen Instellingen</string>
+    <string name="action_settings">Instellingen</string>
+    <string name="hello_world">Hallo wereld!</string>
 
-    <string name="turn_autoscreen_on">Turn AutoScreen ON</string>
-    <string name="turn_autoscreen_off">Turn AutoScreen OFF</string>
+    <string name="turn_autoscreen_on">Set AutoScreen AAN</string>
+    <string name="turn_autoscreen_off">Set AutoScreen UIT</string>
     <string name="device_management_explanation">Need this privilege to turn off the screen</string>
     <string name="widget_title">Screen OnOff</string>
 
-    <string name="pref_auto_setting">Auto Screen Settings</string>
-    <string name="pref_power_setting">Power Settings</string>
-    <string name="pref_advanced_setting">Advanced</string>
+    <string name="pref_auto_setting">Auto Screen Instellingen</string>
+    <string name="pref_power_setting">Power Instellingen</string>
+    <string name="pref_advanced_setting">Geavanceerd</string>
 
-    <string name="pref_summary_charging_on">only works during charging.</string>
-    <string name="pref_title_charging_on">Only when plugged</string>
+    <string name="pref_summary_charging_on">werkt alleen tijdens opladen.</string>
+    <string name="pref_title_charging_on">Alleen wanneer in Oplader</string>
 
-    <string name="pref_summary_auto_on">Screen On/Off automatically</string>
-    <string name="pref_title_auto_on">Enable</string>
+    <string name="pref_summary_auto_on">Screen On/Off automatisch</string>
+    <string name="pref_title_auto_on">Inschakelen</string>
     <string name="uninstall_app">Uninstall</string>
 
     <string name="title_playstore">Rank my App!</string>
-    <string name="title_codesite">goto GitHub</string>
-    <string name="title_about">About</string>
-    <string name="title_changelog">What\'s New</string>
+    <string name="title_codesite">Naar GitHub</string>
+    <string name="title_about">Over</string>
+    <string name="title_changelog">Wat Is er nieuw?</string>
 
     <string name="pref_summary_disable_in_landscape">Useful for taking photos or watching movies in landscape.</string>
-    <string name="pref_title_disable_in_landscape">Temporarily Disable in Landscape</string>
+    <string name="pref_title_disable_in_landscape">Tijdelijk gedeactiveerd in Landscape</string>
 
-    <string name="dialog_about_title">About</string>
+    <string name="dialog_about_title">Over</string>
     <string name="dialog_about_message" formatted="false">%s\nv%s</string>
 
-    <string name="pref_summary_timeout_lock">Delay how long before Screen Off take effects. \n\nCurrent setting:%s</string>
-    <string name="pref_title_timeout_lock">Screen Off Timeout Value</string>
+    <string name="pref_summary_timeout_lock">Vertraging wanneer Scherm UIT word geactiveerd. \n\nCurrent setting:%s</string>
+    <string name="pref_title_timeout_lock">Scherm Uit Timeout Waarde</string>
 
-    <string name="pref_summary_timeout_unlock">Delay how long before Screen On take effects. \n\nCurrent setting:%s</string>
-    <string name="pref_title_timeout_unlock">Screen On Timeout Value</string>
+    <string name="pref_summary_timeout_unlock">Vertraging wanneer scherm AAN word geactiveerd. \n\nCurrent setting:%s</string>
+    <string name="pref_title_timeout_unlock">Scherm Aan Timeout Waarde</string>
 
-    <string name="pref_summary_partiallock">ONLY WORKS on SOME devices. On other devices, the on/off function will not work well. Try by yourself.</string>
-    <string name="pref_title_partiallock">Power Save Mode</string>
+    <string name="pref_summary_partiallock">WERKT ALLEEN op SOMMIGE apparaten. Op andere apparaten, werkt de aan/uit functie niet goed. Probeer het zelf.</string>
+    <string name="pref_title_partiallock">Besparings Mode</string>
 
-    <string name="timeout_same">Same as Lock Timeout Value</string>
-    <string name="timeout_0">Right Away</string>
+    <string name="timeout_same">Zelfde als schermbeveiligings Tijd</string>
+    <string name="timeout_0">Direct</string>
     <string name="timeout_05">0.5 sec</string>
     <string name="timeout_1">1 sec</string>
     <string name="timeout_2">2 sec</string>
     <string name="timeout_3">3 sec</string>
-    <string name="timeout_4">Swipe Twice</string>
-    <string name="timeout_5">Never</string>
+    <string name="timeout_4">Twee Keer Swipe</string>
+    <string name="timeout_5">Nooit</string>
 
     <string-array name="timeout_lock_entries">
         <item>@string/timeout_0</item>
@@ -99,8 +99,8 @@
         <item>10</item>
     </string-array>
 
-    <string name="dlg_uninstall_title">Uninstall App</string>
-    <string name="dlg_uninstall_message">Do you really want to uninstall this app?</string>
+    <string name="dlg_uninstall_title">Deinstalleer App</string>
+    <string name="dlg_uninstall_message">Wil je echt deze app verwijderen?</string>
 
     <string name="changelog_html">
         <![CDATA[
@@ -179,31 +179,28 @@
         ]]>
     </string>
 
-    <string name="pref_sleep_setting">Sleep Time Setting (Beta)</string>
-    <string name="pref_summary_sleeping">to save power consumption.(Still buggy. report to me if you find bugs.)</string>
-    <string name="pref_title_sleeping">Disable while Sleep</string>
-    <string name="sleep_start_title">Sleep Start Time</string>
-    <string name="sleep_stop_title">Sleep End Time</string>
+    <string name="pref_sleep_setting">Slaaptijd Instellingen (Beta)</string>
+    <string name="pref_summary_sleeping">om Batterij verbruik te verminderen.(nog in beta. als je fouten vind contacteer mij.)</string>
+    <string name="pref_title_sleeping">Uitgeschakeld in Slaap</string>
+    <string name="sleep_start_title">Slaap Start Tijd</string>
+    <string name="sleep_stop_title">Slaap Stop Tijd</string>
 
-    <string name="pref_summary_show_notification">Faster toggle;also including screen off button</string>
-    <string name="pref_title_show_notification">Show Notification</string>
-    <string name="statusbar_charging">Charging! AutoScreen is enabled.</string>
-    <string name="statusbar_autoscreen_on">AutoScreen is enabled.</string>
-    <string name="statusbar_autoscreen_off">AutoScreen is disabled.</string>
+    <string name="pref_summary_show_notification">Snellere toggle;met scherm uit-knop</string>
+    <string name="pref_title_show_notification">Laat Notificatie zien</string>
+    <string name="statusbar_charging">Opladen! AutoScreen is actief.</string>
+    <string name="statusbar_autoscreen_on">AutoScreen is actief.</string>
+    <string name="statusbar_autoscreen_off">AutoScreen is Gedeactiveerd.</string>
 
     <!-- no translation -->
     <string name="author_url">https://github.com/plateaukao/PowerOff</string>
     <string name="playstore_url">https://play.google.com/store/apps/details?id=com.danielkao.autoscreenonoff</string>
-
-    <string name="pref_play_close_sound">Play sound while auto turning off screen</string>
-    <string name="pref_title_play_close_sound">Play Sound While Close</string>
-    <string name="pref_vibrate_while_close">Vibrate while auto turning off screen</string>
-    <string name="pref_title_vibrate_while_close">Vibrate While Close</string>
+    <string name="pref_play_close_sound">Speel geluid wanner scherm uit is.</string>
+    <string name="pref_title_play_close_sound">Play Close Sound</string>
 
     <!-- toggle strategy -->
-    <string name="pref_onoff_related">On/Off Related Settings</string>
+    <string name="pref_onoff_related">Aan/Uit verwante Instellingen</string>
 
-    <string name="send_feedback">Send feedback</string>
-    <string name="no_mail_client_warning">There are no email clients installed.</string>
-    <string name="feedback_subject">Feedback to autoscreenonoff app</string>
+    <string name="send_feedback">Verstuur feedback</string>
+    <string name="no_mail_client_warning">Er zijn geen e-mail accounts geinstalleerd.</string>
+    <string name="feedback_subject">Feedback van autoscreenonoff app</string>
 </resources>
