@@ -54,6 +54,13 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.3 (2014/02/14)</b>
+        <ul>
+         <li>Add Dutch translation: Thanks for Xander Stone\'s help</li>
+         <li>Improvement: Add Vibrate while turning off screen.</li>
+         <li>Improvement: make Uninstall action more visible on Actionbar. Don\'t mail me how to uninstall anymore...</li>
+         <li>Improvement: make time picker 24 hour format. Should be more useful.</li>
+        </ul>
         <b>Version 2.2 (2013/12/02):</b>
         <ul>
          <li>Improvement: Add swipe feature. You can set up in Timeout settings.</li>
