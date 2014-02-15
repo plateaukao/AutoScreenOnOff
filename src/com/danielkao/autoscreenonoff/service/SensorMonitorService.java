@@ -515,11 +515,12 @@ public class SensorMonitorService extends Service implements
     private void turnOn(){
         if (!screenLock.isHeld()) {
             screenLock.acquire();
+            /*
             KeyguardManager mKeyGuardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
             KeyguardManager.KeyguardLock mLock = mKeyGuardManager.newKeyguardLock("com.danielkao.autoscreenonoff");
             if(mKeyGuardManager.isKeyguardLocked())
                 mLock.disableKeyguard();
-            //mLock.reenableKeyguard();
+                */
 
             new Thread(new Runnable() {
                 public void run() {

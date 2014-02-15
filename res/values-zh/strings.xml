@@ -51,6 +51,11 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.4 (2014/02/15)</b>
+        <ul>
+         <li>移除解鎖的測試功能</li>
+         <li>解決在某些手機上會crash的問題</li>
+        </ul>
         <b>Version 2.3 (2014/02/14)</b>
         <ul>
          <li>荷文翻譯：謝謝 Xander Stone</li>
