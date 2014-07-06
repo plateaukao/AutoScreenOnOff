@@ -51,6 +51,10 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.4.2 (2014/07/06)</b>
+        <ul>
+        <li> 加入德文、俄文、烏克蘭文翻譯, Thanks to Paul L. Scholz, and Andrew</li>
+        </ul>
         <b>Version 2.4 (2014/02/15)</b>
         <ul>
          <li>移除解鎖的測試功能</li>

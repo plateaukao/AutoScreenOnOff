@@ -54,6 +54,10 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.4.2 (2014/07/06)</b>
+        <ul>
+        <li> add German, Russian, Ukranian translations, Thanks to Paul L. Scholz, and Andrew</li>
+        </ul>
         <b>Version 2.4 (2014/02/15)</b>
         <ul>
          <li>Remove testing unlock feature</li>

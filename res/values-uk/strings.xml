@@ -8,7 +8,7 @@
 
     <string name="turn_autoscreen_on">Включити AutoScreen</string>
     <string name="turn_autoscreen_off">Вимкнути AutoScreen</string>
-    <string name="device_management_explanation">Цi права потрiбнi для вимикання екрану/string>
+    <string name="device_management_explanation">Цi права потрiбнi для вимикання екрану</string>
     <string name="widget_title">Вкл/Вим екрану</string>
 
     <string name="pref_auto_setting">Налаштування Auto Screen</string>
@@ -104,6 +104,10 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.4.2 (2014/07/06)</b>
+        <ul>
+        <li> add German, Russian, Ukranian translations, Thanks to Paul L. Scholz, and Andrew</li>
+        </ul>
         <b>Version 2.4.1 (2014/03/16)</b>
         <ul>
         <li> fix crash on Android 2.2, 2.4</li>
@@ -196,7 +200,7 @@
     </string>
 
     <string name="pref_sleep_setting">Налаштування термiну сна (Beta)</string>
-    <string name="pref_summary_sleeping">зменьшує використання  батареï. (Ще глючить :( Зв'яжiться, якщо знайдете помилки.)</string>
+    <string name="pref_summary_sleeping">зменьшує використання  батареï. (Ще глючить :( Зв\'яжiться, якщо знайдете помилки.)</string>
     <string name="pref_title_sleeping">Не активна пiд час сну</string>
     <string name="sleep_start_title">Початок термiну сну</string>
     <string name="sleep_stop_title">Кiнець термiну сну</string>
