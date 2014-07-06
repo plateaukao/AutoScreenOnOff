@@ -1,55 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">AutoScreenOnOff</string>
-    <string name="setting_name">Auto Screen Settings</string>
-    <string name="action_settings">Settings</string>
+    <string name="setting_name">Налаштування Auto Screen</string>
+    <string name="action_settings"> Налаштування </string>
     <string name="hello_world">Hello world!</string>
 
-    <string name="turn_autoscreen_on">Turn AutoScreen ON</string>
-    <string name="turn_autoscreen_off">Turn AutoScreen OFF</string>
-    <string name="device_management_explanation">Need this privilege to turn off the screen</string>
-    <string name="widget_title">Screen OnOff</string>
+    <string name="turn_autoscreen_on">Включити AutoScreen</string>
+    <string name="turn_autoscreen_off">Вимкнути AutoScreen</string>
+    <string name="device_management_explanation">Цi права потрiбнi для вимикання екрану/string>
+    <string name="widget_title">Вкл/Вим екрану</string>
 
-    <string name="pref_auto_setting">Auto Screen Settings</string>
+    <string name="pref_auto_setting">Налаштування Auto Screen</string>
     <string name="pref_power_setting">Power Settings</string>
-    <string name="pref_advanced_setting">Advanced</string>
+    <string name="pref_advanced_setting">Розширені налаштування</string>
 
-    <string name="pref_summary_charging_on">only works during charging.</string>
-    <string name="pref_title_charging_on">Only when plugged</string>
+    <string name="pref_summary_charging_on">Тiльки пiд час зарядки.</string>
+    <string name="pref_title_charging_on">Тiльки коли пiдключено зарядний пристрiй</string>
 
-    <string name="pref_summary_auto_on">Screen On/Off automatically</string>
-    <string name="pref_title_auto_on">Enable</string>
+    <string name="pref_summary_auto_on">Автоматично ВКЛ/ВИМ екран</string>
+    <string name="pref_title_auto_on">Включено</string>
     <string name="uninstall_app">Uninstall</string>
 
-    <string name="title_playstore">Rank my App!</string>
-    <string name="title_codesite">goto GitHub</string>
-    <string name="title_about">About</string>
-    <string name="title_changelog">What\'s New</string>
+    <string name="title_playstore">Оцiнiть програму!</string>
+    <string name="title_codesite">Перехiд на GitHub</string>
+    <string name="title_about">Про програму</string>
+    <string name="title_changelog">Що нового</string>
 
-    <string name="pref_summary_disable_in_landscape">Useful for taking photos or watching movies in landscape.</string>
-    <string name="pref_title_disable_in_landscape">Temporarily Disable in Landscape</string>
+    <string name="pref_summary_disable_in_landscape">Корисно для фотографування и перегляду фiльмiв y ландшафтномy режимi</string>
+    <string name="pref_title_disable_in_landscape">Тимчасово вимикати у ландшафтному режимi</string>
 
-    <string name="dialog_about_title">About</string>
+    <string name="dialog_about_title">Про програму</string>
     <string name="dialog_about_message" formatted="false">%s\nv%s</string>
 
-    <string name="pref_summary_timeout_lock">Delay how long before Screen Off take effects. \n\nCurrent setting:%s</string>
-    <string name="pref_title_timeout_lock">Screen Off Timeout Value</string>
+    <string name="pref_summary_timeout_lock">Затримка перед ВИМкненням екрану \n\nНалаштовано:%s</string>
+    <string name="pref_title_timeout_lock">Таймаут вимкнення</string>
 
-    <string name="pref_summary_timeout_unlock">Delay how long before Screen On take effects. \n\nCurrent setting:%s</string>
-    <string name="pref_title_timeout_unlock">Screen On Timeout Value</string>
+    <string name="pref_summary_timeout_unlock">Затримка перед ВКЛюченням екрану \n\nНалаштовано:%s</string>
+    <string name="pref_title_timeout_unlock">Таймаут включення</string>
 
-    <string name="pref_summary_partiallock">ONLY WORKS on SOME devices. On other devices, the on/off function will not work well. Try by yourself.</string>
-    <string name="pref_title_partiallock">Power Save Mode</string>
+    <string name="pref_summary_partiallock">Працює не на усiх пристроях.  Будь ласка, перевiрте Ваш пристрiй самi.</string>
+    <string name="pref_title_partiallock">Режим eкономiï</string>
 
-    <string name="timeout_same">Same as Lock Timeout Value</string>
-    <string name="timeout_0">Right Away</string>
-    <string name="timeout_05">0.5 sec</string>
-    <string name="timeout_1">1 sec</string>
-    <string name="timeout_2">2 sec</string>
-    <string name="timeout_3">3 sec</string>
-    <string name="timeout_4">Swipe Twice</string>
-    <string name="timeout_5">Never</string>
+    <string name="timeout_same">Так само, як при вiдключеннi</string>
+    <string name="timeout_0">Негайно</string>
+    <string name="timeout_05">0,5 сек</string>
+    <string name="timeout_1">1 сек</string>
+    <string name="timeout_2">2 cек</string>
+    <string name="timeout_3">3 cек</string>
+    <string name="timeout_4">Подвiйний свайп</string>
+    <string name="timeout_5">Нiколи</string>
 
     <string-array name="timeout_lock_entries">
         <item>@string/timeout_0</item>
@@ -99,8 +99,8 @@
         <item>10</item>
     </string-array>
 
-    <string name="dlg_uninstall_title">Uninstall App</string>
-    <string name="dlg_uninstall_message">Do you really want to uninstall this app?</string>
+    <string name="dlg_uninstall_title">Видалити програму</string>
+    <string name="dlg_uninstall_message">Ви дiйсно бажаєте видалити Auto Screen OnOff?</string>
 
     <string name="changelog_html">
         <![CDATA[
@@ -195,31 +195,32 @@
         ]]>
     </string>
 
-    <string name="pref_sleep_setting">Sleep Time Setting (Beta)</string>
-    <string name="pref_summary_sleeping">to save power consumption.(Still buggy. report to me if you find bugs.)</string>
-    <string name="pref_title_sleeping">Disable while Sleep</string>
-    <string name="sleep_start_title">Sleep Start Time</string>
-    <string name="sleep_stop_title">Sleep End Time</string>
+    <string name="pref_sleep_setting">Налаштування термiну сна (Beta)</string>
+    <string name="pref_summary_sleeping">зменьшує використання  батареï. (Ще глючить :( Зв'яжiться, якщо знайдете помилки.)</string>
+    <string name="pref_title_sleeping">Не активна пiд час сну</string>
+    <string name="sleep_start_title">Початок термiну сну</string>
+    <string name="sleep_stop_title">Кiнець термiну сну</string>
 
-    <string name="pref_summary_show_notification">Faster toggle;also including screen off button</string>
-    <string name="pref_title_show_notification">Show Notification</string>
-    <string name="statusbar_charging">Charging! AutoScreen is enabled.</string>
-    <string name="statusbar_autoscreen_on">AutoScreen is enabled.</string>
-    <string name="statusbar_autoscreen_off">AutoScreen is disabled.</string>
+    <string name="pref_summary_show_notification">Iконка в областi повiдомлень. Також кнопка вимкнення екрану</string>
+    <string name="pref_title_show_notification">Показувати поведомлення</string>
+    <string name="statusbar_charging">Зарядка! AutoScreen активовано</string>
+    <string name="statusbar_autoscreen_on">AutoScreen активовано</string>
+    <string name="statusbar_autoscreen_off">AutoScreen деактивовано</string>
 
     <!-- no translation -->
     <string name="author_url">https://github.com/plateaukao/PowerOff</string>
     <string name="playstore_url">https://play.google.com/store/apps/details?id=com.danielkao.autoscreenonoff</string>
 
-    <string name="pref_play_close_sound">Play sound while auto turning off screen</string>
-    <string name="pref_title_play_close_sound">Play Sound While Close</string>
-    <string name="pref_vibrate_while_close">Vibrate while auto turning off screen</string>
-    <string name="pref_title_vibrate_while_close">Vibrate While Close</string>
+    <string name="pref_play_close_sound">Звук при автовимкненнi екрану</string>
+    <string name="pref_title_play_close_sound">Вiдтворювати звук при автовимиканнi</string>
+
+    <string name="pref_vibrate_while_close">Вибрацiя при автовимиканнi екрану</string>
+    <string name="pref_title_vibrate_while_close">Вібрувати при автовимиканнi екрану</string>
 
     <!-- toggle strategy -->
-    <string name="pref_onoff_related">On/Off Related Settings</string>
+    <string name="pref_onoff_related">Налаштування Вкл\Вим</string>
 
-    <string name="send_feedback">Send feedback</string>
-    <string name="no_mail_client_warning">There are no email clients installed.</string>
-    <string name="feedback_subject">Feedback to autoscreenonoff app</string>
+    <string name="send_feedback">Вiдправити вiдгук</string>
+    <string name="no_mail_client_warning">Не знайдено поштового клієнта</string>
+    <string name="feedback_subject">Вiдправити вiдгук на програму АutoScreenOnOff</string>
 </resources>
