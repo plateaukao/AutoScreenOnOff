@@ -35,6 +35,8 @@ public final class CV {
     public static final String PREF_VIBRATE_WHILE_CLOSE = "prefVibrateWhileClose";
     public static final String PREF_STRATEGY_TURNON = "prefStrategyTurnOn";
     public static final String PREF_STRATEGY_TURNOFF = "prefStrategyTurnOff";
+    public static final String PREF_EXCLUDE_APP_NAMES = "prefExcludeAppNames";
+    public static final String PREF_EXCLUDE_PACKAGES = "prefExludePackages";
 
     //
     public static final String SERVICEACTION = "serviceaction";
@@ -179,6 +181,27 @@ public final class CV {
             i = getPrefTimeoutLock(context);
         }
         return i;
+    }
+
+    public static String getExcludeAppNameList(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String names = sp.getString(PREF_EXCLUDE_APP_NAMES, "");
+        CV.logv("prefExcludeAppNames: %s", names);
+
+        return names;
+    }
+
+    public static void setExcludeAppNameList(Context context, String names) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString(PREF_EXCLUDE_APP_NAMES, names);
+        editor.commit();
+    }
+
+    public static String getExcludeAppPackageNames(Context context) {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+        String packagenames = sp.getString(PREF_EXCLUDE_PACKAGES, null);
+        return packagenames;
     }
 
     public static boolean isPlugged(Context context){

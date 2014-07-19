@@ -104,6 +104,10 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.5 (2014/07/19)</b>
+        <ul>
+        <li> long awaited feature! Now you can select which apps to exclude!</li>
+        </ul>
         <b>Version 2.4.2 (2014/07/06)</b>
         <ul>
         <li> add German, Russian, Ukranian translations, Thanks to Paul L. Scholz, and Andrew</li>
@@ -219,6 +223,9 @@
     <string name="pref_title_play_close_sound">Play Sound While Close</string>
     <string name="pref_vibrate_while_close">Vibrate while auto turning off screen</string>
     <string name="pref_title_vibrate_while_close">Vibrate While Close</string>
+
+    <string name="pref_title_exclude_apps">which apps to exclude</string>
+    <string-array name="empty_array" />
 
     <!-- toggle strategy -->
     <string name="pref_onoff_related">On/Off Related Settings</string>

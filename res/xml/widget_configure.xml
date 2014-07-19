@@ -15,6 +15,13 @@
                 android:summary="@string/pref_summary_charging_on"
                 android:title="@string/pref_title_charging_on" >
         </CheckBoxPreference>
+    <com.danielkao.autoscreenonoff.ui.AppMultiselectListPreference
+            android:defaultValue="@array/empty_array"
+            android:entries="@array/empty_array"
+            android:entryValues="@array/empty_array"
+            android:key="prefExludePackages"
+            android:persistent="true"
+            android:title="@string/pref_title_exclude_apps" />
     <com.danielkao.autoscreenonoff.ui.MyPreferenceCategory android:title="@string/pref_advanced_setting" >
         <CheckBoxPreference
                 android:defaultValue="false"

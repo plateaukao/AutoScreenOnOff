@@ -16,6 +16,7 @@ import android.net.Uri;
 import android.os.*;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.OrientationEventListener;
 import android.widget.RemoteViews;
 import android.widget.Toast;
@@ -401,6 +402,17 @@ public class SensorMonitorService extends Service implements
                     CV.logv("timer is on; exit");
                     resetHandler();
                     return;
+                }
+
+                // check package name list first
+                if(CV.getExcludeAppPackageNames(getApplicationContext())!= null) {
+                    ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+                    ActivityManager.RunningTaskInfo foregroundTaskInfo = am.getRunningTasks(1).get(0);
+                    String foregroundTaskPackageName = foregroundTaskInfo.topActivity.getPackageName();
+                    Log.v("applist", foregroundTaskPackageName);
+                    if(CV.getExcludeAppPackageNames(getApplicationContext()).contains(foregroundTaskPackageName)){
+                        return;
+                    }
                 }
 
                 // check swipe scenario first

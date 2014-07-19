@@ -51,6 +51,10 @@
 
     <string name="changelog_html">
         <![CDATA[
+        <b>Version 2.5 (2014/07/19)</b>
+        <ul>
+        <li> 等待已久的功能：可以選擇在哪些 app 中，不要自動關閉畫面！</li>
+        </ul>
         <b>Version 2.4.2 (2014/07/06)</b>
         <ul>
         <li> 加入德文、俄文、烏克蘭文翻譯, Thanks to Paul L. Scholz, and Andrew</li>
@@ -158,4 +162,6 @@
     <string name="statusbar_autoscreen_off">關閉 自動螢幕控制</string>
     <string name="pref_play_close_sound">關閉螢幕時播放提示音效</string>
     <string name="pref_title_play_close_sound">播放關閉音效</string>
+
+    <string name="pref_title_exclude_apps">在哪些app中不要自動關閉畫面</string>
 </resources>
