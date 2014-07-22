@@ -99,6 +99,17 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/toggleonoff_appwidget_info" />
         </receiver>
+
+        <receiver android:name=".provider.ScreenOffAppWidgetProvider" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.danielkao.autoscreenonoff.updatewidget" />
+            </intent-filter>
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/screenoff_appwidget_info" />
+        </receiver>
+
         <receiver
                 android:name=".receiver.AppReplaceReceiver"
                 android:label="app_replace">
