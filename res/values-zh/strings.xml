@@ -49,7 +49,15 @@
     <string name="dlg_uninstall_title">移除軟體</string>
     <string name="dlg_uninstall_message">你確定要移除本軟體嗎？</string>
 
-    <string name="changelog_html">
+    <string name="changelog_26">
+        <![CDATA[
+        <b>Version 2.6 (2014/07/22)</b>
+        <ul>
+        <li><font color=\"red\">不想太耗電的人，現在可以直接在Home加上個關閉螢幕的小工具！</font></li>
+        </ul>
+        ]]>
+    </string>
+    <string name="old_changelog_html">
         <![CDATA[
         <b>Version 2.5 (2014/07/19)</b>
         <ul>

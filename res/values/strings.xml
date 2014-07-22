@@ -102,7 +102,15 @@
     <string name="dlg_uninstall_title">Uninstall App</string>
     <string name="dlg_uninstall_message">Do you really want to uninstall this app?</string>
 
-    <string name="changelog_html">
+    <string name="changelog_26">
+        <![CDATA[
+        <b>Version 2.6 (2014/07/22)</b>
+        <ul>
+        <li> Another long awaited feature! Now you can <font color=\"red\">add a Screen Off widget on your home!</font></li>
+        </ul>
+        ]]>
+    </string>
+    <string name="old_changelog_html">
         <![CDATA[
         <b>Version 2.5 (2014/07/19)</b>
         <ul>

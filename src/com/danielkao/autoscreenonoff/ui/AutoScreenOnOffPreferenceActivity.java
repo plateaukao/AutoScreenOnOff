@@ -401,7 +401,8 @@ public class AutoScreenOnOffPreferenceActivity extends PreferenceActivity implem
         LayoutInflater li = LayoutInflater.from(this);
         View view = li.inflate(R.layout.changelogdlg, null);
         WebView wv = (WebView) view.findViewById(R.id.wv_changelog);
-        wv.loadData(getString(R.string.changelog_html),"text/html; charset=UTF-8", null);
+        String changelogs = getString(R.string.changelog_26) + getString(R.string.old_changelog_html);
+        wv.loadData(changelogs,"text/html; charset=UTF-8", null);
 
         new AlertDialog.Builder(this)
                 .setTitle(getString(R.string.title_changelog))

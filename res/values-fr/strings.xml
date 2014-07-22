@@ -52,7 +52,7 @@
     <string name="dlg_uninstall_title">Désinstaller l\'application</string>
     <string name="dlg_uninstall_message">Voulez-vous vraiment désinstaller cette application ?</string>
 
-    <string name="changelog_html">
+    <string name="old_changelog_html">
         <![CDATA[
         <b>Version 2.5 (2014/07/19)</b>
         <ul>

@@ -3,7 +3,7 @@
     <string name="action_settings">Nastavení</string>
     <string name="app_name">AutoScreenOnOff</string>
     <string name="author_url">https://github.com/plateaukao/PowerOff</string>
-    <string name="changelog_html">
+    <string name="old_changelog_html">
         <![CDATA[
         <b>Version 2.5 (2014/07/19)</b>
         <ul>
