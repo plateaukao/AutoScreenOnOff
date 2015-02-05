@@ -16,6 +16,9 @@ import android.net.Uri;
 import android.os.*;
 import android.os.PowerManager.WakeLock;
 import android.preference.PreferenceManager;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.OrientationEventListener;
 import android.widget.RemoteViews;
@@ -41,6 +44,9 @@ public class SensorMonitorService extends Service implements
 	private PowerManager mPowerManager;
 	private Sensor mProximity;
     OrientationEventListener mOrientationListener;
+
+    private MyPhoneListener phoneListener;
+    private boolean isInCall = false;
 
     // schedule
     AlarmManager am;
@@ -292,13 +298,19 @@ public class SensorMonitorService extends Service implements
         // show notification if it's set
         if(CV.getPrefShowNotification(this))
             showNotification();
+
+        // register phone events
+        phoneListener = new MyPhoneListener();
+        TelephonyManager telephonyManager = (TelephonyManager) getSystemService(TELEPHONY_SERVICE);
+        telephonyManager.listen(phoneListener, PhoneStateListener.LISTEN_CALL_STATE);
 	}
 
 	@Override
 	public void onDestroy() {
 		CV.logi("onDestroy");
-        if(mIsRegistered)
-		    unregisterSensor();
+        // try to fix sleep not working issue: help from  ntvsx193
+        //if(mIsRegistered)
+		//    unregisterSensor();
 		super.onDestroy();
 	}
 
@@ -377,6 +389,9 @@ public class SensorMonitorService extends Service implements
 
 	@Override
 	public final void onSensorChanged(SensorEvent event) {
+        // in call, just skip the sensor state change
+        if(isInCall) return;
+
         int type = event.sensor.getType();
         if(type == Sensor.TYPE_PROXIMITY){
             float lux = event.values[0];
@@ -759,6 +774,26 @@ public class SensorMonitorService extends Service implements
             Vibrator v = (Vibrator) this.getSystemService(Context.VIBRATOR_SERVICE);
             // Vibrate for 500 milliseconds
             v.vibrate(200);
+        }
+    }
+
+    public class MyPhoneListener extends PhoneStateListener
+    {
+        public void onCallStateChanged (int state, String incomingNumber)
+        {
+            switch (state) {
+                case TelephonyManager.CALL_STATE_IDLE:
+                    isInCall = false;
+                    Log.i("Call", "CALL_STATE_IDLE");
+                    break;
+                case TelephonyManager.CALL_STATE_RINGING:
+                    Log.i("Call", "CALL_STATE_RINING");
+                    break;
+                case TelephonyManager.CALL_STATE_OFFHOOK:
+                    isInCall = true;
+                    Log.i("Call", "CALL_STATE_OFFHOOK");
+                    break;
+            }
         }
     }
 }
