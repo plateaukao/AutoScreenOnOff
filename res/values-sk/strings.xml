@@ -48,6 +48,7 @@
     <string name="timeout_1">1 sek</string>
     <string name="timeout_2">2 sek</string>
     <string name="timeout_3">3 sek</string>
+    <string name="timeout_10">10 sek</string>
 
     <string name="dlg_uninstall_title">Odinštalovať aplikáciu</string>
     <string name="dlg_uninstall_message">Ste si istý, že chcete odinštalovať túto aplikáciu?</string>

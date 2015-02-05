@@ -48,6 +48,7 @@
     <string name="timeout_1">1 giây</string>
     <string name="timeout_2">2 giây</string>
     <string name="timeout_3">3 giây</string>
+    <string name="timeout_10">10 giây</string>
 
     <string name="dlg_uninstall_title">Gỡ ứng dụng</string>
     <string name="dlg_uninstall_message">Bạn thực sự muốn gỡ ứng dụng?</string>

@@ -48,56 +48,9 @@
     <string name="timeout_1">1 сек</string>
     <string name="timeout_2">2 cек</string>
     <string name="timeout_3">3 cек</string>
+    <string name="timeout_10">10 cек</string>
     <string name="timeout_4">Двойной свайп</string>
     <string name="timeout_5">Никогда</string>
-
-    <string-array name="timeout_lock_entries">
-        <item>@string/timeout_0</item>
-        <item>@string/timeout_05</item>
-        <item>@string/timeout_1</item>
-        <item>@string/timeout_2</item>
-        <item>@string/timeout_3</item>
-        <item>@string/timeout_4</item>
-        <item>@string/timeout_5</item>
-    </string-array>
-
-    <!-- no translation -->
-    <string-array name="timeout_lock_values">
-        <item>0</item>
-        <item>500</item>
-        <item>1000</item>
-        <item>2000</item>
-        <item>3000</item>
-        <!-- swipe twice -->
-        <item>2</item>
-        <!-- never -->
-        <item>10</item>
-    </string-array>
-
-    <string-array name="timeout_unlock_entries">
-        <item>@string/timeout_same</item>
-        <item>@string/timeout_0</item>
-        <item>@string/timeout_05</item>
-        <item>@string/timeout_1</item>
-        <item>@string/timeout_2</item>
-        <item>@string/timeout_3</item>
-        <item>@string/timeout_4</item>
-        <item>@string/timeout_5</item>
-    </string-array>
-
-    <!-- no translation -->
-    <string-array name="timeout_unlock_values">
-        <item>-1</item>
-        <item>0</item>
-        <item>500</item>
-        <item>1000</item>
-        <item>2000</item>
-        <item>3000</item>
-        <!-- swipe twice -->
-        <item>2</item>
-        <!-- never -->
-        <item>10</item>
-    </string-array>
 
     <string name="dlg_uninstall_title">Удалить программу</string>
     <string name="dlg_uninstall_message">Вы действительно хотите удалить Auto Screen OnOff?</string>

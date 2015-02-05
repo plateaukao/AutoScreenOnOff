@@ -48,6 +48,7 @@
     <string name="timeout_1">1 secondes</string>
     <string name="timeout_2">2 secondes</string>
     <string name="timeout_3">3 secondes</string>
+    <string name="timeout_10">10 secondes</string>
 
     <string name="dlg_uninstall_title">Désinstaller l\'application</string>
     <string name="dlg_uninstall_message">Voulez-vous vraiment désinstaller cette application ?</string>

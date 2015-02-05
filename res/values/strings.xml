@@ -48,6 +48,7 @@
     <string name="timeout_1">1 sec</string>
     <string name="timeout_2">2 sec</string>
     <string name="timeout_3">3 sec</string>
+    <string name="timeout_10">10 sec</string>
     <string name="timeout_4">Swipe Twice</string>
     <string name="timeout_5">Never</string>
 
@@ -57,6 +58,7 @@
         <item>@string/timeout_1</item>
         <item>@string/timeout_2</item>
         <item>@string/timeout_3</item>
+        <item>@string/timeout_10</item>
         <item>@string/timeout_4</item>
         <item>@string/timeout_5</item>
     </string-array>
@@ -68,6 +70,7 @@
         <item>1000</item>
         <item>2000</item>
         <item>3000</item>
+        <item>10000</item>
         <!-- swipe twice -->
         <item>2</item>
         <!-- never -->
@@ -81,6 +84,7 @@
         <item>@string/timeout_1</item>
         <item>@string/timeout_2</item>
         <item>@string/timeout_3</item>
+        <item>@string/timeout_10</item>
         <item>@string/timeout_4</item>
         <item>@string/timeout_5</item>
     </string-array>
@@ -93,6 +97,7 @@
         <item>1000</item>
         <item>2000</item>
         <item>3000</item>
+        <item>10000</item>
         <!-- swipe twice -->
         <item>2</item>
         <!-- never -->
