@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">AutoScreenOnOff</string>
-    <string name="setting_name">Auto Screen Settings</string>
+    <string name="setting_name">Settings</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 
@@ -107,6 +107,16 @@
     <string name="dlg_uninstall_title">Uninstall App</string>
     <string name="dlg_uninstall_message">Do you really want to uninstall this app?</string>
 
+    <string name="changelog_27">
+        <![CDATA[
+        <b>Version 2.7 (2015/02/06)</b>
+        <ul>
+        <li> disable functions while in call</li>
+        <li> fix exclude-app list not working in Android 5</li>
+        <li> try to fix sleep timer issue</li>
+        </ul>
+        ]]>
+    </string>
     <string name="changelog_26">
         <![CDATA[
         <b>Version 2.6 (2014/07/22)</b>

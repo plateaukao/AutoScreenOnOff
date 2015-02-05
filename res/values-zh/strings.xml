@@ -50,6 +50,16 @@
     <string name="dlg_uninstall_title">移除軟體</string>
     <string name="dlg_uninstall_message">你確定要移除本軟體嗎？</string>
 
+    <string name="changelog_27">
+        <![CDATA[
+        <b>Version 2.7 (2015/02/06)</b>
+        <ul>
+        <li> 電話通話中，暫停作用</li>
+        <li> 修正在 Android 5，例外軟體列表無作用</li>
+        <li> 嘗試修正睡眠功能失效的問題</li>
+        </ul>
+        ]]>
+    </string>
     <string name="changelog_26">
         <![CDATA[
         <b>Version 2.6 (2014/07/22)</b>
