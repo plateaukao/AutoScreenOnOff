@@ -30,6 +30,7 @@ import com.danielkao.autoscreenonoff.util.CV;
 
 import java.lang.reflect.Method;
 import java.util.Calendar;
+import java.util.List;
 
 public class SensorMonitorService extends Service implements
 		SensorEventListener {
@@ -406,10 +407,11 @@ public class SensorMonitorService extends Service implements
 
                 // check package name list first
                 if(CV.getExcludeAppPackageNames(getApplicationContext())!= null) {
-                    ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-                    ActivityManager.RunningTaskInfo foregroundTaskInfo = am.getRunningTasks(1).get(0);
-                    String foregroundTaskPackageName = foregroundTaskInfo.topActivity.getPackageName();
+                    ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+                    List<ActivityManager.RunningAppProcessInfo> tasks = manager.getRunningAppProcesses();
+                    String foregroundTaskPackageName = tasks.get(0).processName;
                     Log.v("applist", foregroundTaskPackageName);
+
                     if(CV.getExcludeAppPackageNames(getApplicationContext()).contains(foregroundTaskPackageName)){
                         return;
                     }
