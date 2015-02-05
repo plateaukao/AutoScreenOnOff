@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.5.6'
+        classpath 'com.android.tools.build:gradle:1.0.1'
     }
 }
 apply plugin: 'android'
@@ -13,8 +13,8 @@ dependencies {
 }
 
 android {
-    compileSdkVersion 19 
-    buildToolsVersion "19"
+    compileSdkVersion 20
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         minSdkVersion 8
