@@ -157,13 +157,13 @@
     </string>
 
     <string name="pref_sleep_setting">Налаштування термiну сна (Beta)</string>
-    <string name="pref_summary_sleeping">зменьшує використання  батареï. (Ще глючить :( Зв\'яжiться, якщо знайдете помилки.)</string>
+    <string name="pref_summary_sleeping">Зменшує використання батареï. (Ще глючить :( Зв\'яжiться, якщо знайдете помилки.)</string>
     <string name="pref_title_sleeping">Не активна пiд час сну</string>
     <string name="sleep_start_title">Початок термiну сну</string>
     <string name="sleep_stop_title">Кiнець термiну сну</string>
 
     <string name="pref_summary_show_notification">Iконка в областi повiдомлень. Також кнопка вимкнення екрану</string>
-    <string name="pref_title_show_notification">Показувати поведомлення</string>
+    <string name="pref_title_show_notification">Показувати повідомлення</string>
     <string name="statusbar_charging">Зарядка! AutoScreen активовано</string>
     <string name="statusbar_autoscreen_on">AutoScreen активовано</string>
     <string name="statusbar_autoscreen_off">AutoScreen деактивовано</string>
@@ -174,9 +174,11 @@
 
     <string name="pref_play_close_sound">Звук при автовимкненнi екрану</string>
     <string name="pref_title_play_close_sound">Вiдтворювати звук при автовимиканнi</string>
-
     <string name="pref_vibrate_while_close">Вибрацiя при автовимиканнi екрану</string>
     <string name="pref_title_vibrate_while_close">Вібрувати при автовимиканнi екрану</string>
+
+    <string name="pref_title_exclude_apps">не діяти для застосунків</string>
+    <string-array name="empty_array" />
 
     <!-- toggle strategy -->
     <string name="pref_onoff_related">Налаштування Вкл\Вим</string>
