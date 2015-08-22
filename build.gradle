@@ -39,4 +39,8 @@ android {
             resources.srcDirs = ['PowerOffTest/src']
         }
     }
+
+    lintOptions {
+      abortOnError false
+    }
 }
