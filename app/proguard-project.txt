@@ -1,0 +1,7 @@
+# R8 rules for release builds (minifyEnabled + proguard-android-optimize.txt).
+#
+# The legacy preference framework inflates custom Preference subclasses
+# (TimePreference, MyPreferenceCategory) from res/xml by reflection, and the
+# app is tiny — keep the whole namespace rather than chasing individual
+# entry points.
+-keep class com.danielkao.autoscreenonoff.** { *; }

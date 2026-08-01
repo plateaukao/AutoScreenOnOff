@@ -1,0 +1,69 @@
+plugins {
+    id 'com.android.application'
+    id 'com.github.triplet.play'
+}
+
+def keystorePropsFile = rootProject.file('keystore.properties')
+def keystoreProps = new Properties()
+if (keystorePropsFile.exists()) {
+    keystoreProps.load(new FileInputStream(keystorePropsFile))
+}
+def hasKeystore = keystoreProps.containsKey('storeFile')
+
+android {
+    namespace 'com.danielkao.autoscreenonoff'
+    compileSdk 36
+
+    signingConfigs {
+        if (hasKeystore) {
+            release {
+                storeFile file(keystoreProps['storeFile'])
+                storePassword keystoreProps['storePassword']
+                keyAlias keystoreProps['keyAlias']
+                keyPassword keystoreProps['keyPassword']
+            }
+        }
+    }
+
+    defaultConfig {
+        applicationId "com.danielkao.autoscreenonoff"
+        minSdk 21
+        targetSdk 36
+        versionCode 40
+        versionName "2.8.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-project.txt'
+            if (hasKeystore) {
+                signingConfig signingConfigs.release
+            }
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
+
+play {
+    // Path configurable via playCredentials in keystore.properties (gitignored).
+    serviceAccountCredentials.set(file(keystoreProps.getProperty('playCredentials',
+            "${System.getProperty('user.home')}/.secrets/autoscreenonoff-play-publisher.json")))
+    defaultToAppBundles.set(true)
+    // Safe default; production releases pass --track production explicitly.
+    track.set('internal')
+}
+
+dependencies {
+    implementation 'androidx.core:core:1.15.0'
+}

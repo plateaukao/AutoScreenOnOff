@@ -1,10 +1,27 @@
-bin/
-.idea/
-build/
+# Gradle
 .gradle/
+build/
+app/build/
+local.properties
 
-PowerOffTest/gen/com/danielkao/autoscreenonoff/tests/BuildConfig.java
+# Android Studio / IntelliJ
+.idea/
+*.iml
+captures/
+.externalNativeBuild/
+.cxx/
 
-PowerOffTest/gen/com/danielkao/autoscreenonoff/tests/Manifest.java
+# Build outputs
+*.apk
+*.aab
+app/release/
+bin/
 
-PowerOffTest/gen/com/danielkao/autoscreenonoff/tests/R.java
+# Signing credentials
+keystore.properties
+*.keystore
+*.jks
+*.p12
+
+# macOS
+.DS_Store

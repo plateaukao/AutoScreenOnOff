@@ -1,4 +1,4 @@
-# Auto Screen OnOff <img src='https://travis-ci.org/plateaukao/AutoScreenOnOff.svg?branch=master' />
+# Auto Screen OnOff
 
 [![Get it on Google Play](https://developer.android.com/images/brand/en_generic_rgb_wo_45.png)](https://play.google.com/store/apps/details?id=com.danielkao.autoscreenonoff)
 
@@ -23,8 +23,26 @@ or
 3. Agree to activate device management. (This is required to turn off the screen)
 4. Now everything should work now. Try cover your hand over the top area of the screen (where the proximity sensor might be located) to see if it works.
 
+While monitoring is enabled the app runs as a foreground service, so a
+persistent notification is shown (Android requires this for apps that keep
+a sensor registered in the background).
+
 ## Development
-This project is built using Android Studio. If you want to clone the git and modify the codes, please use Android Studio too.
+Standard single-module Gradle project (Android Studio or command line):
+
+```bash
+./gradlew assembleDebug      # debug APK
+./gradlew assembleRelease    # release APK (unsigned without keystore.properties)
+./gradlew bundleRelease      # app bundle for Play upload
+```
+
+Toolchain: Gradle 9.3.1, Android Gradle Plugin 9.1.1, compileSdk/targetSdk 36,
+minSdk 21 (Android 5.0), JDK 17+.
+
+Release signing reads `keystore.properties` in the repo root (gitignored;
+copy `keystore.properties.sample` and fill in your keystore details).
+Publishing uses the [Gradle Play Publisher](https://github.com/Triple-T/gradle-play-publisher)
+plugin (`./gradlew publishBundle`, defaults to the internal track).
 
 ## Screenshots
 Preference Screen

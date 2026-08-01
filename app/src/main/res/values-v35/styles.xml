@@ -1,0 +1,14 @@
+<resources>
+
+    <!--
+        Android 15 forces edge-to-edge, drawing the legacy Holo settings
+        screen behind the system bars; this opt-out still works there.
+        Android 16+ ignores it (util/EdgeToEdge pads the nav-bar side
+        instead; the Holo decor keeps handling the status-bar side).
+        The parent must mirror the winning override in values-v14.
+    -->
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+
+</resources>
